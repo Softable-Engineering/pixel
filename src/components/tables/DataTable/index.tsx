@@ -1,10 +1,11 @@
 // External Libraries
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: Ignored due to no validation needed */
 import { DndContext, closestCenter } from '@dnd-kit/core'
 
 // Components
 import { TableBody } from './components/TableBody'
 import { TableHeader } from './components/TableHeader'
-// import { Skeleton } from '@components/structure/Skeleton'
+import { Skeleton } from '@components/structure/Skeleton'
 
 // Hooks
 import { useDataTable } from './hooks/useDataTable'
@@ -14,6 +15,8 @@ import type { CustomColumnDef, CustomData } from './types'
 
 // Styles
 import { Container, LoaderContainer } from './styles'
+
+export * from './types'
 
 interface Props<T> {
   height?: number
@@ -56,15 +59,15 @@ export const DataTable = <T,>({
     onReorder
   })
 
-  // if (loading) {
-  //   return (
-  //     <LoaderContainer>
-  //       {Array.from({ length: 6 }).map((_, index) => (
-  //         <Skeleton key={`skeleton_${index}`} width="100%" height="3rem" />
-  //       ))}
-  //     </LoaderContainer>
-  //   )
-  // }
+  if (loading) {
+    return (
+      <LoaderContainer>
+        {Array.from({ length: 6 }).map((_, index) => (
+          <Skeleton key={`skeleton_${index}`} width="100%" height="3rem" />
+        ))}
+      </LoaderContainer>
+    )
+  }
 
   return (
     <DndContext

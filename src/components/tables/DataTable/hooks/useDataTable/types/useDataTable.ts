@@ -1,4 +1,4 @@
-import { CustomColumnDef, CustomData } from "../../../types"
+import type { CustomColumnDef, CustomData } from '../../../types'
 
 export interface UseDataTableParams<T> {
   data: CustomData<T>[]

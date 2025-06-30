@@ -1,18 +1,18 @@
 // External Libraries
 import { useState, useMemo, useEffect } from 'react'
 import {
-  SortingState,
   useReactTable,
   getCoreRowModel,
-  getSortedRowModel
+  getSortedRowModel,
+  type SortingState
 } from '@tanstack/react-table'
 import {
   useSensor,
   useSensors,
   MouseSensor,
   TouchSensor,
-  DragEndEvent,
-  KeyboardSensor
+  KeyboardSensor,
+  type DragEndEvent
 } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 

@@ -1,10 +1,9 @@
 // External Libraries
-import React from 'react'
 import {
   SortableContext,
   horizontalListSortingStrategy
 } from '@dnd-kit/sortable'
-import { Table } from '@tanstack/react-table'
+import type { Table } from '@tanstack/react-table'
 
 // Components
 import { DraggableColumnHeader } from './components/DraggableColumnHeader'
@@ -35,7 +34,7 @@ export const TableHeader = <T,>({
 }: Props<T>) => {
   return (
     <Container $headColor={headerColor} $textColorHeader={textColorHeader}>
-      {table.getHeaderGroups().map(headerGroup => (
+      {table.getHeaderGroups().map((headerGroup) => (
         <tr key={headerGroup.id}>
           <SortableContext
             items={columnOrder}

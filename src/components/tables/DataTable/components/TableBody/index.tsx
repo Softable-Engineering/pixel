@@ -1,6 +1,5 @@
 // External Libraries
-import React from 'react'
-import { Row, Table } from '@tanstack/react-table'
+import type { Row, Table } from '@tanstack/react-table'
 
 // Components
 import { TableCell } from './components/TableCell'
@@ -26,7 +25,7 @@ export const TableBody = <T,>({
 
   // Functions
   function renderRows() {
-    return rows.map(row => {
+    return rows.map((row) => {
       const cells = row.getVisibleCells()
       const cursor = row.original.onClick ? 'pointer' : 'default'
       const handleClick = () => row.original.onClick?.(row.original.data)

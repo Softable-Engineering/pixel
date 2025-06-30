@@ -1,20 +1,33 @@
 {
   "name": "softable-pixel",
   "version": "1.0.0",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup"
+  },
   "peerDependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@tanstack/react-table": "^8.21.3",
+    "facepaint": "^1.2.1",
     "react": "~18.2.0",
     "react-dom": "~18.2.0",
     "styled-components": "^6.0.8"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.0.6",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@tanstack/react-table": "^8.21.3",
+    "@types/facepaint": "^1",
     "@types/node": "^18.18.3",
     "@types/react": "~18.2.33",
     "@types/react-dom": "^18.3.5",
+    "facepaint": "^1.2.1",
+    "styled-components": "^6.0.8",
+    "tsup": "^8.5.0",
     "typescript": "^5.2.2"
   },
   "packageManager": "yarn@4.9.2"

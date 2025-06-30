@@ -1,15 +1,12 @@
 // External Libraries
-import React from 'react'
-import { Cell, Row } from '@tanstack/react-table'
+import type React from 'react'
+import type { Cell, Row } from '@tanstack/react-table'
 
 // Components
 import { Typography } from '@components/toolkit/Typography'
 
 // Types
-import type {
-  CustomData,
-  CustomColumnDef
-} from '@components/tables/DataTable/types'
+import type { CustomColumnDef, CustomData } from '../../../../types'
 
 // Styles
 import { Container } from './styles'
@@ -32,7 +29,7 @@ export const TableCell = <T,>({
   const typeValue = typeof value
   const columnDef = cell.column.columnDef as CustomColumnDef<T>
   const handleClick = columnDef.onClick
-    ? () => columnDef.onClick!(row.original.data)
+    ? () => columnDef.onClick?.(row.original.data)
     : undefined
 
   // Functions

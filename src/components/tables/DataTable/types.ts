@@ -1,4 +1,4 @@
-import { AccessorFnColumnDef } from '@tanstack/react-table'
+import type { AccessorFnColumnDef } from '@tanstack/react-table'
 
 export interface ColumnProps {
   columnId: string
