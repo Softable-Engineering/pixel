@@ -1,5 +1,5 @@
 // Bibliotecas Externas
-import React, { createContext, PropsWithChildren, useContext } from 'react'
+import React, { createContext, type PropsWithChildren, useContext } from 'react'
 
 export interface TypographyContextData {
   loading: boolean

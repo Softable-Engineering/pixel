@@ -1,7 +1,6 @@
 import facepaint from 'facepaint'
-import { DefaultTheme } from 'styled-components'
-
-import { TypeVariants } from './types'
+import type { DefaultTheme } from 'styled-components'
+import type { TypeVariants } from './types'
 
 export const FontAnchors = facepaint([
   '@media(min-width: 321px)', // Mobile S

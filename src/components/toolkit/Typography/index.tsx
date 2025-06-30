@@ -10,7 +10,7 @@ import { getVariants } from './config'
 import { getPlaceholder } from './utils/getPlaceholder'
 
 // Types
-import { PixelTypeProps } from './types'
+import type { PixelTypeProps } from './types'
 
 // Styles
 import { Container } from './styles'

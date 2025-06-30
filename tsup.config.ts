@@ -11,6 +11,16 @@ export default defineConfig({
   shims: true,
   splitting: true,
 
+  external: [
+    'react',
+    'react-dom',
+    'styled-components',
+    '@dnd-kit/core',
+    '@dnd-kit/sortable',
+    '@tanstack/react-table',
+    'facepaint'
+  ],
+
   esbuildOptions(options) {
     options.alias = {
       '@components': path.resolve(__dirname, 'src/components'),

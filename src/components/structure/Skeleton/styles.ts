@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import type { IMargin } from '@type/css'
 import { applyMargin } from '@utils/functions'
 

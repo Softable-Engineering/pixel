@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { FontAnchors, FontWeights } from './config'
+import { styled, css } from 'styled-components'
+import { FontAnchors, type FontWeights } from './config'
 import { normalizeEntry } from './utils/normalizeEntry'
 import { normalizeWeight } from './utils/normalizeWeight'
 
