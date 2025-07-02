@@ -11,7 +11,7 @@ export const Container = styled.thead<ContainerProps>`
 
   svg path {
     fill: ${({ $textColorHeader }) =>
-      $textColorHeader ? `${$textColorHeader} !important` : 'inherit'};
+      $textColorHeader ? `${$textColorHeader} !important` : undefined};
   }
 
   p {
