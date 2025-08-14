@@ -18,7 +18,8 @@ export default defineConfig({
     '@dnd-kit/core',
     '@dnd-kit/sortable',
     '@tanstack/react-table',
-    'facepaint'
+    'facepaint',
+    'framer-motion'
   ],
 
   esbuildOptions(options) {
