@@ -2,6 +2,7 @@
 import React from 'react'
 
 // Components
+import { Select } from './components/Select'
 import { PresetsColumn } from './components/PresetsColumn'
 
 // Hooks
@@ -14,7 +15,7 @@ import { OPACITY_ANIMATION_PRESETS } from '@utils/animations'
 import type { DateRange } from '../../types'
 
 // Styles
-import { Container } from './styles'
+import { Container, Content } from './styles'
 
 interface Props {
   value: DateRange
@@ -25,6 +26,7 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
   (params, ref) => {
     // Hooks
     const { presets, context, handleChangeValue } = useCalendar(params)
+    const { filters } = context
 
     return (
       <Container ref={ref} {...OPACITY_ANIMATION_PRESETS}>
@@ -33,6 +35,14 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
           context={context}
           onChangeValue={handleChangeValue}
         />
+
+        <Content>
+          <Select
+            options={[]}
+            value={filters.operator}
+            onChange={console.log}
+          />
+        </Content>
       </Container>
     )
   }
