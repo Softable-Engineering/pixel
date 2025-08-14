@@ -8,11 +8,11 @@ import type {
 export function getTodayPreset(): Shortcut {
   return {
     id: 'today',
-    label: 'Hoje editado',
-    build: (ctx: BuildContext): DateFilterValue => {
+    label: 'Hoje',
+    build: (_: BuildContext): DateFilterValue => {
       return {
         op: 'equals',
-        at: { type: 'literal', date: ctx.now }
+        at: { type: 'token', token: 'today' }
       }
     }
   }

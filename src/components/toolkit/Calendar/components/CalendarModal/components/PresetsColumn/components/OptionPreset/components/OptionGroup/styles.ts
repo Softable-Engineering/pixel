@@ -13,6 +13,7 @@ export const Container = styled.div`
   transition: 0.5s;
 
   &:hover {
+    cursor: pointer;
     transition: 0.5s;
     background-color: var(--option-background-hover);
   }
@@ -24,8 +25,11 @@ export const ContainerChildren = styled(motion.div)`
   height: fit-content;
 
   position: absolute;
-  left: 100%;
+  left: calc(100% + 0.5rem);
   top: 0;
 
+  border-radius: 0.5rem;
+
   background-color: var(--option-background-color);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 `

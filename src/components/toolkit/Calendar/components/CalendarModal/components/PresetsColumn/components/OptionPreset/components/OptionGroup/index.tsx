@@ -12,8 +12,9 @@ import { OPACITY_ANIMATION_PRESETS } from '@utils/animations'
 
 // Types
 import type {
-  BuildContext,
   Preset,
+  DateRange,
+  BuildContext,
   ShortcutGroup
 } from '@components/toolkit/Calendar/types'
 
@@ -23,15 +24,27 @@ import { Container, ContainerChildren } from './styles'
 interface Props {
   group: ShortcutGroup
   context: BuildContext
+  onChangeValue: (range: DateRange) => void
 }
 
-export const OptionGroup: React.FC<Props> = ({ group, context }) => {
+export const OptionGroup: React.FC<Props> = ({
+  group,
+  context,
+  onChangeValue
+}) => {
   // States
   const [hover, setHover] = useState(false)
 
   // Functions
   function renderItem(preset: Preset) {
-    return <OptionPreset key={preset.id} item={preset} context={context} />
+    return (
+      <OptionPreset
+        key={preset.id}
+        item={preset}
+        context={context}
+        onChangeValue={onChangeValue}
+      />
+    )
   }
 
   function renderShortcutGroup(items: Preset[]): ReactNode[] {

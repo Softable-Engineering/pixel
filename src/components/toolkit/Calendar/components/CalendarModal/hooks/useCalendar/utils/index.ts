@@ -1,5 +1,6 @@
 export * from './dateAdapter'
 export * from './getPresets'
 export * from './makeInitialContext'
+export * from './makeInitialValue'
 export * from './shortcutGroup'
 export * from './shortcuts'

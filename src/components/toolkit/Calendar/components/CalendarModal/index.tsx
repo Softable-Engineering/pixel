@@ -22,13 +22,17 @@ interface Props {
 }
 
 export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
-  ({ value, onChange }, ref) => {
+  (params, ref) => {
     // Hooks
-    const { presets, context } = useCalendar()
+    const { presets, context, handleChangeValue } = useCalendar(params)
 
     return (
       <Container ref={ref} {...OPACITY_ANIMATION_PRESETS}>
-        <PresetsColumn presets={presets} context={context} />
+        <PresetsColumn
+          presets={presets}
+          context={context}
+          onChangeValue={handleChangeValue}
+        />
       </Container>
     )
   }

@@ -8,7 +8,11 @@ import { Typography } from '@components/toolkit/Typography'
 import { resolveFilterToRange } from '@components/toolkit/Calendar/utils'
 
 // Types
-import type { Shortcut, BuildContext } from '@components/toolkit/Calendar/types'
+import type {
+  Shortcut,
+  DateRange,
+  BuildContext
+} from '@components/toolkit/Calendar/types'
 
 // Styles
 import { Container } from './styles'
@@ -16,34 +20,21 @@ import { Container } from './styles'
 interface Props {
   shortcut: Shortcut
   context: BuildContext
+  onChangeValue: (range: DateRange) => void
 }
 
-export const Option: React.FC<Props> = ({ context, shortcut }) => {
+export const Option: React.FC<Props> = ({
+  context,
+  shortcut,
+  onChangeValue
+}) => {
   // Functions
   function handleOptionClick() {
     const dateFilter = shortcut.build(context)
 
-    const resp = resolveFilterToRange(dateFilter, context)
+    const dateRange = resolveFilterToRange(dateFilter, context)
 
-    const startDate = new Intl.DateTimeFormat('pt-BR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    }).format(resp.start)
-
-    const endDate = new Intl.DateTimeFormat('pt-BR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    }).format(resp.end)
-
-    console.log(`${startDate} - ${endDate}`)
+    onChangeValue(dateRange)
   }
 
   return (
