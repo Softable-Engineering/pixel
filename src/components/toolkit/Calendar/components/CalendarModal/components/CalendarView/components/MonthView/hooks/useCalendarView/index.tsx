@@ -30,7 +30,7 @@ export function useCalendarView(currentMonth: number, currentYear: number) {
 
     for (let day = 1; day <= daysInMonth; day++) {
       result.push({
-        key: `day_${day}`,
+        key: `day_${day}_${month}_${year}`,
         day,
         year,
         month,

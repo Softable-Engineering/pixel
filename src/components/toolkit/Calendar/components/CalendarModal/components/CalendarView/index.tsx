@@ -31,7 +31,7 @@ export const CalendarView: React.FC<Props> = ({ dateRange, context }) => {
     return monthsView.map(({ month, year }) => {
       return (
         <MonthView
-          key={`${month}-${year}`}
+          key={`${month}_${year}`}
           month={month}
           year={year}
           value={2}

@@ -1,4 +1,5 @@
 // External Libraries
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: <explanation> */
 import type React from 'react'
 import { useMemo, type ReactNode } from 'react'
 
@@ -55,9 +56,9 @@ export const MonthView: React.FC<Props> = ({
   }
 
   function renderWeekDays(): ReactNode[] {
-    return WEEK_DAYS.map(day => (
+    return WEEK_DAYS.map((day, index) => (
       <Typography
-        key={`week_day_${day}`}
+        key={`week_day_${day}_${month}_${year}_${index}`}
         variant="b2"
         fontWeight="bold"
         $align="center"
