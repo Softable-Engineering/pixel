@@ -1,32 +1,105 @@
 // External Libraries
-import type React from 'react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 
 // Components
+import { OptionsList } from './components/OptionsList'
 import { OptionDisplay } from './components/OptionDisplay'
 
+// Hooks
+import { useClickOutsideWatcher } from 'src/hooks/useClickOutsideWatcher'
+
 // Types
-import type { Props } from './types'
+import type { Option, Props } from './types'
 
 // Styles
 import { Container } from './styles'
 
-export const Select: React.FC<Props> = ({ value, options, onChange }) => {
+const VALUE_CUSTOM_OPTION = 'custom-value-with-select'
+
+export const Select = <T extends string>(props: Props<T>) => {
+  // Refs
+  const containerListRef = useRef<HTMLDivElement>(null)
+
+  // Constants
+  const {
+    value,
+    options,
+    disabled = false,
+    withCustomValue = false,
+    onChange
+  } = props
+  const selectedOption = options.find(option => option.value === value)
+
+  const completeOptions = getCompleteOptions()
+
+  // States
+  const [customValueSelected, setCustomValueSelected] = useState(false)
+
   // States
   const [visible, setVisible] = useState(false)
 
+  // Hooks
+  useClickOutsideWatcher(containerListRef, handleClose, !visible)
+
+  useEffect(() => {
+    if (!selectedOption) {
+      setCustomValueSelected(true)
+    } else return setCustomValueSelected(false)
+  }, [selectedOption])
+
   // Functions
-  function handleToggleVisible() {
-    setVisible(prev => !prev)
+  function getCompleteOptions() {
+    const customOption = {
+      label: 'Valor customizado',
+      value: VALUE_CUSTOM_OPTION
+    }
+    if (withCustomValue) {
+      return [...options, customOption]
+    }
+
+    return options
+  }
+
+  function handleOpen() {
+    if (visible) return null
+
+    setVisible(true)
+  }
+
+  function handleClose() {
+    setVisible(false)
+  }
+
+  function handleChange(value: T) {
+    if (value === VALUE_CUSTOM_OPTION) {
+      setCustomValueSelected(true)
+      handleClose()
+      return
+    }
+    setCustomValueSelected(false)
+    onChange(value)
+    handleClose()
   }
 
   return (
-    <Container>
-      <OptionDisplay value={value} onClick={handleToggleVisible} />
+    <Container $disabled={disabled} ref={containerListRef}>
+      <OptionDisplay
+        value={value}
+        customValueSelected={customValueSelected}
+        selectedOption={selectedOption}
+        onChange={onChange}
+        onClick={handleOpen}
+      />
 
       <AnimatePresence initial={false}>
-        {visible ? <>asd</> : null}
+        {visible && !disabled ? (
+          <OptionsList<T>
+            value={value}
+            options={completeOptions as Option<T>[]}
+            onChange={handleChange}
+          />
+        ) : null}
       </AnimatePresence>
     </Container>
   )

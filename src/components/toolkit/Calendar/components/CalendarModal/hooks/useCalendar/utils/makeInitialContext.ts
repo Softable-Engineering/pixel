@@ -14,13 +14,16 @@ function getFilters(): Filters {
   }
 }
 
-export function makeInitialContext(): BuildContext {
+export function makeInitialContext(
+  onChangeFilters: (change: Partial<Filters>) => void
+): BuildContext {
   return {
     minDate: MIN,
     maxDate: MAX,
     now: new Date(),
     weekStartsOn: 0,
     utils: getAdapters(),
-    filters: getFilters()
+    filters: getFilters(),
+    onChangeFilters
   }
 }

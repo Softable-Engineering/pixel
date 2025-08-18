@@ -19,7 +19,7 @@ import type {
 } from '@components/toolkit/Calendar/types'
 
 // Styles
-import { Container, ContainerChildren } from './styles'
+import { Container, ContainerChildren, ContainerOption } from './styles'
 
 interface Props {
   group: ShortcutGroup
@@ -58,9 +58,11 @@ export const OptionGroup: React.FC<Props> = ({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <Typography variant="b2" fontWeight="bold" color="var(--text-color)">
-        {group?.label}
-      </Typography>
+      <ContainerOption>
+        <Typography variant="b2" fontWeight="bold" color="var(--text-color)">
+          {group?.label}
+        </Typography>
+      </ContainerOption>
 
       <AnimatePresence initial={false}>
         {hover ? (

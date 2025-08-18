@@ -18,7 +18,9 @@ export function useCalendar({ value, onChange }: CalendarProps) {
 
   // States
   const [valueRange, setValueRange] = useState<DateRange>(value)
-  const [context, setContext] = useState<BuildContext>(makeInitialContext)
+  const [context, setContext] = useState<BuildContext>(
+    makeInitialContext(handleChangeFilters)
+  )
 
   // Functions
   function handleChangeFilters(change: Partial<Filters>) {
@@ -31,11 +33,18 @@ export function useCalendar({ value, onChange }: CalendarProps) {
     }))
   }
 
+  function handleChangeDateRange(change: Partial<DateRange>) {
+    setValueRange(prev => ({
+      ...prev,
+      ...change
+    }))
+  }
+
   return {
     presets,
     context,
     valueRange,
     handleChangeFilters,
-    handleChangeValue: setValueRange
+    handleChangeDateRange
   }
 }

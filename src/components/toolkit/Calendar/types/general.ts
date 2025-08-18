@@ -28,6 +28,7 @@ export interface BuildContext {
   filters: Filters
   utils: DateAdapter
   weekStartsOn?: WeekdayIndex
+  onChangeFilters: (change: Partial<Filters>) => void
 }
 
 export interface Shortcut {

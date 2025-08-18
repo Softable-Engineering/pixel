@@ -15,7 +15,7 @@ import type {
 } from '@components/toolkit/Calendar/types'
 
 // Styles
-import { Container } from './styles'
+import { Container, ContainerOption } from './styles'
 
 interface Props {
   shortcut: Shortcut
@@ -30,18 +30,23 @@ export const Option: React.FC<Props> = ({
 }) => {
   // Functions
   function handleOptionClick() {
+    const { onChangeFilters } = context
+
     const dateFilter = shortcut.build(context)
 
     const dateRange = resolveFilterToRange(dateFilter, context)
 
+    onChangeFilters({ operator: dateFilter.op })
     onChangeValue(dateRange)
   }
 
   return (
     <Container onClick={handleOptionClick}>
-      <Typography variant="b2" fontWeight="medium" color="var(--text-color)">
-        {shortcut.label}
-      </Typography>
+      <ContainerOption>
+        <Typography variant="b2" fontWeight="medium" color="var(--text-color)">
+          {shortcut.label}
+        </Typography>
+      </ContainerOption>
     </Container>
   )
 }

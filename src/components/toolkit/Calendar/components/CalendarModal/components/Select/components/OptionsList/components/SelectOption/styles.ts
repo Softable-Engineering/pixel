@@ -2,23 +2,32 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
-  padding: 0.125rem;
+  min-width: 10rem;
+  height: fit-content;
 
-  transition: 0.5s;
-`
-
-export const ContainerOption = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
 
-  transition: 0.5s;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  padding: 0.125rem;
 
-  &:hover {
+  transition: 0.5s;
+
+  &:hover div {
     cursor: pointer;
     transition: 0.5s;
     background-color: var(--option-background-hover);
   }
+`
+
+export const Content = styled.div`
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 0.5rem;
+
+  border-radius: 0.5rem;
 `
