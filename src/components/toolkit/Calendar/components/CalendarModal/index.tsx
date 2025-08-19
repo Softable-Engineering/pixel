@@ -3,6 +3,7 @@ import React from 'react'
 
 // Components
 import { Select } from './components/Select'
+import { CalendarView } from './components/CalendarView'
 import { PresetsColumn } from './components/PresetsColumn'
 
 // Hooks
@@ -18,7 +19,6 @@ import type { DateRange } from '../../types'
 
 // Styles
 import { Container, ContainerCalendar, Content, Header } from './styles'
-import { CalendarView } from './components/CalendarView'
 
 interface Props {
   value: DateRange
