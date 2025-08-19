@@ -13,7 +13,7 @@ export const ContainerOption = styled.div`
   justify-content: flex-start;
 
   transition: 0.5s;
-  padding: 0.25rem 1rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;
 
   &:hover {
