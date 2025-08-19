@@ -1,13 +1,50 @@
 // Types
-import type { DayCell } from './types'
+import type { Variant } from '../../components/Day/types'
+import type { DayCell, UseCalendarViewParams } from './types'
 
 const TOTAL_CELLS = 42
 
-export function useCalendarView(currentMonth: number, currentYear: number) {
+export function useCalendarView({
+  context,
+  dateRange,
+  currentYear,
+  currentMonth,
+  onChangeValue
+}: UseCalendarViewParams) {
   // Constants
   const monthCells = getCells(currentYear, currentMonth)
 
-  // States
+  // Functions
+  function handleChangeValue(newDate: Date) {
+    const isSameDate = dateRange.end.getDate() === dateRange.start.getDate()
+    const isBeforeDate = newDate.getTime() < dateRange.start.getTime()
+    const isAfterDate = newDate.getTime() > dateRange.end.getTime()
+
+    if (context.filters.operator !== 'range') {
+      return onChangeValue?.({ start: newDate, end: newDate })
+    }
+
+    if (isSameDate && isBeforeDate) {
+      return onChangeValue?.({ start: newDate })
+    }
+
+    if (isSameDate && isAfterDate) {
+      return onChangeValue?.({ end: newDate })
+    }
+
+    if (!isBeforeDate && !isAfterDate) {
+      return onChangeValue?.({ start: newDate, end: newDate })
+    }
+
+    if (isBeforeDate) {
+      return onChangeValue?.({ start: newDate, end: dateRange.end })
+    }
+
+    if (isAfterDate) {
+      return onChangeValue?.({ start: dateRange.start, end: newDate })
+    }
+  }
+
   function getCells(year: number, month: number): DayCell[] {
     const firstDayOfWeek = new Date(year, month, 1).getDay()
     const daysInMonth = new Date(year, month + 1, 0).getDate()
@@ -56,5 +93,43 @@ export function useCalendarView(currentMonth: number, currentYear: number) {
     return result
   }
 
-  return { monthCells, getCells }
+  function getVariant(day: number, month: number, year: number): Variant {
+    const startDate = new Date(
+      dateRange.start.getFullYear(),
+      dateRange.start.getMonth(),
+      dateRange.start.getDate()
+    )
+    const endDate = new Date(
+      dateRange.end.getFullYear(),
+      dateRange.end.getMonth(),
+      dateRange.end.getDate()
+    )
+    const currentDate = new Date(year, month, day)
+
+    if (
+      currentDate.getTime() === startDate.getTime() &&
+      currentDate.getTime() === endDate.getTime()
+    ) {
+      return 'single'
+    }
+
+    if (currentDate.getTime() === startDate.getTime()) {
+      return 'start'
+    }
+
+    if (currentDate.getTime() === endDate.getTime()) {
+      return 'end'
+    }
+
+    if (
+      currentDate.getTime() > startDate.getTime() &&
+      currentDate.getTime() < endDate.getTime()
+    ) {
+      return 'middle'
+    }
+
+    return 'none'
+  }
+
+  return { monthCells, getCells, getVariant, handleChangeValue }
 }

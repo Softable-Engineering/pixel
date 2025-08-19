@@ -46,18 +46,24 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
   }
 
   function onBlur() {
-    const [day, month, year] = customValue.split('/')
-    const date = new Date(
-      `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-    )
+    try {
+      if (customValue.length !== 10) return null
 
-    if (Number.isNaN(date.getTime())) return null
+      const [day, month, year] = customValue.split('/')
+      const date = new Date(
+        `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+      )
 
-    const newDate = new Date(
-      date.setHours(0, 0, 0, 0) + 24 * 60 * 60 * 1000
-    ).toISOString() as T
+      if (Number.isNaN(date.getTime())) return null
 
-    onChange(newDate)
+      const newDate = new Date(
+        date.setHours(0, 0, 0, 0) + 24 * 60 * 60 * 1000
+      ).toISOString() as T
+
+      onChange(newDate)
+    } catch {
+      return null
+    }
   }
 
   if (customValueSelected)

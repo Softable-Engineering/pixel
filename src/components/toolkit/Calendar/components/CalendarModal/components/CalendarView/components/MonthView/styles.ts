@@ -16,6 +16,5 @@ export const ContainerDays = styled.div`
   width: 100%;
 
   display: grid;
-  grid-gap: 0.5rem;
   grid-template-columns: repeat(7, 1fr);
 `

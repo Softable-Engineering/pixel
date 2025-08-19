@@ -13,42 +13,60 @@ import { useCalendarView } from './hooks/useCalendarView'
 // Utils
 import { MONTH_NAMES, WEEK_DAYS } from './constants'
 
+// Types
+import type {
+  DateRange,
+  BuildContext
+} from '@components/toolkit/Calendar/types'
+
 // Styles
 import { Container, ContainerDays } from './styles'
 
 interface Props {
   year: number
   month: number
-  value: number
-  onChange?: (date: Date) => void
+  dateRange: DateRange
+  context: BuildContext
+  onChangeValue?: (range: Partial<DateRange>) => void
 }
 
 export const MonthView: React.FC<Props> = ({
   year,
   month,
-  value,
-  onChange
+  context,
+  dateRange,
+  onChangeValue
 }) => {
   // Hooks
-  const { monthCells } = useCalendarView(month, year)
+  const { monthCells, getVariant, handleChangeValue } = useCalendarView({
+    context,
+    dateRange,
+    currentYear: year,
+    currentMonth: month,
+    onChangeValue
+  })
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const days = useMemo(() => {
     return monthCells.map(
       ({ key, day, year: y, month: m, disabled, isOtherMonth }) => {
+        const variant = getVariant(day, month, year)
+
         return (
           <Day
             year={y}
             month={m}
             key={key}
             day={day}
+            variant={variant}
             disabled={disabled}
             isOtherMonth={isOtherMonth}
-            onChange={!disabled && onChange ? onChange : undefined}
+            onChange={handleChangeValue}
           />
         )
       }
     )
-  }, [monthCells, onChange])
+  }, [monthCells, onChangeValue])
 
   // Functions
   function getTitle() {

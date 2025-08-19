@@ -24,6 +24,12 @@ export function useCalendar({ value, onChange }: CalendarProps) {
 
   // Functions
   function handleChangeFilters(change: Partial<Filters>) {
+    if (change.operator !== 'range')
+      handleChangeDateRange({
+        start: new Date(),
+        end: new Date()
+      })
+
     setContext(prev => ({
       ...prev,
       filters: {

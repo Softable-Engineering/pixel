@@ -15,6 +15,8 @@ export const Container = styled(motion.div)`
 
   border-radius: 0.5rem;
   background-color: #fbfbfb;
+
+  user-select: none;
 `
 
 export const ContainerCalendar = styled.div`

@@ -22,7 +22,11 @@ interface Props {
   onChangeValue: (range: Partial<DateRange>) => void
 }
 
-export const CalendarView: React.FC<Props> = ({ dateRange, context }) => {
+export const CalendarView: React.FC<Props> = ({
+  dateRange,
+  context,
+  onChangeValue
+}) => {
   // Hooks
   const { monthsView } = useCalendarView({ context, dateRange })
 
@@ -32,9 +36,11 @@ export const CalendarView: React.FC<Props> = ({ dateRange, context }) => {
       return (
         <MonthView
           key={`${month}_${year}`}
-          month={month}
           year={year}
-          value={2}
+          month={month}
+          context={context}
+          dateRange={dateRange}
+          onChangeValue={onChangeValue}
         />
       )
     })

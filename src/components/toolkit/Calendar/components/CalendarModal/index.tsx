@@ -75,6 +75,7 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
               onChange={v => handleChangeDateRange({ end: new Date(v) })}
             />
           </Header>
+
           <Content>
             <CalendarView
               context={context}
