@@ -12,7 +12,7 @@ import type {
 } from '@components/toolkit/Calendar/types'
 
 // Styles
-import { Container } from './styles'
+import { Container, ContainerPreset } from './styles'
 
 interface Props {
   context: BuildContext
@@ -26,18 +26,31 @@ export const PresetsColumn: React.FC<Props> = ({
   onChangeValue
 }) => {
   // Functions
+  function renderPreset(preset: PresetGroup) {
+    return Object.entries(preset).map(([key, value]) => {
+      return (
+        <OptionPreset
+          key={key}
+          item={value}
+          context={context}
+          onChangeValue={onChangeValue}
+        />
+      )
+    })
+  }
+
   function renderPresets() {
-    return presets.map(preset => {
-      return Object.entries(preset).map(([key, value]) => {
-        return (
-          <OptionPreset
-            key={key}
-            item={value}
-            context={context}
-            onChangeValue={onChangeValue}
-          />
-        )
-      })
+    return presets.map((preset, index) => {
+      const isLastPreset = preset === presets[presets.length - 1]
+
+      return (
+        <ContainerPreset
+          key={`preset_${preset.id}_${index}`}
+          isLast={isLastPreset}
+        >
+          {renderPreset(preset)}
+        </ContainerPreset>
+      )
     })
   }
 

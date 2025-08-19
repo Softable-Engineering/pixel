@@ -1,4 +1,5 @@
 // External Libraries
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: <no> */
 import type React from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode, useState } from 'react'
@@ -19,7 +20,12 @@ import type {
 } from '@components/toolkit/Calendar/types'
 
 // Styles
-import { Container, ContainerChildren, ContainerOption } from './styles'
+import {
+  Container,
+  ContainerOption,
+  ContainerChildren,
+  ContainerPreset
+} from './styles'
 
 interface Props {
   group: ShortcutGroup
@@ -36,20 +42,28 @@ export const OptionGroup: React.FC<Props> = ({
   const [hover, setHover] = useState(false)
 
   // Functions
-  function renderItem(preset: Preset) {
-    return (
-      <OptionPreset
-        key={preset.id}
-        item={preset}
-        context={context}
-        onChangeValue={onChangeValue}
-      />
-    )
+  function renderGroup(presets: Preset[]) {
+    return presets.map(preset => {
+      return (
+        <OptionPreset
+          item={preset}
+          key={preset.id}
+          context={context}
+          onChangeValue={onChangeValue}
+        />
+      )
+    })
   }
 
-  function renderShortcutGroup(items: Preset[]): ReactNode[] {
-    return items.map(item => {
-      return renderItem(item)
+  function renderShortcutGroup(items: Preset[][]): ReactNode[] {
+    return items.map((item, index) => {
+      const isLast = index === items.length - 1
+
+      return (
+        <ContainerPreset key={`subgroup_${index}`} isLast={isLast}>
+          {renderGroup(item)}
+        </ContainerPreset>
+      )
     })
   }
 
@@ -59,7 +73,7 @@ export const OptionGroup: React.FC<Props> = ({
       onMouseLeave={() => setHover(false)}
     >
       <ContainerOption>
-        <Typography variant="b2" fontWeight="bold" color="var(--text-color)">
+        <Typography variant="b2" fontWeight="medium" color="var(--text-color)">
           {group?.label}
         </Typography>
       </ContainerOption>

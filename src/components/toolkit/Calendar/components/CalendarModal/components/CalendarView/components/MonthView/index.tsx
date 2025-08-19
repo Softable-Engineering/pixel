@@ -1,5 +1,5 @@
 // External Libraries
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: <explanation> */
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: <no> */
 import type React from 'react'
 import { useMemo, type ReactNode } from 'react'
 
@@ -46,7 +46,7 @@ export const MonthView: React.FC<Props> = ({
     onChangeValue
   })
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <no>
   const days = useMemo(() => {
     return monthCells.map(
       ({ key, day, year: y, month: m, disabled, isOtherMonth }) => {
@@ -96,6 +96,7 @@ export const MonthView: React.FC<Props> = ({
       >
         {getTitle()}
       </Typography>
+
       <ContainerDays>
         {renderWeekDays()}
         {days}

@@ -40,7 +40,7 @@ function createItems(): Shortcut[] {
 export function getLastDaysPreset(): ShortcutGroup {
   return {
     id: 'last-days',
-    label: 'Últimos … dias',
-    items: createItems()
+    label: 'Últimos dias',
+    items: [createItems()]
   }
 }

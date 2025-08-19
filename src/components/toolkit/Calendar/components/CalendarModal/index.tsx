@@ -39,10 +39,23 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
       handleChangeDateRange
     } = useCalendar(params)
 
+    // Constants
     const startDateOptions = getDateOptions()
     const endDateOptions = getDateOptions()
-
     const { filters } = context
+
+    // Functions
+    function handleChangeValue(value: Date, type: keyof DateRange) {
+      if (context.filters.operator !== 'range') {
+        return handleChangeDateRange({ start: value, end: value })
+      }
+
+      if (type === 'start') {
+        return handleChangeDateRange({ start: value })
+      }
+
+      handleChangeDateRange({ end: value })
+    }
 
     return (
       <Container ref={ref} {...OPACITY_ANIMATION_PRESETS}>
@@ -65,14 +78,14 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
               withCustomValue
               options={startDateOptions}
               value={startOfDay(valueRange.start).toISOString()}
-              onChange={v => handleChangeDateRange({ start: new Date(v) })}
+              onChange={v => handleChangeValue(new Date(v), 'start')}
             />
             <Select
               withCustomValue
               options={endDateOptions}
               disabled={filters.operator !== 'range'}
               value={startOfDay(valueRange.end).toISOString()}
-              onChange={v => handleChangeDateRange({ end: new Date(v) })}
+              onChange={v => handleChangeValue(new Date(v), 'end')}
             />
           </Header>
 

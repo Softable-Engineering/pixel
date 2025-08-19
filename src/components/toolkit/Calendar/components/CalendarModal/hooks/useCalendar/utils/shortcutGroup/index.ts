@@ -1,1 +1,7 @@
+export * from './getBimestersPreset'
 export * from './getLastDaysPreset'
+export * from './getMonthsPreset'
+export * from './getSemestersPreset'
+export * from './getTrimestersPreset'
+export * from './getYearsPreset'
+export * from './getRelativePreset'

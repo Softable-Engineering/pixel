@@ -9,7 +9,15 @@ import {
   getThisYearPreset,
   getThisMonthPreset
 } from './shortcuts'
-import { getLastDaysPreset } from './shortcutGroup'
+import {
+  getYearsPreset,
+  getRelativePreset,
+  getLastDaysPreset,
+  getMonthsGroupPreset,
+  getSemesterGroupPreset,
+  getBimesterGroupPreset,
+  getTrimesterGroupPreset
+} from './shortcutGroup'
 
 export function getPresets(): PresetGroup[] {
   return [
@@ -21,7 +29,13 @@ export function getPresets(): PresetGroup[] {
       thisYear: getThisYearPreset()
     },
     {
-      lastDays: getLastDaysPreset()
+      relative: getRelativePreset(),
+      lastDays: getLastDaysPreset(),
+      lastMonths: getMonthsGroupPreset(),
+      lastBimesters: getBimesterGroupPreset(),
+      lastTrimesters: getTrimesterGroupPreset(),
+      lastSemesters: getSemesterGroupPreset(),
+      lastYears: getYearsPreset()
     }
   ]
 }

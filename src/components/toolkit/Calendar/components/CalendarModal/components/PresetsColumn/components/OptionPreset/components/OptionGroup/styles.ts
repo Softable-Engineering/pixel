@@ -2,6 +2,10 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
+interface ContainerGroup {
+  isLast: boolean
+}
+
 export const Container = styled.div`
   width: 100%;
   padding: 0.125rem;
@@ -19,7 +23,7 @@ export const ContainerOption = styled.div`
   justify-content: flex-start;
 
   transition: 0.5s;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 1rem;
   border-radius: 0.5rem;
 
   &:hover {
@@ -44,5 +48,9 @@ export const ContainerChildren = styled(motion.div)`
 
   background-color: var(--option-background-color);
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
+  /* overflow-y: auto; */
+`
+
+export const ContainerPreset = styled.div<ContainerGroup>`
+  border-bottom: ${({ isLast }) => (!isLast ? '1px solid var(--border-color)' : null)};
 `

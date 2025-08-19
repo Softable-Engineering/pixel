@@ -4,14 +4,18 @@ import { useEffect, useState } from 'react'
 // Components
 import { Typography } from '@components/toolkit/Typography'
 
+// Utils
+import { Locale, MaskModule, MaskType } from 'src/services/MaskModule'
+
 // Types
 import type { Option } from '../../types'
 
 // Styles
-import { Container, Input } from './styles'
+import { Container, Form, Input } from './styles'
 
 interface Props<T> {
   value: string
+  visibleListModal: boolean
   customValueSelected: boolean
   selectedOption: Option<T> | undefined
   onClick: () => void
@@ -34,6 +38,18 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
 
   // Functions
   function renderValue() {
+    if (customValueSelected)
+      return (
+        <Form onSubmit={onSubmit}>
+          <Input
+            value={customValue}
+            placeholder="00/00/0000"
+            onBlur={onBlur}
+            onChange={handleChangeValue}
+          />
+        </Form>
+      )
+
     return (
       <Typography variant="b2" color="var(--text-color)">
         {selectedOption?.label ?? 'Selecione uma opção'}
@@ -41,14 +57,17 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
     )
   }
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setCustomValue(event.target.value)
+  function handleChangeValue(event: React.ChangeEvent<HTMLInputElement>) {
+    const value = event.target.value
+    const mask = MaskModule.getMask(Locale.BR, MaskType.DATE)
+    const maskedValue = mask?.format(value as string)
+
+    return setCustomValue(maskedValue || '')
   }
 
-  function onBlur() {
+  function getDate() {
     try {
       if (customValue.length !== 10) return null
-
       const [day, month, year] = customValue.split('/')
       const date = new Date(
         `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
@@ -60,21 +79,36 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
         date.setHours(0, 0, 0, 0) + 24 * 60 * 60 * 1000
       ).toISOString() as T
 
-      onChange(newDate)
+      return newDate
     } catch {
       return null
     }
   }
 
-  if (customValueSelected)
-    return (
-      <Input
-        value={customValue}
-        placeholder="00/00/0000"
-        onBlur={onBlur}
-        onChange={handleChange}
-      />
-    )
+  function onBlur() {
+    const newDate = getDate()
+    if (newDate && newDate !== '') return onChange(newDate)
+    onChange(props.value as T)
+  }
 
-  return <Container onClick={onClick}>{renderValue()}</Container>
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    onBlur()
+  }
+  return (
+    <Container $visible={props.visibleListModal} onClick={onClick}>
+      {renderValue()}
+
+      <svg width="16" height="17" viewBox="0 0 16 17" fill="none">
+        <title>Arrow icon</title>
+        <path
+          d="M4 6.5L8 10.5L12 6.5"
+          stroke="#7D7C78"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </Container>
+  )
 }

@@ -26,7 +26,7 @@ export const OptionPreset: React.FC<Props> = ({
   context,
   onChangeValue
 }) => {
-  if (isShortcutGroup(item))
+  if (isShortcutGroup(item)) {
     return (
       <OptionGroup
         group={item}
@@ -34,6 +34,7 @@ export const OptionPreset: React.FC<Props> = ({
         onChangeValue={onChangeValue}
       />
     )
+  }
 
   return (
     <Option shortcut={item} context={context} onChangeValue={onChangeValue} />

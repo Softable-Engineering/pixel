@@ -41,7 +41,7 @@ export interface Shortcut {
 export interface ShortcutGroup {
   id: string
   label: string
-  items: Array<Shortcut | ShortcutGroup>
+  items: (Shortcut | ShortcutGroup)[][]
 }
 
 export type ResolveFilterToRange = (

@@ -61,10 +61,8 @@ export const Select = <T extends string>(props: Props<T>) => {
     return options
   }
 
-  function handleOpen() {
-    if (visible) return null
-
-    setVisible(true)
+  function toggleVisible() {
+    setVisible(prev => !prev)
   }
 
   function handleClose() {
@@ -86,10 +84,11 @@ export const Select = <T extends string>(props: Props<T>) => {
     <Container $disabled={disabled} ref={containerListRef}>
       <OptionDisplay
         value={value}
-        customValueSelected={customValueSelected}
+        visibleListModal={visible}
         selectedOption={selectedOption}
+        customValueSelected={customValueSelected}
         onChange={onChange}
-        onClick={handleOpen}
+        onClick={toggleVisible}
       />
 
       <AnimatePresence initial={false}>
