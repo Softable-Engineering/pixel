@@ -76,6 +76,21 @@ export const OptionGroup: React.FC<Props> = ({
         <Typography variant="b2" fontWeight="medium" color="var(--text-color)">
           {group?.label}
         </Typography>
+
+        <svg
+          width="5"
+          height="6"
+          fill="none"
+          viewBox="0 0 5 6"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>Right arrow</title>
+
+          <path
+            d="M3.99806 0.3761C4.33139 0.1817 4.75 0.4221 4.75 0.808L4.75 5.19198C4.75 5.57788 4.33139 5.81831 3.99806 5.62387L0.240401 3.43189C-0.0903995 3.23895 -0.0903994 2.76105 0.240401 2.56811L3.99806 0.3761Z"
+            fill="#A8AFB7"
+          />
+        </svg>
       </ContainerOption>
 
       <AnimatePresence initial={false}>
