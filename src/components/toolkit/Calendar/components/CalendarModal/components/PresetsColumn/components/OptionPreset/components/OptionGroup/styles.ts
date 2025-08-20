@@ -23,7 +23,7 @@ export const ContainerOption = styled.div`
   justify-content: space-between;
 
   transition: 0.5s;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem;
   border-radius: 0.5rem;
 
   svg {
@@ -55,7 +55,19 @@ export const ContainerChildren = styled(motion.div)`
   background-color: var(--option-background-color);
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
   overflow-y: auto;
-  scrollbar-width: thin;
+
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 100%;
+  }
 `
 
 export const ContainerPreset = styled.div<ContainerGroup>`
