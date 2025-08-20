@@ -41,7 +41,19 @@ export interface Shortcut {
 export interface ShortcutGroup {
   id: string
   label: string
-  items: (Shortcut | ShortcutGroup)[][]
+  items: (Shortcut | ShortcutGroup | ActionOption)[][]
+}
+
+export type TypeAction = 'SWITCH'
+
+export type ActionOption = SwitchActionProps
+
+export interface SwitchActionProps {
+  id: string
+  label: string
+  type: 'SWITCH'
+  checked: (ctx: BuildContext) => boolean
+  action: (ctx: BuildContext, value: boolean) => void
 }
 
 export type ResolveFilterToRange = (
@@ -49,6 +61,6 @@ export type ResolveFilterToRange = (
   ctx: BuildContext
 ) => DateRange
 
-export type Preset = Shortcut | ShortcutGroup
+export type Preset = Shortcut | ShortcutGroup | ActionOption
 
 export type PresetGroup = Record<string, Preset>

@@ -13,7 +13,8 @@ import type {
 } from '@components/toolkit/Calendar/types'
 
 // Styles
-import { isShortcutGroup } from './utils'
+import { isAction, isShortcutGroup } from './utils'
+import { Action } from './components/Action'
 
 interface Props {
   item: Preset
@@ -34,6 +35,10 @@ export const OptionPreset: React.FC<Props> = ({
         onChangeValue={onChangeValue}
       />
     )
+  }
+
+  if (isAction(item)) {
+    return <Action action={item} context={context} />
   }
 
   return (
