@@ -16,7 +16,8 @@ import {
   getMonthsGroupPreset,
   getSemesterGroupPreset,
   getBimesterGroupPreset,
-  getTrimesterGroupPreset
+  getTrimesterGroupPreset,
+  getQuarterGroupPreset
 } from './shortcutGroup'
 
 export function getPresets(): PresetGroup[] {
@@ -34,6 +35,7 @@ export function getPresets(): PresetGroup[] {
       lastMonths: getMonthsGroupPreset(),
       lastBimesters: getBimesterGroupPreset(),
       lastTrimesters: getTrimesterGroupPreset(),
+      lastQuarter: getQuarterGroupPreset(),
       lastSemesters: getSemesterGroupPreset(),
       lastYears: getYearsPreset()
     }

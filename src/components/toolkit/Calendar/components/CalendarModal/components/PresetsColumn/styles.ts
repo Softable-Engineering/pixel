@@ -13,5 +13,5 @@ export const Container = styled.div`
 `
 
 export const ContainerPreset = styled.div<ContainerPresetProps>`
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: ${({ isLast }) => (!isLast ? '1px solid var(--border-color)' : null)};
 `

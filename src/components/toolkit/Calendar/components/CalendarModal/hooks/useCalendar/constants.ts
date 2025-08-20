@@ -29,4 +29,11 @@ export const TRIMESTERS = [
   '4° Trimestre'
 ]
 
+export const QUARTERS = [
+  '1° Quadrimestre',
+  '2° Quadrimestre',
+  '3° Quadrimestre',
+  '4° Quadrimestre'
+]
+
 export const SEMESTERS = ['1° Semestre', '2° Semestre']
