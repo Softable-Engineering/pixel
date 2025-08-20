@@ -40,22 +40,3 @@ export interface RangeDateFilter {
   end: DateEndpoint
   allowSameDay?: boolean
 }
-
-export type DateFilterValue =
-  | EqualsDateFilter
-  | BeforeDateFilter
-  | AfterDateFilter
-  | RangeDateFilter
-
-export interface TokenEndpointOption {
-  kind: 'token'
-  token: DateToken
-  label: string
-}
-
-export interface CustomEndpointOption {
-  kind: 'custom'
-  label: string
-}
-
-export type EndpointOption = TokenEndpointOption | CustomEndpointOption

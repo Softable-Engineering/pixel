@@ -1,5 +1,5 @@
 // Utils
-import { QUARTERS } from '../../constants'
+import { MONTHS } from '@components/toolkit/Calendar/constants/monthRanges'
 
 // Types
 import type {
@@ -9,13 +9,13 @@ import type {
   ShortcutGroup
 } from '@components/toolkit/Calendar/types'
 
-export function getQuarterPreset(
-  indexBimester: number,
+export function getMonthPreset(
+  indexMonth: number,
   offsetYear: number
 ): Shortcut {
   return {
-    id: 'last-quarter',
-    label: QUARTERS[indexBimester],
+    id: 'last-month',
+    label: MONTHS[indexMonth],
     build: (ctx: BuildContext): DateFilterValue => {
       return {
         op: 'range',
@@ -24,7 +24,7 @@ export function getQuarterPreset(
           token: 'startOfMonth',
           offset: {
             years: offsetYear,
-            months: -ctx.now.getMonth() + indexBimester * 4
+            months: -ctx.now.getMonth() + indexMonth
           }
         },
         end: {
@@ -32,7 +32,7 @@ export function getQuarterPreset(
           token: 'endOfMonth',
           offset: {
             years: offsetYear,
-            months: -ctx.now.getMonth() + indexBimester * 4 + 3
+            months: -ctx.now.getMonth() + indexMonth
           }
         }
       }
@@ -40,35 +40,35 @@ export function getQuarterPreset(
   }
 }
 
-function getQuarterGroup(year: number): ShortcutGroup {
+function getYearGroup(year: number): ShortcutGroup {
   const currentYear = new Date().getFullYear()
   const offsetYear = year - currentYear
 
   return {
-    id: 'quarters',
+    id: 'years',
     label: `${currentYear + offsetYear}`,
-    items: [getQuarter(offsetYear)]
+    items: [getMonths(offsetYear)]
   }
 }
 
-function getQuarter(offsetYear: number): Shortcut[] {
-  return Array.from({ length: 3 }).map((_, index) => {
-    return getQuarterPreset(index, offsetYear)
+function getMonths(offsetYear: number): Shortcut[] {
+  return Array.from({ length: 12 }).map((_, index) => {
+    return getMonthPreset(index, offsetYear)
   })
 }
 
 function getLastFiveYearsGroup(): ShortcutGroup[] {
   const currentYear = new Date().getFullYear() - 1
 
-  return Array.from({ length: 4 }).map((_, index) => {
-    return getQuarterGroup(currentYear - index)
+  return Array.from({ length: 5 }).map((_, index) => {
+    return getYearGroup(currentYear - index)
   })
 }
 
-export function getQuarterGroupPreset(): ShortcutGroup {
+export function getMonthsGroupPreset(): ShortcutGroup {
   return {
-    id: 'quarters',
-    label: 'Quadrimestre',
-    items: [[...getQuarter(0)], [...getLastFiveYearsGroup()]]
+    id: 'months',
+    label: 'Mês',
+    items: [[...getMonths(0)], [...getLastFiveYearsGroup()]]
   }
 }

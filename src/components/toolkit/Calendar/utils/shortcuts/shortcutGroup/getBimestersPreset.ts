@@ -1,5 +1,5 @@
 // Utils
-import { SEMESTERS } from '../../constants'
+import { BIMESTERS } from '@components/toolkit/Calendar/constants/monthRanges'
 
 // Types
 import type {
@@ -9,13 +9,13 @@ import type {
   ShortcutGroup
 } from '@components/toolkit/Calendar/types'
 
-export function getSemesterPreset(
+export function getBimesterPreset(
   indexBimester: number,
   offsetYear: number
 ): Shortcut {
   return {
-    id: 'last-semester',
-    label: SEMESTERS[indexBimester],
+    id: 'last-bimester',
+    label: BIMESTERS[indexBimester],
     build: (ctx: BuildContext): DateFilterValue => {
       return {
         op: 'range',
@@ -24,7 +24,7 @@ export function getSemesterPreset(
           token: 'startOfMonth',
           offset: {
             years: offsetYear,
-            months: -ctx.now.getMonth() + indexBimester * 6
+            months: -ctx.now.getMonth() + indexBimester * 2
           }
         },
         end: {
@@ -32,7 +32,7 @@ export function getSemesterPreset(
           token: 'endOfMonth',
           offset: {
             years: offsetYear,
-            months: -ctx.now.getMonth() + indexBimester * 6 + 5
+            months: -ctx.now.getMonth() + indexBimester * 2 + 1
           }
         }
       }
@@ -47,13 +47,13 @@ function getYearGroup(year: number): ShortcutGroup {
   return {
     id: 'years',
     label: `${currentYear + offsetYear}`,
-    items: [getSemester(offsetYear)]
+    items: [getBimesters(offsetYear)]
   }
 }
 
-function getSemester(offsetYear: number): Shortcut[] {
-  return Array.from({ length: 2 }).map((_, index) => {
-    return getSemesterPreset(index, offsetYear)
+function getBimesters(offsetYear: number): Shortcut[] {
+  return Array.from({ length: 6 }).map((_, index) => {
+    return getBimesterPreset(index, offsetYear)
   })
 }
 
@@ -65,10 +65,10 @@ function getLastFiveYearsGroup(): ShortcutGroup[] {
   })
 }
 
-export function getSemesterGroupPreset(): ShortcutGroup {
+export function getBimesterGroupPreset(): ShortcutGroup {
   return {
     id: 'months',
-    label: 'Semestre',
-    items: [[...getSemester(0)], [...getLastFiveYearsGroup()]]
+    label: 'Bimestre',
+    items: [[...getBimesters(0)], [...getLastFiveYearsGroup()]]
   }
 }

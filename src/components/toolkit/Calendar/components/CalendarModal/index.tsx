@@ -16,14 +16,15 @@ import { getDateOptions, getOperatorOptions } from './utils'
 import { OPACITY_ANIMATION_PRESETS } from '@utils/animations'
 
 // Types
-import type { DateRange, DateRangeValue, Locale } from '../../types'
+import type { DateRange, DateRangeValue, PresetGroup } from '../../types'
 
 // Styles
 import { Container, ContainerCalendar, Content, Footer, Header } from './styles'
 
 interface Props {
+  locale: string
   value: DateRangeValue
-  locale: Locale
+  presets?: PresetGroup[]
   onClose: () => void
   onChange: (range: DateRangeValue) => void
 }

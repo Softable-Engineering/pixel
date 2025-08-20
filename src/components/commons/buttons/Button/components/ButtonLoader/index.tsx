@@ -1,5 +1,5 @@
 // External Libraries
-import React from 'react'
+import type React from 'react'
 
 // Components
 import { Loader } from '@components/toolkit/Loader'
@@ -8,7 +8,7 @@ import { Loader } from '@components/toolkit/Loader'
 import { BACKGROUND_COLOR_MAPPER } from '../../mappers/background'
 
 // Types
-import { ButtonVariant } from '../../types'
+import type { ButtonVariant } from '../../types'
 
 // Styles
 import { Container } from './styles'

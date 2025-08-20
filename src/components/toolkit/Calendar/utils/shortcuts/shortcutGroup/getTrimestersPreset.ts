@@ -1,5 +1,5 @@
 // Utils
-import { TRIMESTERS } from '../../constants'
+import { TRIMESTERS } from '@components/toolkit/Calendar/constants/monthRanges'
 
 // Types
 import type {

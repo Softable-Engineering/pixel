@@ -16,9 +16,9 @@ interface Props extends CalendarProps {
   onClose: () => void
 }
 
-export function useCalendar({ value, locale, onClose, onChange }: Props) {
+export function useCalendar({ value, presets, onClose, onChange }: Props) {
   // Constants
-  const presets = getPresets()
+  const calendarPresets = presets ?? getPresets()
 
   // States
   const [valueRange, setValueRange] = useState<DateRange>(parseDateValue())
@@ -29,8 +29,8 @@ export function useCalendar({ value, locale, onClose, onChange }: Props) {
   // Functions
   function parseDateValue() {
     return {
-      start: new Date(new Date(value.start).toLocaleString(locale)),
-      end: new Date(new Date(new Date(value.end).toLocaleString(locale)))
+      start: new Date(value.start),
+      end: new Date(value.end)
     }
   }
 
@@ -71,9 +71,9 @@ export function useCalendar({ value, locale, onClose, onChange }: Props) {
   }
 
   return {
-    presets,
     context,
     valueRange,
+    presets: calendarPresets,
     clearValue,
     applyValue,
     handleChangeFilters,

@@ -1,5 +1,5 @@
 // Types
-import type { BuildContext, Filters } from '@components/toolkit/Calendar/types'
+import type { Filters, BuildContext } from '@components/toolkit/Calendar/types'
 
 // Utils
 import { getAdapters } from './dateAdapter/getAdapters'

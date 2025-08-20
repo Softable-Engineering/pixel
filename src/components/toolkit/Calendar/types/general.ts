@@ -1,14 +1,14 @@
 // Types
 import type { DateAdapter } from './adapters'
-import type { DateFilterValue, DateOperator } from './dateFilter'
+import type {
+  DateOperator,
+  RangeDateFilter,
+  AfterDateFilter,
+  BeforeDateFilter,
+  EqualsDateFilter
+} from './dateFilter'
 
 export type WeekdayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6
-
-export enum Locale {
-  BR = 'pt-BR', // Brazil
-  US = 'en-US', // United States
-  AR = 'es-AR' // Argentina
-}
 
 export interface DateRange {
   start: Date
@@ -75,3 +75,9 @@ export type ResolveFilterToRange = (
 export type Preset = Shortcut | ShortcutGroup | ActionOption
 
 export type PresetGroup = Record<string, Preset>
+
+export type DateFilterValue =
+  | EqualsDateFilter
+  | BeforeDateFilter
+  | AfterDateFilter
+  | RangeDateFilter

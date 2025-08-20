@@ -15,7 +15,9 @@ import type { CalendarProps, CalendarMethods } from './types/calendar'
 // Styles
 import { Container } from './styles'
 
-export * from './types/calendar'
+// Exports
+export * as CalendarTypes from './types'
+export { DEFAULT_PRESETS } from './constants/presets'
 
 export const Calendar = React.forwardRef<CalendarMethods, CalendarProps>(
   ({ children, ...rest }, ref) => {
