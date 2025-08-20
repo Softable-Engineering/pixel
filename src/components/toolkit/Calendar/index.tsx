@@ -59,7 +59,7 @@ export const Calendar = React.forwardRef<CalendarMethods, CalendarProps>(
     }
 
     return (
-      <Container ref={containerCalendarRef}>
+      <Container ref={containerCalendarRef} id="wrapper-calendar-component">
         {children}
 
         <AnimatePresence initial={false}>

@@ -2,7 +2,7 @@
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: <no> */
 import type React from 'react'
 import { AnimatePresence } from 'framer-motion'
-import { type ReactNode, useState } from 'react'
+import { type ReactNode, useRef, useState } from 'react'
 
 // Components
 import { OptionPreset } from '../..'
@@ -26,6 +26,8 @@ import {
   ContainerChildren,
   ContainerPreset
 } from './styles'
+import { useFollowElementPosition } from 'src/hooks/useFollowElementPosition'
+import { Portal } from '@components/commons/modals/Portal'
 
 interface Props {
   group: ShortcutGroup
@@ -38,8 +40,17 @@ export const OptionGroup: React.FC<Props> = ({
   context,
   onChangeValue
 }) => {
+  // Refs
+  const containerRef = useRef<HTMLDivElement>(null)
+
   // States
   const [hover, setHover] = useState(false)
+
+  // Hooks
+  const { floatingRef } = useFollowElementPosition(containerRef, {
+    placement: 'right-start',
+    offsetX: 8
+  })
 
   // Functions
   function renderGroup(presets: Preset[]) {
@@ -69,6 +80,7 @@ export const OptionGroup: React.FC<Props> = ({
 
   return (
     <Container
+      ref={containerRef}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -95,9 +107,11 @@ export const OptionGroup: React.FC<Props> = ({
 
       <AnimatePresence initial={false}>
         {hover ? (
-          <ContainerChildren {...OPACITY_ANIMATION_PRESETS}>
-            {renderShortcutGroup(group.items)}
-          </ContainerChildren>
+          <Portal key={group.id} wrapperId="wrapper-calendar-component">
+            <ContainerChildren ref={floatingRef} {...OPACITY_ANIMATION_PRESETS}>
+              {renderShortcutGroup(group.items)}
+            </ContainerChildren>
+          </Portal>
         ) : null}
       </AnimatePresence>
     </Container>

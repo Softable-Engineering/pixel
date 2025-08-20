@@ -1,6 +1,8 @@
 import { styled } from 'styled-components'
 
 export const Container = styled.div`
+  position: relative;
+
   --primary: #4CB782;
 
   --border-color: #e7e8e9;
