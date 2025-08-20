@@ -10,6 +10,8 @@ export interface CalendarMethods {
   close: () => void
 }
 
+export * from './general'
+
 export interface CalendarProps
   extends PropsWithChildren,
     UseFollowElementPositionOptions {
