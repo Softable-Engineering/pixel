@@ -11,7 +11,7 @@ function getYear(year: number): Shortcut {
   const offsetYear = year - currentYear
 
   return {
-    id: 'years',
+    id: `years-group-preset-${year}`,
     label: `${currentYear + offsetYear}`,
     build: (_: BuildContext): DateFilterValue => {
       return {

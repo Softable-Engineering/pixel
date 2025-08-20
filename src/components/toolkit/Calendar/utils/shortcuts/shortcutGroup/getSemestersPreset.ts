@@ -14,7 +14,7 @@ export function getSemesterPreset(
   offsetYear: number
 ): Shortcut {
   return {
-    id: 'last-semester',
+    id: `last-semester-${SEMESTERS[indexBimester]}`,
     label: SEMESTERS[indexBimester],
     build: (ctx: BuildContext): DateFilterValue => {
       return {
@@ -45,7 +45,7 @@ function getYearGroup(year: number): ShortcutGroup {
   const offsetYear = year - currentYear
 
   return {
-    id: 'years',
+    id: `years-group-semester-${year}`,
     label: `${currentYear + offsetYear}`,
     items: [getSemester(offsetYear)]
   }

@@ -14,7 +14,7 @@ export function getMonthPreset(
   offsetYear: number
 ): Shortcut {
   return {
-    id: 'last-month',
+    id: `last-month-${MONTHS[indexMonth]}`,
     label: MONTHS[indexMonth],
     build: (ctx: BuildContext): DateFilterValue => {
       return {
@@ -45,7 +45,7 @@ function getYearGroup(year: number): ShortcutGroup {
   const offsetYear = year - currentYear
 
   return {
-    id: 'years',
+    id: `years-group-${year}`,
     label: `${currentYear + offsetYear}`,
     items: [getMonths(offsetYear)]
   }

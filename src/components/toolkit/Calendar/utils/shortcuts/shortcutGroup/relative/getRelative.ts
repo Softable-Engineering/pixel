@@ -16,7 +16,7 @@ function getRelativePreset(
   index: number
 ): Shortcut {
   return {
-    id: 'last-semester',
+    id: `relatives-preset-${label}`,
     label: label,
     build: (ctx: BuildContext): DateFilterValue => {
       const current = Math.floor(ctx.now.getMonth() / monthRepresent)

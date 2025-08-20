@@ -14,7 +14,7 @@ export function getTrimesterPreset(
   offsetYear: number
 ): Shortcut {
   return {
-    id: 'last-trimester',
+    id: `last-trimester-${TRIMESTERS[indexBimester]}`,
     label: TRIMESTERS[indexBimester],
     build: (ctx: BuildContext): DateFilterValue => {
       return {
@@ -45,7 +45,7 @@ function getYearGroup(year: number): ShortcutGroup {
   const offsetYear = year - currentYear
 
   return {
-    id: 'years',
+    id: `years-group-trimester-${year}`,
     label: `${currentYear + offsetYear}`,
     items: [getTrimester(offsetYear)]
   }

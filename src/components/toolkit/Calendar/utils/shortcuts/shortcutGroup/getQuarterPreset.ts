@@ -14,7 +14,7 @@ export function getQuarterPreset(
   offsetYear: number
 ): Shortcut {
   return {
-    id: 'last-quarter',
+    id: `last-quarter-group-${QUARTERS[indexBimester]}`,
     label: QUARTERS[indexBimester],
     build: (ctx: BuildContext): DateFilterValue => {
       return {
@@ -45,7 +45,7 @@ function getQuarterGroup(year: number): ShortcutGroup {
   const offsetYear = year - currentYear
 
   return {
-    id: 'quarters',
+    id: `quarters-group-${year}`,
     label: `${currentYear + offsetYear}`,
     items: [getQuarter(offsetYear)]
   }
