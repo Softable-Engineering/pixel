@@ -2,7 +2,11 @@ import { defineConfig } from 'tsup'
 import path from 'path'
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: {
+    index: 'src/index.ts',
+    calendar: 'src/components/toolkit/Calendar/index.tsx',
+    'data-table': 'src/components/tables/DataTable/index.tsx'
+  },
   format: ['esm'],
   dts: true,
   outDir: 'dist',
@@ -18,7 +22,8 @@ export default defineConfig({
     '@dnd-kit/core',
     '@dnd-kit/sortable',
     '@tanstack/react-table',
-    'facepaint'
+    'facepaint',
+    'framer-motion'
   ],
 
   esbuildOptions(options) {
