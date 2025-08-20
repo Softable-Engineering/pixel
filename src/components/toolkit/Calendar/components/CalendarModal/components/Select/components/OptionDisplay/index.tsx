@@ -15,6 +15,7 @@ import { Container, Form, Input } from './styles'
 
 interface Props<T> {
   value: string
+  disabled: boolean
   visibleListModal: boolean
   customValueSelected: boolean
   selectedOption: Option<T> | undefined
@@ -44,6 +45,7 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
           <Input
             value={customValue}
             placeholder="00/00/0000"
+            disabled={props.disabled}
             onBlur={onBlur}
             onChange={handleChangeValue}
           />
@@ -95,8 +97,15 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
     event.preventDefault()
     onBlur()
   }
+
+  function handleOpen() {
+    if (props.disabled) return
+
+    onClick()
+  }
+
   return (
-    <Container $visible={props.visibleListModal} onClick={onClick}>
+    <Container $visible={props.visibleListModal} onClick={handleOpen}>
       {renderValue()}
 
       <svg width="16" height="17" viewBox="0 0 16 17" fill="none">

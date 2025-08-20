@@ -131,5 +131,10 @@ export function useCalendarView({
     return 'none'
   }
 
-  return { monthCells, getCells, getVariant, handleChangeValue }
+  return {
+    monthCells,
+    getCells,
+    getVariant,
+    handleChangeValue
+  }
 }

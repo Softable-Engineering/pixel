@@ -59,4 +59,5 @@ export const Footer = styled.div`
 
   padding: 0.5rem;
   border-top: 1px solid var(--border-color);
+  column-gap: 0.5rem;
 `

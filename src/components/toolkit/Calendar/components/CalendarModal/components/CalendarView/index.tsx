@@ -28,11 +28,17 @@ export const CalendarView: React.FC<Props> = ({
   onChangeValue
 }) => {
   // Hooks
-  const { monthsView } = useCalendarView({ context, dateRange })
+  const { monthsView, handleNextMonths, handlePrevMonths } = useCalendarView({
+    context,
+    dateRange
+  })
 
   // Functions
   function renderMonthsView() {
-    return monthsView.map(({ month, year }) => {
+    return monthsView.map(({ month, year }, index) => {
+      const isStartMonth = index === 0
+      const isLastMonth = index === monthsView.length - 1
+
       return (
         <MonthView
           key={`${month}_${year}`}
@@ -40,7 +46,11 @@ export const CalendarView: React.FC<Props> = ({
           month={month}
           context={context}
           dateRange={dateRange}
+          isLastMonth={isLastMonth}
+          isStartMonth={isStartMonth}
           onChangeValue={onChangeValue}
+          handleNextMonths={handleNextMonths}
+          handlePrevMonths={handlePrevMonths}
         />
       )
     })

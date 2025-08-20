@@ -12,6 +12,19 @@ export const Container = styled.div`
   margin-top: 0.5rem;
 `
 
+export const DummyButton = styled.div`
+    width: 2.5rem;
+    padding: 0.5rem;
+`
+
+export const Row = styled.div`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
 export const ContainerDays = styled.div`
   width: 100%;
 

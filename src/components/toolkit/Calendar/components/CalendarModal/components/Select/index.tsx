@@ -84,6 +84,7 @@ export const Select = <T extends string>(props: Props<T>) => {
     <Container $disabled={disabled} ref={containerListRef}>
       <OptionDisplay
         value={value}
+        disabled={disabled}
         visibleListModal={visible}
         selectedOption={selectedOption}
         customValueSelected={customValueSelected}

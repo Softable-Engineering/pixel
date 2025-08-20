@@ -12,18 +12,20 @@ export function useCalendarView({ context, dateRange }: UseCalendarViewParams) {
   const referenceDate = dateRange.start || context.now
 
   // States
-  const [months, setMonths] = useState<MonthView[]>(getMonthsView)
+  const [months, setMonths] = useState<MonthView[]>(
+    getMonthsView(referenceDate)
+  )
 
   // UseEffects
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <no>
   useEffect(() => {
-    setMonths(getMonthsView)
-  }, [dateRange])
+    setMonths(getMonthsView(referenceDate))
+  }, [])
 
   // Functions
-  function getMonthsView() {
-    const currentMonth = startOfMonth(referenceDate)
-    const nextMonth = startOfMonth(context.utils.addMonths(referenceDate, 1))
+  function getMonthsView(reference: Date) {
+    const currentMonth = startOfMonth(reference)
+    const nextMonth = startOfMonth(context.utils.addMonths(reference, 1))
 
     return [
       {
@@ -37,5 +39,19 @@ export function useCalendarView({ context, dateRange }: UseCalendarViewParams) {
     ]
   }
 
-  return { monthsView: months }
+  function handleNextMonths() {
+    const date = new Date(months[1].year, months[1].month, 1)
+    const nextMonth = context.utils.addMonths(date, 0)
+
+    setMonths(getMonthsView(nextMonth))
+  }
+
+  function handlePrevMonths() {
+    const date = new Date(months[0].year, months[0].month, 1)
+    const prevMonth = context.utils.addMonths(date, -1)
+
+    setMonths(getMonthsView(prevMonth))
+  }
+
+  return { monthsView: months, handleNextMonths, handlePrevMonths }
 }
