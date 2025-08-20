@@ -46,7 +46,7 @@ export const PresetsColumn: React.FC<Props> = ({
       return (
         <ContainerPreset
           key={`preset_${preset.id}_${index}`}
-          isLast={isLastPreset}
+          $isLast={isLastPreset}
         >
           {renderPreset(preset)}
         </ContainerPreset>

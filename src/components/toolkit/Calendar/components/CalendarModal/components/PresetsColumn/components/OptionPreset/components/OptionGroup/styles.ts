@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 interface ContainerGroup {
-  isLast: boolean
+  $isLast: boolean
 }
 
 export const Container = styled.div`
@@ -56,5 +56,5 @@ export const ContainerChildren = styled(motion.div)`
 `
 
 export const ContainerPreset = styled.div<ContainerGroup>`
-  border-bottom: ${({ isLast }) => (!isLast ? '1px solid var(--border-color)' : null)};
+  border-bottom: ${({ $isLast }) => (!$isLast ? '1px solid var(--border-color)' : null)};
 `

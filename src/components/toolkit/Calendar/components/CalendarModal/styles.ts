@@ -49,3 +49,14 @@ export const Header = styled.div`
   padding: 0.5rem;
   border-bottom: 1px solid var(--border-color);
 `
+
+export const Footer = styled.div`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 0.5rem;
+  border-top: 1px solid var(--border-color);
+`

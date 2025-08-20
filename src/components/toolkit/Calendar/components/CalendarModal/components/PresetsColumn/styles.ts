@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 interface ContainerPresetProps {
-  isLast: boolean
+  $isLast: boolean
 }
 
 export const Container = styled.div`
@@ -13,5 +13,5 @@ export const Container = styled.div`
 `
 
 export const ContainerPreset = styled.div<ContainerPresetProps>`
-  border-bottom: ${({ isLast }) => (!isLast ? '1px solid var(--border-color)' : null)};
+  border-bottom: ${({ $isLast }) => (!$isLast ? '1px solid var(--border-color)' : null)};
 `

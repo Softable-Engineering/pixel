@@ -54,7 +54,7 @@ export function getRelative(type: TypeRelative): ShortcutGroup {
   const relativeDate = TYPE_RELATIVE_MAPPER[type]
 
   return {
-    id: 'relative-bimester',
+    id: `relative-${relativeDate.label}`,
     label: relativeDate.label,
     items: [
       [

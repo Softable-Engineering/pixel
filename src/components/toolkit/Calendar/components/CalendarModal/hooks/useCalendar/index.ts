@@ -12,17 +12,28 @@ import type {
   CalendarProps
 } from '@components/toolkit/Calendar/types'
 
-export function useCalendar({ value, onChange }: CalendarProps) {
+interface Props extends CalendarProps {
+  onClose: () => void
+}
+
+export function useCalendar({ value, locale, onClose, onChange }: Props) {
   // Constants
   const presets = getPresets()
 
   // States
-  const [valueRange, setValueRange] = useState<DateRange>(value)
+  const [valueRange, setValueRange] = useState<DateRange>(parseDateValue())
   const [context, setContext] = useState<BuildContext>(
     makeInitialContext(handleChangeFilters)
   )
 
   // Functions
+  function parseDateValue() {
+    return {
+      start: new Date(new Date(value.start).toLocaleString(locale)),
+      end: new Date(new Date(new Date(value.end).toLocaleString(locale)))
+    }
+  }
+
   function handleChangeFilters(change: Partial<Filters>) {
     if (change.operator !== 'range')
       handleChangeDateRange({
@@ -46,10 +57,25 @@ export function useCalendar({ value, onChange }: CalendarProps) {
     }))
   }
 
+  function clearValue() {
+    setValueRange(parseDateValue())
+    setContext(makeInitialContext(handleChangeFilters))
+  }
+
+  function applyValue() {
+    onChange?.({
+      start: valueRange.start.toISOString(),
+      end: valueRange.end.toISOString()
+    })
+    onClose()
+  }
+
   return {
     presets,
     context,
     valueRange,
+    clearValue,
+    applyValue,
     handleChangeFilters,
     handleChangeDateRange
   }

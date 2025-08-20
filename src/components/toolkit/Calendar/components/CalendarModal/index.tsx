@@ -5,6 +5,7 @@ import React from 'react'
 import { Select } from './components/Select'
 import { CalendarView } from './components/CalendarView'
 import { PresetsColumn } from './components/PresetsColumn'
+import { Button } from '@components/commons/buttons/Button'
 
 // Hooks
 import { useCalendar } from './hooks/useCalendar'
@@ -15,14 +16,16 @@ import { getDateOptions, getOperatorOptions } from './utils'
 import { OPACITY_ANIMATION_PRESETS } from '@utils/animations'
 
 // Types
-import type { DateRange } from '../../types'
+import type { DateRange, DateRangeValue, Locale } from '../../types'
 
 // Styles
-import { Container, ContainerCalendar, Content, Header } from './styles'
+import { Container, ContainerCalendar, Content, Footer, Header } from './styles'
 
 interface Props {
-  value: DateRange
-  onChange: (range: DateRange) => void
+  value: DateRangeValue
+  locale: Locale
+  onClose: () => void
+  onChange: (range: DateRangeValue) => void
 }
 
 export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
@@ -35,6 +38,8 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
       presets,
       context,
       valueRange,
+      clearValue,
+      applyValue,
       handleChangeFilters,
       handleChangeDateRange
     } = useCalendar(params)
@@ -96,6 +101,21 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
               onChangeValue={handleChangeDateRange}
             />
           </Content>
+
+          <Footer>
+            <Button
+              label="Limpar"
+              variant="text"
+              borderRadius="0.5rem"
+              onClick={clearValue}
+            />
+            <Button
+              label="Aplicar"
+              variant="filled"
+              borderRadius="0.5rem"
+              onClick={applyValue}
+            />
+          </Footer>
         </ContainerCalendar>
       </Container>
     )

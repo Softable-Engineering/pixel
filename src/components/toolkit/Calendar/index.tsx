@@ -63,7 +63,9 @@ export const Calendar = React.forwardRef<CalendarMethods, CalendarProps>(
         {children}
 
         <AnimatePresence initial={false}>
-          {visible ? <CalendarModal ref={floatingRef} {...rest} /> : null}
+          {visible ? (
+            <CalendarModal ref={floatingRef} {...rest} onClose={handleClose} />
+          ) : null}
         </AnimatePresence>
       </Container>
     )

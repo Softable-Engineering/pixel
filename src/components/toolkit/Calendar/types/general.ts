@@ -4,9 +4,20 @@ import type { DateFilterValue, DateOperator } from './dateFilter'
 
 export type WeekdayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6
 
+export enum Locale {
+  BR = 'pt-BR', // Brazil
+  US = 'en-US', // United States
+  AR = 'es-AR' // Argentina
+}
+
 export interface DateRange {
   start: Date
   end: Date
+}
+
+export interface DateRangeValue {
+  start: string
+  end: string
 }
 
 export interface DurationOffset {

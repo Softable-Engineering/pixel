@@ -1,0 +1,13 @@
+const DEFAULT_SIZE = '20px'
+const DEFAULT_THICKNESS = '2px'
+const DEFAULT_SPEED = '1s'
+const DEFAULT_COLOR = 'white'
+const DEFAULT_EMPTY_COLOR = 'transparent'
+
+export {
+  DEFAULT_SIZE,
+  DEFAULT_SPEED,
+  DEFAULT_THICKNESS,
+  DEFAULT_COLOR,
+  DEFAULT_EMPTY_COLOR
+}

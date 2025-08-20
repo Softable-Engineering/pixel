@@ -101,13 +101,7 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
 
       <svg width="16" height="17" viewBox="0 0 16 17" fill="none">
         <title>Arrow icon</title>
-        <path
-          d="M4 6.5L8 10.5L12 6.5"
-          stroke="#7D7C78"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+        <path d="M4 6.5L8 10.5L12 6.5" stroke="#7D7C78" />
       </svg>
     </Container>
   )

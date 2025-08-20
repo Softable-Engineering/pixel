@@ -60,7 +60,7 @@ export const OptionGroup: React.FC<Props> = ({
       const isLast = index === items.length - 1
 
       return (
-        <ContainerPreset key={`subgroup_${index}`} isLast={isLast}>
+        <ContainerPreset key={`subgroup_${index}`} $isLast={isLast}>
           {renderGroup(item)}
         </ContainerPreset>
       )
