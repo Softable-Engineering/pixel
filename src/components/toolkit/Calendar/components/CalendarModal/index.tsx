@@ -131,6 +131,7 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
             <Button
               label="Limpar"
               variant="text"
+              color="var(--text-color)"
               borderRadius="0.5rem"
               onClick={clearValue}
             />

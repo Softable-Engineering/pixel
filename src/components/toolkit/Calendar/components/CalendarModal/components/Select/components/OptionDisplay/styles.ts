@@ -48,4 +48,6 @@ export const Input = styled.input`
   flex: 1;
 
   outline: none;
+
+  color: var(--text-color);
 `
