@@ -9,4 +9,5 @@ export interface UseCalendarViewParams {
   variant: Variant
   dateRange: DateRange
   context: BuildContext
+  visibleMonths?: number
 }

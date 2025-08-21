@@ -7,13 +7,14 @@ import type { MonthView, UseCalendarViewParams } from './types'
 export function useCalendarView({
   context,
   variant,
-  dateRange
+  dateRange,
+  visibleMonths
 }: UseCalendarViewParams) {
   // Constants
   const prevStepValue = -1
   const nextStepValue = variant === 'group' ? 0 : 1
 
-  const qtdMonths = variant === 'group' ? 2 : 1
+  const qtdMonthsValue = normalizeVisibleMonths()
   const referenceDate = dateRange.start || context.now
 
   // States
@@ -28,8 +29,23 @@ export function useCalendarView({
   }, [])
 
   // Functions
+
+  function normalizeVisibleMonths() {
+    if (variant === 'group' && visibleMonths) {
+      return visibleMonths >= 2 ? visibleMonths : 2
+    }
+    if (variant === 'single' && visibleMonths) {
+      return visibleMonths >= 1 ? visibleMonths : 1
+    }
+
+    if (variant === 'single') return 1
+    if (variant === 'group') return 2
+
+    return 2
+  }
+
   function getMonthsView(reference: Date) {
-    return Array.from({ length: qtdMonths }, (_, index) => {
+    return Array.from({ length: qtdMonthsValue }, (_, index) => {
       const date = context.utils.addMonths(reference, index)
 
       return {
@@ -40,11 +56,11 @@ export function useCalendarView({
   }
 
   function handleNextMonths() {
-    const lastMonthIndex = months.length - 1
+    const secondMonthIndex = months.length >= 2 ? 1 : 0
 
     const date = new Date(
-      months[lastMonthIndex].year,
-      months[lastMonthIndex].month,
+      months[secondMonthIndex].year,
+      months[secondMonthIndex].month,
       1
     )
     const nextMonth = context.utils.addMonths(date, nextStepValue)

@@ -21,6 +21,7 @@ interface Props {
   variant: Variant
   dateRange: DateRange
   context: BuildContext
+  visibleMonths?: number
   onChangeValue: (range: Partial<DateRange>) => void
 }
 
@@ -28,13 +29,15 @@ export const CalendarView: React.FC<Props> = ({
   context,
   variant,
   dateRange,
+  visibleMonths,
   onChangeValue
 }) => {
   // Hooks
   const { monthsView, handleNextMonths, handlePrevMonths } = useCalendarView({
     context,
     variant,
-    dateRange
+    dateRange,
+    visibleMonths
   })
 
   // Functions

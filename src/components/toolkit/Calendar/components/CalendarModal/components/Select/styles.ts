@@ -6,6 +6,8 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   flex: 1;
+  min-width: 10rem;
+  max-width: 20rem;
   height: fit-content;
   position: relative;
 

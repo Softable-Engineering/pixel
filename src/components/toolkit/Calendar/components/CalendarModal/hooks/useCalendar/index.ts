@@ -19,6 +19,7 @@ interface Props extends CalendarProps {
 export function useCalendar({
   value,
   presets,
+  visibleMonths,
   variant = 'group',
   onClose,
   onChange
@@ -86,6 +87,7 @@ export function useCalendar({
     context,
     variant,
     valueRange,
+    visibleMonths,
     presets: calendarPresets,
     clearValue,
     applyValue,
