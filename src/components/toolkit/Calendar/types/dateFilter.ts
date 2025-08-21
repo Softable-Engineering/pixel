@@ -2,8 +2,6 @@
 import type { DateToken } from './adapters'
 import type { DurationOffset } from './general'
 
-export type DateOperator = 'equals' | 'range' | 'before' | 'after'
-
 export interface LiteralDateEndpoint {
   type: 'literal'
   date: Date

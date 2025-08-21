@@ -1,7 +1,6 @@
 // Types
 import type { DateAdapter } from './adapters'
 import type {
-  DateOperator,
   RangeDateFilter,
   AfterDateFilter,
   BeforeDateFilter,
@@ -83,3 +82,5 @@ export type DateFilterValue =
   | BeforeDateFilter
   | AfterDateFilter
   | RangeDateFilter
+
+export type DateOperator = 'equals' | 'range' | 'before' | 'after'

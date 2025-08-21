@@ -2,8 +2,12 @@
 import type { PropsWithChildren } from 'react'
 
 // Types
-import type { DateOperator } from './dateFilter'
-import type { DateRangeValue, PresetGroup, Variant } from './general'
+import type {
+  Variant,
+  PresetGroup,
+  DateOperator,
+  DateRangeValue
+} from './general'
 import type { UseFollowElementPositionOptions } from '@hooks/useFollowElementPosition/types'
 
 /**
