@@ -14,7 +14,7 @@ import type { Option } from '../../types'
 import { Container, Form, Input } from './styles'
 
 interface Props<T> {
-  value: string
+  value?: string
   disabled: boolean
   visibleListModal: boolean
   customValueSelected: boolean
@@ -32,8 +32,10 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
 
   // UseEffects
   useEffect(() => {
-    const date = new Date(props.value)
-    const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`
+    const date = props.value ? new Date(props.value) : null
+    const formattedDate = date
+      ? `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`
+      : ''
     setCustomValue(formattedDate)
   }, [props.value])
 
@@ -69,7 +71,7 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
 
   function getDate() {
     try {
-      if (customValue.length !== 10) return null
+      if (!customValue || customValue.length !== 10) return null
       const [day, month, year] = customValue.split('/')
       const date = new Date(
         `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
@@ -90,7 +92,8 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
   function onBlur() {
     const newDate = getDate()
     if (newDate && newDate !== '') return onChange(newDate)
-    onChange(props.value as T)
+
+    if (!!props.value) return onChange(props.value as T)
   }
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {

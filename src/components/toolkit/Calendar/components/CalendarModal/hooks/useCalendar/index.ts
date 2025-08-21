@@ -29,8 +29,8 @@ export function useCalendar({ value, presets, onClose, onChange }: Props) {
   // Functions
   function parseDateValue() {
     return {
-      start: new Date(value.start),
-      end: new Date(value.end)
+      start: value.start ? new Date(value.start) : undefined,
+      end: value.end ? new Date(value.end) : undefined
     }
   }
 
@@ -58,14 +58,17 @@ export function useCalendar({ value, presets, onClose, onChange }: Props) {
   }
 
   function clearValue() {
-    setValueRange(parseDateValue())
+    setValueRange({
+      start: undefined,
+      end: undefined
+    })
     setContext(makeInitialContext(handleChangeFilters))
   }
 
   function applyValue() {
     onChange?.({
-      start: valueRange.start.toISOString(),
-      end: valueRange.end.toISOString()
+      start: valueRange?.start?.toISOString(),
+      end: valueRange?.end?.toISOString()
     })
     onClose()
   }

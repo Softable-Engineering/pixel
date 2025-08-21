@@ -4,7 +4,7 @@ export interface Option<T> {
 }
 
 export interface Props<T> {
-  value: T
+  value?: T
   disabled?: boolean
   options: Option<T>[]
   withCustomValue?: boolean

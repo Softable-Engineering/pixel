@@ -49,6 +49,12 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
     const startDateOptions = getDateOptions()
     const endDateOptions = getDateOptions()
     const { filters } = context
+    const endDateValue = valueRange.end
+      ? startOfDay(valueRange.end).toISOString()
+      : undefined
+    const startDateValue = valueRange.start
+      ? startOfDay(valueRange.start).toISOString()
+      : undefined
 
     // Functions
     function handleChangeValue(value: Date, type: keyof DateRange) {
@@ -83,14 +89,14 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
             <Select
               withCustomValue
               options={startDateOptions}
-              value={startOfDay(valueRange.start).toISOString()}
+              value={startDateValue}
               onChange={v => handleChangeValue(new Date(v), 'start')}
             />
             <Select
               withCustomValue
               options={endDateOptions}
               disabled={filters.operator !== 'range'}
-              value={startOfDay(valueRange.end).toISOString()}
+              value={endDateValue}
               onChange={v => handleChangeValue(new Date(v), 'end')}
             />
           </Header>

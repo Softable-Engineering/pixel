@@ -11,13 +11,13 @@ import type {
 export type WeekdayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6
 
 export interface DateRange {
-  start: Date
-  end: Date
+  start?: Date
+  end?: Date
 }
 
 export interface DateRangeValue {
-  start: string
-  end: string
+  start?: string
+  end?: string
 }
 
 export interface DurationOffset {

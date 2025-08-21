@@ -16,9 +16,13 @@ export function useCalendarView({
 
   // Functions
   function handleChangeValue(newDate: Date) {
-    const isSameDate = dateRange.end.getDate() === dateRange.start.getDate()
-    const isBeforeDate = newDate.getTime() < dateRange.start.getTime()
-    const isAfterDate = newDate.getTime() > dateRange.end.getTime()
+    const startDate = dateRange?.start
+    const endDate = dateRange?.end
+    const isSameDate = endDate?.getDate() === startDate?.getDate()
+    const isBeforeDate = startDate
+      ? newDate.getTime() < startDate.getTime()
+      : false
+    const isAfterDate = endDate ? newDate.getTime() > endDate.getTime() : false
 
     if (context.filters.operator !== 'range') {
       return onChangeValue?.({ start: newDate, end: newDate })
@@ -94,6 +98,8 @@ export function useCalendarView({
   }
 
   function getVariant(day: number, month: number, year: number): Variant {
+    if (!dateRange.start || !dateRange.end) return 'none'
+
     const startDate = new Date(
       dateRange.start.getFullYear(),
       dateRange.start.getMonth(),

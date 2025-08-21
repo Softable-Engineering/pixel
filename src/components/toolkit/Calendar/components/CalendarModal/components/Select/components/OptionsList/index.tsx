@@ -11,7 +11,7 @@ import type { Option } from '../../types'
 import { Container } from './styles'
 
 interface Props<T> {
-  value: T
+  value?: T
   options: Option<T>[]
   onChange: (value: T) => void
 }
