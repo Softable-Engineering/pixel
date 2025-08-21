@@ -1,8 +1,8 @@
 // External Libraries
-import React from 'react'
+import type React from 'react'
 
 // Styles
-import { Container, LoaderProps } from './styles'
+import { Container, type LoaderProps } from './styles'
 
 type Props = LoaderProps
 

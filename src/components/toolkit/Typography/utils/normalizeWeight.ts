@@ -1,4 +1,4 @@
-import { FontWeights, weights } from '../config'
+import { type FontWeights, weights } from '../config'
 
 export function normalizeWeight(
   value: keyof FontWeights | (keyof FontWeights)[] | undefined

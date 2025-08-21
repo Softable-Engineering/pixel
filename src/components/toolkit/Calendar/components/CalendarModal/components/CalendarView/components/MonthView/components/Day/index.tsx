@@ -15,7 +15,6 @@ interface Props {
   year: number
   month: number
   variant: Variant
-  disabled: boolean
   isOtherMonth: boolean
   onChange: (date: Date) => void
 }
@@ -25,7 +24,6 @@ export const Day: React.FC<Props> = ({
   year,
   month,
   variant,
-  disabled,
   isOtherMonth,
   onChange
 }) => {

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { MutableRefObject, useEffect } from 'react'
+import { type MutableRefObject, useEffect } from 'react'
 
 export function useClickOutsideWatcher(
   ref: MutableRefObject<HTMLElement | null>,
@@ -16,5 +16,5 @@ export function useClickOutsideWatcher(
     if (!disabled) document.addEventListener('mousedown', handleClickOutside)
 
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [ref, disabled])
+  }, [ref, disabled, onClickOutside])
 }
