@@ -3,11 +3,14 @@ import { styled } from 'styled-components'
 export const Container = styled.div`
   position: relative;
 
-  --primary: #4CB782;
+  --primary: ${({ theme }) => theme.colors.primary};
 
-  --border-color: #e7e8e9;
-  --text-color: #606060;
-  --option-background-color: #fbfbfb;
-  --option-background-hover: #efefef;
-  --option-secondary-background-color: #EFEFEF;
+  --scrolbar-color: ${({ theme }) => theme.colors.scrollbar};
+
+  --border-color: ${({ theme }) => theme.colors.border.secondary};
+  --text-color: ${({ theme }) => theme.colors.text.secondary};
+  --option-background-color: ${({ theme }) => theme.colors.background.secondary};
+  --option-background-hover: ${({ theme }) => theme.colors.background.hover_secondary};
+  --option-secondary-background-color: ${({ theme }) => theme.colors.background.hover_secondary};
+  --background-color: ${({ theme }) => theme.colors.background.secondary};
 `

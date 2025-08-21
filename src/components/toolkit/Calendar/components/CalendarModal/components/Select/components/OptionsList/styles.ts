@@ -9,7 +9,7 @@ export const Container = styled.div`
   z-index: 10;
 
   background-color: var(--option-background-color);
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.07);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
   overflow-y: auto;
 
   border-radius: 0.5rem;

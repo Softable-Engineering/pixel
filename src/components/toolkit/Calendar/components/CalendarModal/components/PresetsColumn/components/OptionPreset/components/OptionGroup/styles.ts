@@ -1,10 +1,45 @@
 // External Libraries
 import { motion } from 'framer-motion'
-import { styled } from 'styled-components'
+import { css, styled } from 'styled-components'
 
 interface ContainerGroup {
   $isLast: boolean
 }
+
+export const ScrollStyles = css`
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-track:hover {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-track:active {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var(--scrolbar-color);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrolbar-color);
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background-color: var(--scrolbar-color);
+  }
+
+  scrollbar-width: 8px;
+  scrollbar-color: var(--scrolbar-color) transparent;
+`
 
 export const Container = styled.div`
   width: 100%;
@@ -56,18 +91,7 @@ export const ContainerChildren = styled(motion.div)`
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
   overflow-y: auto;
 
-  ::-webkit-scrollbar {
-    width: 2px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--border-color);
-    border-radius: 100%;
-  }
+  ${ScrollStyles};
 `
 
 export const ContainerPreset = styled.div<ContainerGroup>`

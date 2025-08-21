@@ -8,6 +8,8 @@ declare module 'styled-components' {
   export interface ColorsWildcards {
     primary: string
 
+    scrollbar: string
+
     text: TextColors
     border: BorderColors
     background: BackgroundColors
@@ -20,9 +22,18 @@ declare module 'styled-components' {
 
   interface BorderColors {
     primary: string
+    secondary: string
+    tertiary: string
   }
 
   interface BackgroundColors {
     skeleton: string
+
+    primary: string
+    secondary: string
+    tertiary: string
+
+    hover: string
+    hover_secondary: string
   }
 }
