@@ -7,7 +7,7 @@ import { OptionsList } from './components/OptionsList'
 import { OptionDisplay } from './components/OptionDisplay'
 
 // Hooks
-import { useClickOutsideWatcher } from 'src/hooks/useClickOutsideWatcher'
+import { useClickOutsideWatcher } from '@hooks/useClickOutsideWatcher'
 
 // Types
 import type { Option, Props } from './types'

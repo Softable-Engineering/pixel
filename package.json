@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "rm -rf dist && tsup"
+    "build": "rm -rf dist && tsdown"
   },
   "exports": {
     ".": {
@@ -47,7 +47,6 @@
     "framer-motion": "^11.0.3",
     "styled-components": "^6.0.8",
     "tsdown": "^0.14.1",
-    "tsup": "^8.5.0",
     "typescript": "^5.2.2"
   },
   "typesVersions": {

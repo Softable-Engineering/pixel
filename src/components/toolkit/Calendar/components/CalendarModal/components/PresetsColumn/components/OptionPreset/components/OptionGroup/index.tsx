@@ -26,7 +26,7 @@ import {
   ContainerChildren,
   ContainerPreset
 } from './styles'
-import { useFollowElementPosition } from 'src/hooks/useFollowElementPosition'
+import { useFollowElementPosition } from '@hooks/useFollowElementPosition'
 import { Portal } from '@components/commons/modals/Portal'
 
 interface Props {

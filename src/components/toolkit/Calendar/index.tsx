@@ -6,8 +6,8 @@ import React, { useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { CalendarModal } from './components/CalendarModal'
 
 // Hooks
-import { useClickOutsideWatcher } from 'src/hooks/useClickOutsideWatcher'
-import { useFollowElementPosition } from 'src/hooks/useFollowElementPosition'
+import { useClickOutsideWatcher } from '@hooks/useClickOutsideWatcher'
+import { useFollowElementPosition } from '@hooks/useFollowElementPosition'
 
 // Types
 import type { CalendarProps, CalendarMethods } from './types/calendar'

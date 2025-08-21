@@ -4,7 +4,7 @@ import type { PropsWithChildren } from 'react'
 // Types
 import type { DateOperator } from './dateFilter'
 import type { DateRangeValue, PresetGroup, Variant } from './general'
-import type { UseFollowElementPositionOptions } from 'src/hooks/useFollowElementPosition/types'
+import type { UseFollowElementPositionOptions } from '@hooks/useFollowElementPosition/types'
 
 /**
  * Public methods exposed by the Calendar component.
