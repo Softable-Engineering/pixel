@@ -1,5 +1,5 @@
 // External Libraries
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 // Utils
 import { getVariant } from './utils'

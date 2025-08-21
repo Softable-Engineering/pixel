@@ -1,6 +1,6 @@
 // External Libraries
 import { motion } from 'framer-motion'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 interface ContainerGroup {
   $isLast: boolean

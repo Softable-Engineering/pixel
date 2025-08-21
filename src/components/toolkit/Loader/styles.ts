@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 import { getBorder, getSpinnerAnimation } from './utils'
 import { DEFAULT_SIZE, DEFAULT_COLOR } from './constants'

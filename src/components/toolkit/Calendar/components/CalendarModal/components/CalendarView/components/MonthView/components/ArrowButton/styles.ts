@@ -1,5 +1,5 @@
 // External Libraries
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 // Types
 import type { Variant } from '.'

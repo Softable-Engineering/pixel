@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 import type { ButtonVariant } from './types'
 import { mapVariantToCss } from './mappers/variant'
