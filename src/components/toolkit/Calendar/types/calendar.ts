@@ -2,7 +2,8 @@
 import type { PropsWithChildren } from 'react'
 
 // Types
-import type { DateRangeValue, PresetGroup } from './general'
+import type { DateOperator } from './dateFilter'
+import type { DateRangeValue, PresetGroup, Variant } from './general'
 import type { UseFollowElementPositionOptions } from 'src/hooks/useFollowElementPosition/types'
 
 export interface CalendarMethods {
@@ -17,7 +18,8 @@ export interface CalendarProps
     UseFollowElementPositionOptions {
   locale: string
   value: DateRangeValue
+  variant?: Variant
   presets?: PresetGroup[]
   allowPeriodSelection?: boolean
-  onChange: (range: DateRangeValue) => void
+  onChange: (range: DateRangeValue, operator: DateOperator) => void
 }

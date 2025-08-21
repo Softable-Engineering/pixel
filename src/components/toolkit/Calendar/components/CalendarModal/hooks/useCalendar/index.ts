@@ -16,14 +16,20 @@ interface Props extends CalendarProps {
   onClose: () => void
 }
 
-export function useCalendar({ value, presets, onClose, onChange }: Props) {
+export function useCalendar({
+  value,
+  presets,
+  variant = 'group',
+  onClose,
+  onChange
+}: Props) {
   // Constants
-  const calendarPresets = presets ?? getPresets()
+  const calendarPresets = presets ?? getPresets(variant)
 
   // States
   const [valueRange, setValueRange] = useState<DateRange>(parseDateValue())
   const [context, setContext] = useState<BuildContext>(
-    makeInitialContext(handleChangeFilters)
+    makeInitialContext(handleChangeFilters, variant)
   )
 
   // Functions
@@ -62,19 +68,23 @@ export function useCalendar({ value, presets, onClose, onChange }: Props) {
       start: undefined,
       end: undefined
     })
-    setContext(makeInitialContext(handleChangeFilters))
+    setContext(makeInitialContext(handleChangeFilters, variant))
   }
 
   function applyValue() {
-    onChange?.({
-      start: valueRange?.start?.toISOString(),
-      end: valueRange?.end?.toISOString()
-    })
+    onChange?.(
+      {
+        start: valueRange?.start?.toISOString(),
+        end: valueRange?.end?.toISOString()
+      },
+      context.filters.operator
+    )
     onClose()
   }
 
   return {
     context,
+    variant,
     valueRange,
     presets: calendarPresets,
     clearValue,

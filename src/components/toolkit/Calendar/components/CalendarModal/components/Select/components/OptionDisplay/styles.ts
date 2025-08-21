@@ -5,9 +5,7 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  max-width: 15rem;
   height: fit-content;
-
 
   display: flex;
   align-items: center;

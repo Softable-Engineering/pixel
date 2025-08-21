@@ -9,6 +9,7 @@ import { useCalendarView } from './hooks/useCalendarView'
 
 // Types
 import type {
+  Variant,
   DateRange,
   BuildContext
 } from '@components/toolkit/Calendar/types'
@@ -17,19 +18,22 @@ import type {
 import { Container } from './styles'
 
 interface Props {
+  variant: Variant
   dateRange: DateRange
   context: BuildContext
   onChangeValue: (range: Partial<DateRange>) => void
 }
 
 export const CalendarView: React.FC<Props> = ({
-  dateRange,
   context,
+  variant,
+  dateRange,
   onChangeValue
 }) => {
   // Hooks
   const { monthsView, handleNextMonths, handlePrevMonths } = useCalendarView({
     context,
+    variant,
     dateRange
   })
 

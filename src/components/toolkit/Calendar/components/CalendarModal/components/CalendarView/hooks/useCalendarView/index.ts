@@ -1,14 +1,19 @@
 // External Libraries
 import { useEffect, useState } from 'react'
 
-// Utils
-import { startOfMonth } from '../../../../hooks/useCalendar/utils'
-
 // Types
 import type { MonthView, UseCalendarViewParams } from './types'
 
-export function useCalendarView({ context, dateRange }: UseCalendarViewParams) {
+export function useCalendarView({
+  context,
+  variant,
+  dateRange
+}: UseCalendarViewParams) {
   // Constants
+  const prevStepValue = -1
+  const nextStepValue = variant === 'group' ? 0 : 1
+
+  const qtdMonths = variant === 'group' ? 2 : 1
   const referenceDate = dateRange.start || context.now
 
   // States
@@ -24,31 +29,32 @@ export function useCalendarView({ context, dateRange }: UseCalendarViewParams) {
 
   // Functions
   function getMonthsView(reference: Date) {
-    const currentMonth = startOfMonth(reference)
-    const nextMonth = startOfMonth(context.utils.addMonths(reference, 1))
+    return Array.from({ length: qtdMonths }, (_, index) => {
+      const date = context.utils.addMonths(reference, index)
 
-    return [
-      {
-        year: currentMonth.getFullYear(),
-        month: currentMonth.getMonth()
-      },
-      {
-        year: nextMonth.getFullYear(),
-        month: nextMonth.getMonth()
+      return {
+        year: date.getFullYear(),
+        month: date.getMonth()
       }
-    ]
+    })
   }
 
   function handleNextMonths() {
-    const date = new Date(months[1].year, months[1].month, 1)
-    const nextMonth = context.utils.addMonths(date, 0)
+    const lastMonthIndex = months.length - 1
+
+    const date = new Date(
+      months[lastMonthIndex].year,
+      months[lastMonthIndex].month,
+      1
+    )
+    const nextMonth = context.utils.addMonths(date, nextStepValue)
 
     setMonths(getMonthsView(nextMonth))
   }
 
   function handlePrevMonths() {
     const date = new Date(months[0].year, months[0].month, 1)
-    const prevMonth = context.utils.addMonths(date, -1)
+    const prevMonth = context.utils.addMonths(date, prevStepValue)
 
     setMonths(getMonthsView(prevMonth))
   }

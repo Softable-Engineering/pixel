@@ -10,6 +10,8 @@ import type {
 
 export type WeekdayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6
 
+export type Variant = 'single' | 'group'
+
 export interface DateRange {
   start?: Date
   end?: Date

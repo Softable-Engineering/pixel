@@ -16,17 +16,24 @@ import { getDateOptions, getOperatorOptions } from './utils'
 import { OPACITY_ANIMATION_PRESETS } from '@utils/animations'
 
 // Types
-import type { DateRange, DateRangeValue, PresetGroup } from '../../types'
+import type {
+  Variant,
+  DateRange,
+  PresetGroup,
+  DateOperator,
+  DateRangeValue
+} from '../../types'
 
 // Styles
 import { Container, ContainerCalendar, Content, Footer, Header } from './styles'
 
 interface Props {
   locale: string
+  variant?: Variant
   value: DateRangeValue
   presets?: PresetGroup[]
   onClose: () => void
-  onChange: (range: DateRangeValue) => void
+  onChange: (range: DateRangeValue, operator: DateOperator) => void
 }
 
 export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
@@ -38,6 +45,7 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
     const {
       presets,
       context,
+      variant,
       valueRange,
       clearValue,
       applyValue,
@@ -71,38 +79,45 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
 
     return (
       <Container ref={ref} {...OPACITY_ANIMATION_PRESETS}>
-        <PresetsColumn
-          presets={presets}
-          context={context}
-          onChangeValue={handleChangeDateRange}
-        />
+        {variant === 'group' ? (
+          <PresetsColumn
+            presets={presets}
+            context={context}
+            onChangeValue={handleChangeDateRange}
+          />
+        ) : null}
 
         <ContainerCalendar>
           <Header>
-            <Select
-              options={operatorOptions}
-              value={filters.operator}
-              onChange={v => {
-                handleChangeFilters({ operator: v })
-              }}
-            />
+            {variant === 'group' ? (
+              <Select
+                options={operatorOptions}
+                value={filters.operator}
+                onChange={v => {
+                  handleChangeFilters({ operator: v })
+                }}
+              />
+            ) : null}
             <Select
               withCustomValue
               options={startDateOptions}
               value={startDateValue}
               onChange={v => handleChangeValue(new Date(v), 'start')}
             />
-            <Select
-              withCustomValue
-              options={endDateOptions}
-              disabled={filters.operator !== 'range'}
-              value={endDateValue}
-              onChange={v => handleChangeValue(new Date(v), 'end')}
-            />
+            {variant === 'group' ? (
+              <Select
+                withCustomValue
+                options={endDateOptions}
+                disabled={filters.operator !== 'range'}
+                value={endDateValue}
+                onChange={v => handleChangeValue(new Date(v), 'end')}
+              />
+            ) : null}
           </Header>
 
           <Content>
             <CalendarView
+              variant={variant}
               context={context}
               dateRange={valueRange}
               onChangeValue={handleChangeDateRange}

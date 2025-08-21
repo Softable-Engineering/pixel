@@ -1,10 +1,12 @@
 // Types
 import type {
+  Variant,
   DateRange,
   BuildContext
 } from '@components/toolkit/Calendar/types'
 
 export interface UseCalendarViewParams {
-  context: BuildContext
+  variant: Variant
   dateRange: DateRange
+  context: BuildContext
 }
