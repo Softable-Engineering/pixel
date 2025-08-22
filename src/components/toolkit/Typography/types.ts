@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react'
-import { FontWeights } from './config'
+import type { PropsWithChildren } from 'react'
+import type { FontWeights } from './config'
 
 export interface TypeVariant {
   fontSize: string[]

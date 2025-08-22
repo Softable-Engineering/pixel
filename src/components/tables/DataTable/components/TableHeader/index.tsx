@@ -34,7 +34,7 @@ export const TableHeader = <T,>({
 }: Props<T>) => {
   return (
     <Container $headColor={headerColor} $textColorHeader={textColorHeader}>
-      {table.getHeaderGroups().map((headerGroup) => (
+      {table.getHeaderGroups().map(headerGroup => (
         <tr key={headerGroup.id}>
           <SortableContext
             items={columnOrder}

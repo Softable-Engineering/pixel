@@ -1,4 +1,4 @@
-import { Props, SectionTableProps } from '../types'
+import type { Props, SectionTableProps } from '../types'
 
 export function isSectionTable<T>(
   props: Props<T>
