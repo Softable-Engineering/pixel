@@ -25,6 +25,7 @@ export const Select = <T extends string>(props: Props<T>) => {
   const {
     value,
     options,
+    placeholder,
     disabled = false,
     withCustomValue = false,
     onChange
@@ -85,6 +86,7 @@ export const Select = <T extends string>(props: Props<T>) => {
       <OptionDisplay
         value={value}
         disabled={disabled}
+        placeholder={placeholder}
         visibleListModal={visible}
         selectedOption={selectedOption}
         customValueSelected={customValueSelected}

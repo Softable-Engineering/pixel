@@ -93,8 +93,8 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
           <Header>
             {variant === 'group' ? (
               <Select
-                options={operatorOptions}
                 value={filters.operator}
+                options={operatorOptions}
                 onChange={v => {
                   handleChangeFilters({ operator: v })
                 }}
@@ -102,16 +102,18 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
             ) : null}
             <Select
               withCustomValue
-              options={startDateOptions}
               value={startDateValue}
+              placeholder="Data inicial"
+              options={startDateOptions}
               onChange={v => handleChangeValue(new Date(v), 'start')}
             />
             {variant === 'group' ? (
               <Select
                 withCustomValue
-                options={endDateOptions}
-                disabled={filters.operator !== 'range'}
                 value={endDateValue}
+                options={endDateOptions}
+                placeholder="Data final"
+                disabled={filters.operator !== 'range'}
                 onChange={v => handleChangeValue(new Date(v), 'end')}
               />
             ) : null}
@@ -131,8 +133,8 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
             <Button
               label="Limpar"
               variant="text"
-              color="var(--text-color)"
               borderRadius="0.5rem"
+              labelColor="var(--text-color)"
               onClick={clearValue}
             />
             <Button

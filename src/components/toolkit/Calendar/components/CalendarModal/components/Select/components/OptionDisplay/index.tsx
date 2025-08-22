@@ -16,6 +16,7 @@ import { Container, Form, Input } from './styles'
 interface Props<T> {
   value?: string
   disabled: boolean
+  placeholder?: string
   visibleListModal: boolean
   customValueSelected: boolean
   selectedOption: Option<T> | undefined
@@ -46,8 +47,8 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
         <Form onSubmit={onSubmit}>
           <Input
             value={customValue}
-            placeholder="00/00/0000"
             disabled={props.disabled}
+            placeholder={props.placeholder || '00/00/0000'}
             onBlur={onBlur}
             onChange={handleChangeValue}
           />

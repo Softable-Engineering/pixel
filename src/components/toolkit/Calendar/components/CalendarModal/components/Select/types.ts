@@ -6,6 +6,7 @@ export interface Option<T> {
 export interface Props<T> {
   value?: T
   disabled?: boolean
+  placeholder?: string
   options: Option<T>[]
   withCustomValue?: boolean
   onChange: (value: T) => void

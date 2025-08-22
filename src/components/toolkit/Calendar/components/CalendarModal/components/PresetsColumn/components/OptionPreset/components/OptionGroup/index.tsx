@@ -49,7 +49,7 @@ export const OptionGroup: React.FC<Props> = ({
   // Hooks
   const { floatingRef } = useFollowElementPosition(containerRef, {
     placement: 'right-start',
-    offsetX: 8
+    offsetX: 4
   })
 
   // Functions

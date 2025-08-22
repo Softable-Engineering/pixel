@@ -15,6 +15,8 @@ export const Container = styled(motion.div)`
 
   border-radius: 0.5rem;
   background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+
 
   user-select: none;
 `

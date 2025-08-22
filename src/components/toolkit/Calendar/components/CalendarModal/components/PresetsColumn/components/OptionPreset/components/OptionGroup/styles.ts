@@ -90,6 +90,7 @@ export const ContainerChildren = styled(motion.div)`
   background-color: var(--option-background-color);
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
   overflow-y: auto;
+  border: 1px solid var(--border-color);
 
   ${ScrollStyles};
 `

@@ -5,7 +5,7 @@ import type { DateOperator } from '@components/toolkit/Calendar/types'
 export function getOperatorOptions(): Option<DateOperator>[] {
   return [
     { label: 'Em', value: 'equals' },
-    { label: 'Apos', value: 'after' },
+    { label: 'Após', value: 'after' },
     { label: 'Antes', value: 'before' },
     { label: 'No período', value: 'range' }
   ]
