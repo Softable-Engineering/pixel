@@ -69,9 +69,9 @@ export const DraggableColumnHeader = <T,>({
         onMouseLeave={() => setHover(false)}
       >
         <Content
-          $maxWidth={header.column.getSize()}
-          onDoubleClick={() => resetSize()}
           $padding={padding}
+          $width={header.column.getSize()}
+          onDoubleClick={() => resetSize()}
         >
           <Typography
             as="span"

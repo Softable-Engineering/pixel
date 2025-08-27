@@ -5,8 +5,9 @@ interface Props {
 }
 
 interface ContentProps {
-  $maxWidth?: number
+  $width?: number
   $padding?: string
+  $maxWidth?: number
 }
 
 export const Container = styled.th<Props>`
@@ -49,7 +50,9 @@ export const Content = styled.div<ContentProps>`
 
   p {
     min-width: 10rem;
-    max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
+    width: ${({ $width }) => `${$width}px`};
+    /* max-width: ${({ $maxWidth }) => `${$maxWidth}px`}; */
+
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
