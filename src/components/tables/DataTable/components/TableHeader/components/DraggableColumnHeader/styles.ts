@@ -30,7 +30,7 @@ export const ColumnHeader = styled.div`
 `
 
 export const Content = styled.div<ContentProps>`
-  flex: 1;
+  width: ${({ $width }) => `${$width}px`};
   height: 100%;
 
   display: flex;
@@ -38,7 +38,7 @@ export const Content = styled.div<ContentProps>`
   justify-content: left;
 
   span {
-    width: 100%;
+    width: ${({ $width }) => `${$width}px`};
     height: 100%;
 
     display: flex;
@@ -49,10 +49,6 @@ export const Content = styled.div<ContentProps>`
   }
 
   p {
-    min-width: 10rem;
-    width: ${({ $width }) => `${$width}px`};
-    /* max-width: ${({ $maxWidth }) => `${$maxWidth}px`}; */
-
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

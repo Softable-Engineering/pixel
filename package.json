@@ -22,6 +22,10 @@
     "./data-table": {
       "types": "./dist/data-table.d.ts",
       "import": "./dist/data-table.js"
+    },
+    "./table-view": {
+      "types": "./dist/table-view.d.ts",
+      "import": "./dist/table-view.js"
     }
   },
   "peerDependencies": {
