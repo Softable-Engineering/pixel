@@ -3,7 +3,7 @@ import {
   DEFAULT_THICKNESS,
   DEFAULT_EMPTY_COLOR
 } from './constants'
-import { LoaderProps } from './styles'
+import type { LoaderProps } from './styles'
 
 export function getBorder(props: LoaderProps) {
   const thickness = props.thickness || DEFAULT_THICKNESS

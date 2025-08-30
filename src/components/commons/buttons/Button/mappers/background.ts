@@ -1,4 +1,4 @@
-import { ButtonVariant } from '../types'
+import type { ButtonVariant } from '../types'
 
 export const BACKGROUND_COLOR_MAPPER: Record<ButtonVariant, string> = {
   filled: '#4CB782',

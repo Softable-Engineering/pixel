@@ -17,7 +17,7 @@ export const Container = styled.button<ContainerProps>`
   position: relative;
 
   padding: 0.75rem 1rem;
-  border-radius: ${({ theme, $borderRadius }) =>
+  border-radius: ${({ $borderRadius }) =>
     $borderRadius ? $borderRadius : '0.25rem'};
 
   transition:

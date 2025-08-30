@@ -1,4 +1,4 @@
-import { TypeVariants } from '@components/toolkit/Typography/types'
+import type { TypeVariants } from '@components/toolkit/Typography/types'
 
 export interface ButtonProps extends ButtonStyleProps, ButtonTextProps {
   loading?: boolean
