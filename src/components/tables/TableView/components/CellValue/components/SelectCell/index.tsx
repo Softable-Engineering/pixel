@@ -1,14 +1,15 @@
 // External Libraries
+/** biome-ignore-all lint/a11y/useSemanticElements: <Not needed> */
 import type React from 'react'
 
 // Components
+import { Label } from './components/Label'
 
 // Types
 import type { BaseSelect } from '../../types'
 
 // Styles
 import { Container } from './styles'
-import { Label } from './components/Label'
 
 interface Props extends BaseSelect {
   selected: string

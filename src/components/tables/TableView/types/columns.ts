@@ -1,6 +1,8 @@
 // Types
 import type { BaseColumn } from './general'
 
+export type Actions = 'new-column'
+
 export enum ColumnType {
   DATE = 'date',
   PAGE = 'page',
@@ -10,6 +12,7 @@ export enum ColumnType {
 }
 
 export type Column<T> = {
+  id: string
   header: string
   accessorFn: (row: T) => string
 }

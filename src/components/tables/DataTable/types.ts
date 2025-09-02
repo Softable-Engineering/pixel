@@ -8,8 +8,12 @@ export type CustomColumnDef<T> = AccessorFnColumnDef<T, unknown> & {
   onClick?: (row: T) => void
 }
 
+export interface BaseCustomData {
+  id: string
+}
+
 export interface CustomData<T> {
-  data: T
+  data: T extends BaseCustomData ? T : T & BaseCustomData
   onClick?: (row: T) => void
 }
 

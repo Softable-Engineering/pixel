@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 
 interface Props {
+  $cellPadding?: string
   $hasVerticalDivider: boolean
   $hasHorizontalDivider: boolean
 }
@@ -8,7 +9,7 @@ interface Props {
 export const Container = styled.td<Props>`
   width: min-content;
 
-  padding: 0.75rem;
+  padding: ${({ $cellPadding }) => $cellPadding ?? '0.75rem'};
 
   border-right: 1px solid
     ${({ $hasVerticalDivider }) =>

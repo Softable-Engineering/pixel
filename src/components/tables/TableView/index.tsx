@@ -18,16 +18,18 @@ export {
   BaseColumnData
 } from './types'
 
-export const TableView = <T extends BaseColumnData>({
-  columns,
-  ...dataTableProps
-}: Props<T>) => {
-  // Utils
-  const normalizedColumns = getColumns(columns)
+export const TableView = <T extends BaseColumnData>(props: Props<T>) => {
+  // Constants
+  const { columns, onChangeCell, ...dataTableProps } = props
+  const normalizedColumns = getColumns(columns, onChangeCell)
 
   return (
     <Container>
-      <DataTable<T> {...dataTableProps} columns={normalizedColumns} />
+      <DataTable<T>
+        cellPadding="1px"
+        {...dataTableProps}
+        columns={normalizedColumns}
+      />
     </Container>
   )
 }

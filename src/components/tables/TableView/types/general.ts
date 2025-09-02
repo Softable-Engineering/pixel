@@ -2,12 +2,14 @@
 import type { CustomData } from '@components/tables/DataTable'
 import type { DateColumnData, SelectColumnData, TextColumnData } from './rows'
 import type {
+  Actions,
   ColumnDef,
   DateColumn,
   TextColumn,
   NumberColumn,
   SelectColumn
 } from './columns'
+import type { UpdateCellParams } from './cell'
 
 export type BaseColumn = TextColumn | DateColumn | SelectColumn | NumberColumn
 export type BaseColumnData = TextColumnData | DateColumnData | SelectColumnData
@@ -31,5 +33,7 @@ export interface DataTableProps<T> {
 }
 
 export interface Props<T> extends DataTableProps<T> {
+  actions?: Actions[]
   columns: ColumnDef<T>[]
+  onChangeCell?: (data: UpdateCellParams) => void
 }

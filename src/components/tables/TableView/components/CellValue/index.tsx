@@ -3,10 +3,11 @@ import type React from 'react'
 
 // Components
 import { SelectCell } from './components/SelectCell'
+import { RichTextCell } from './components/RichTextCell'
 import { Typography } from '@components/toolkit/Typography'
 
 // Utils
-import { isBaseSelect } from './utils'
+import { isBaseSelect, isBaseText } from './utils'
 
 // Types
 import type { Props } from './types'
@@ -16,6 +17,10 @@ import { Container } from './styles'
 
 export const CellValue: React.FC<Props> = props => {
   if (isBaseSelect(props)) return <SelectCell {...props} />
+
+  if (isBaseText(props)) {
+    return <RichTextCell {...props} />
+  }
 
   return (
     <Container>

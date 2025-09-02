@@ -19,3 +19,7 @@ export const Container = styled.thead<ContainerProps>`
       $textColorHeader ? `${$textColorHeader} !important` : 'inherit'};
   }
 `
+
+export const ActionsCell = styled.th`
+  padding: 0 2rem 0 0;
+`

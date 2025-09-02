@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 
 interface ContainerProps {
   $fitWidth?: boolean
+  $hasBorder?: boolean
   $borderColor?: string
 }
 
@@ -14,10 +15,12 @@ export const Container = styled.table<ContainerProps>`
 
   border-radius: 0.5rem;
 
+  --primary: ${({ theme }) => theme.colors.primary};
   --border-color: ${({ $borderColor, theme }) =>
     $borderColor ?? theme.colors.border.primary};
 
-  border: 1px solid var(--border-color);
+  border: ${({ $hasBorder }) => ($hasBorder ? '1px solid var(--border-color)' : null)};
+  border-bottom: 1px solid var(--border-color)
 `
 
 export const LoaderContainer = styled.div`

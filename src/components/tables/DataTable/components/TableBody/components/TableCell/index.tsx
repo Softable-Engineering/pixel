@@ -12,6 +12,7 @@ import type { CustomColumnDef, CustomData } from '../../../../types'
 import { Container } from './styles'
 
 interface Props<T> {
+  cellPadding?: string
   row: Row<CustomData<T>>
   hasVerticalDivider: boolean
   hasHorizontalDivider: boolean
@@ -21,6 +22,7 @@ interface Props<T> {
 export const TableCell = <T,>({
   row,
   cell,
+  cellPadding,
   hasVerticalDivider,
   hasHorizontalDivider
 }: Props<T>) => {
@@ -41,6 +43,7 @@ export const TableCell = <T,>({
 
   return (
     <Container
+      $cellPadding={cellPadding}
       style={{ width: cell.column.getSize() }}
       $hasVerticalDivider={hasVerticalDivider}
       $hasHorizontalDivider={hasHorizontalDivider}

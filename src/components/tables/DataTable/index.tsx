@@ -1,5 +1,6 @@
 // External Libraries
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: Ignored due to no validation needed */
+import type { ReactNode } from 'react'
 import { DndContext, closestCenter } from '@dnd-kit/core'
 
 // Components
@@ -22,11 +23,13 @@ interface Props<T> {
   height?: number
   loading?: boolean
   fitWidth?: boolean
+  cellPadding?: string
   data: CustomData<T>[]
   borderColor?: string
   headerColor?: string
   textColorHeader?: string
   canResetResize?: boolean
+  actionsColumn?: ReactNode
   enableSelection?: boolean
   hasVerticalDivider?: boolean
   hasHorizontalDivider?: boolean
@@ -42,6 +45,8 @@ export const DataTable = <T,>({
   columns,
   headerColor,
   borderColor,
+  cellPadding,
+  actionsColumn,
   textColorHeader,
   fitWidth = false,
   canResetResize = false,
@@ -75,11 +80,16 @@ export const DataTable = <T,>({
       onDragEnd={handleDragEnd}
       collisionDetection={closestCenter}
     >
-      <Container $fitWidth={fitWidth} $borderColor={borderColor}>
+      <Container
+        $fitWidth={fitWidth}
+        $borderColor={borderColor}
+        $hasBorder={!actionsColumn}
+      >
         <TableHeader<CustomData<T>>
           table={table}
           headerColor={headerColor}
           columnOrder={columnOrder}
+          actionsColumn={actionsColumn}
           canResetResize={canResetResize}
           textColorHeader={textColorHeader}
           hasVerticalDivider={hasVerticalDivider}
@@ -89,6 +99,8 @@ export const DataTable = <T,>({
 
         <TableBody
           table={table}
+          cellPadding={cellPadding}
+          actionsColumn={actionsColumn}
           hasVerticalDivider={hasVerticalDivider}
           hasHorizontalDivider={hasHorizontalDivider}
         />
