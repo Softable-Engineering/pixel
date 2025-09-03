@@ -8,7 +8,7 @@ import { Typography } from '@components/toolkit/Typography'
 
 // Types
 import type { BaseText } from '../../types'
-import { Types } from '../../../../modals/CellModal/types'
+import { CellTypes } from '@components/tables/TableView/types'
 
 // Styles
 import { Container } from './styles'
@@ -26,7 +26,7 @@ export const RichTextCell: React.FC<Props> = ({
     <CellModal
       text={text}
       minHeight="100%"
-      type={Types.TEXT}
+      type={CellTypes.TEXT}
       onChange={onChange}
     >
       <Container>

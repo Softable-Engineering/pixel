@@ -5,8 +5,8 @@ import type React from 'react'
 import { SelectModal } from './component/SelectModal'
 
 // Types
-import { Types } from '../../types'
 import type { ModalFieldProps } from './types'
+import { CellTypes } from '@components/tables/TableView/types'
 
 // Styles
 import { Container, Textarea } from './styles'
@@ -17,7 +17,7 @@ export const ModalField: React.FC<ModalFieldProps> = props => {
 
   // Functions
   function renderContent() {
-    if (type === Types.TEXT) {
+    if (type === CellTypes.TEXT) {
       return (
         <Textarea
           autoFocus
@@ -27,7 +27,7 @@ export const ModalField: React.FC<ModalFieldProps> = props => {
       )
     }
 
-    if (type === Types.SELECT)
+    if (type === CellTypes.SELECT)
       return <SelectModal {...props} onClose={onClose} />
   }
 

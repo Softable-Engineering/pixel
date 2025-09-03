@@ -13,9 +13,8 @@ import { isDate, isRichText, isSelect } from './normalizeType'
 
 // Types
 import type { UpdateCellParams } from '../types/cell'
-import { type ColumnDef, ColumnType } from '../types'
+import { CellTypes, type ColumnDef, ColumnType } from '../types'
 import type { CustomColumnDef, CustomData } from '@components/tables/DataTable'
-import { Types } from '../modals/CellModal/types'
 
 function getIcon(type: ColumnType) {
   if (type === ColumnType.DATE) return <TextIcon />
@@ -49,7 +48,7 @@ function renderCell<T>(
         select={column.select}
         type={ColumnType.SELECT}
         onChange={v =>
-          onChange?.({ ...commonsParams, type: Types.SELECT, select: v })
+          onChange?.({ ...commonsParams, type: CellTypes.SELECT, select: v })
         }
       />
     )
@@ -62,7 +61,7 @@ function renderCell<T>(
         type={ColumnType.RICH_TEXT}
         rich_text={column.rich_text}
         onChange={v =>
-          onChange?.({ ...commonsParams, type: Types.TEXT, text: v })
+          onChange?.({ ...commonsParams, type: CellTypes.TEXT, text: v })
         }
       />
     )
@@ -75,7 +74,7 @@ function renderCell<T>(
         date={column.date}
         type={ColumnType.DATE}
         onChange={v =>
-          onChange?.({ ...commonsParams, type: Types.DATE, date: v })
+          onChange?.({ ...commonsParams, type: CellTypes.DATE, date: v })
         }
       />
     )

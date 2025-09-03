@@ -8,7 +8,7 @@ import { CellModal } from '../../../../modals/CellModal'
 
 // Types
 import type { BaseSelect } from '../../types'
-import { Types } from '../../../../modals/CellModal/types'
+import { CellTypes } from '@components/tables/TableView/types'
 
 // Styles
 import { Container } from './styles'
@@ -21,7 +21,7 @@ export const SelectCell: React.FC<Props> = ({ selected, select, onChange }) => {
 
   return (
     <CellModal
-      type={Types.SELECT}
+      type={CellTypes.SELECT}
       selected={selected}
       options={select.options}
       onChange={onChange}
