@@ -3,12 +3,12 @@
 import type React from 'react'
 
 // Components
-import { CellModal } from '../../modals/CellModal'
+import { CellModal } from '../../../../modals/CellModal'
 import { Typography } from '@components/toolkit/Typography'
 
 // Types
 import type { BaseText } from '../../types'
-import { Types } from '../../modals/CellModal/types'
+import { Types } from '../../../../modals/CellModal/types'
 
 // Styles
 import { Container } from './styles'
@@ -30,7 +30,9 @@ export const RichTextCell: React.FC<Props> = ({
       onChange={onChange}
     >
       <Container>
-        <Typography variant="b2">{text}</Typography>
+        <Typography variant="b2" $align="left">
+          {text}
+        </Typography>
       </Container>
     </CellModal>
   )

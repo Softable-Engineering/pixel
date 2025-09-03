@@ -26,6 +26,7 @@ export const Calendar = React.forwardRef<CalendarMethods, CalendarProps>(
 
     // States
     const [visible, setVisible] = useState(false)
+    const [calendarId] = useState(() => crypto.randomUUID())
 
     // Hooks
     useImperativeHandle(ref, handleRefMethods)
@@ -61,12 +62,20 @@ export const Calendar = React.forwardRef<CalendarMethods, CalendarProps>(
     }
 
     return (
-      <Container ref={containerCalendarRef} id="wrapper-calendar-component">
+      <Container
+        ref={containerCalendarRef}
+        id={`wrapper-calendar-component-${calendarId}`}
+      >
         {children}
 
         <AnimatePresence initial={false}>
           {visible ? (
-            <CalendarModal ref={floatingRef} {...rest} onClose={handleClose} />
+            <CalendarModal
+              ref={floatingRef}
+              {...rest}
+              calendarId={calendarId}
+              onClose={handleClose}
+            />
           ) : null}
         </AnimatePresence>
       </Container>

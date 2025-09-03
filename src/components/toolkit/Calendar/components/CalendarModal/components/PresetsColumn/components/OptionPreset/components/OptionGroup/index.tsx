@@ -30,6 +30,7 @@ import { useFollowElementPosition } from '@hooks/useFollowElementPosition'
 import { Portal } from '@components/commons/modals/Portal'
 
 interface Props {
+  calendarId: string
   group: ShortcutGroup
   context: BuildContext
   onChangeValue: (range: DateRange) => void
@@ -38,6 +39,7 @@ interface Props {
 export const OptionGroup: React.FC<Props> = ({
   group,
   context,
+  calendarId,
   onChangeValue
 }) => {
   // Refs
@@ -60,6 +62,7 @@ export const OptionGroup: React.FC<Props> = ({
           item={preset}
           key={preset.id}
           context={context}
+          calendarId={calendarId}
           onChangeValue={onChangeValue}
         />
       )
@@ -107,7 +110,10 @@ export const OptionGroup: React.FC<Props> = ({
 
       <AnimatePresence initial={false}>
         {hover ? (
-          <Portal key={group.id} wrapperId="wrapper-calendar-component">
+          <Portal
+            key={group.id}
+            wrapperId={`wrapper-calendar-component-${calendarId}`}
+          >
             <ContainerChildren ref={floatingRef} {...OPACITY_ANIMATION_PRESETS}>
               {renderShortcutGroup(group.items)}
             </ContainerChildren>

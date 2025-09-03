@@ -12,12 +12,12 @@ export type BaseText = TextColumn & {
 }
 
 export type BaseSelect = SelectColumn & {
-  selected: string
+  selected: string[]
   onChange: (selected: string[]) => void
 }
 
 export type BaseDate = DateColumn & {
-  date: string
+  value: string
   onChange: (date: string) => void
 }
 

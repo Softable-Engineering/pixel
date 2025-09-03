@@ -3,27 +3,32 @@
 import type React from 'react'
 
 // Components
-import { Label } from './components/Label'
+import { Label } from '../../../Label'
+import { CellModal } from '../../../../modals/CellModal'
 
 // Types
 import type { BaseSelect } from '../../types'
+import { Types } from '../../../../modals/CellModal/types'
 
 // Styles
 import { Container } from './styles'
 
-interface Props extends BaseSelect {
-  selected: string
-}
+interface Props extends BaseSelect {}
 
-export const SelectCell: React.FC<Props> = ({ selected, select }) => {
+export const SelectCell: React.FC<Props> = ({ selected, select, onChange }) => {
   // Constants
-  const item = select.options.find(item => item.id === selected)
-
-  if (!item) return null
+  const item = select.options.find(item => item.id === selected[0])
 
   return (
-    <Container>
-      <Label color={item.color} value={item.name} />
-    </Container>
+    <CellModal
+      type={Types.SELECT}
+      selected={selected}
+      options={select.options}
+      onChange={onChange}
+    >
+      <Container>
+        {item ? <Label color={item.color} value={item.name} /> : null}
+      </Container>
+    </CellModal>
   )
 }

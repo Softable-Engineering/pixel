@@ -15,8 +15,10 @@ export {
   ColumnDef,
   BaseColumn,
   ColumnType,
-  BaseColumnData
+  BaseColumnData,
+  UpdateCellParams
 } from './types'
+export { Types } from './modals/CellModal/types'
 
 export const TableView = <T extends BaseColumnData>(props: Props<T>) => {
   // Constants

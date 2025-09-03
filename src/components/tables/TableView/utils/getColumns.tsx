@@ -9,13 +9,13 @@ import { HeaderCell } from '../components/HeaderCell'
 import { Typography } from '@components/toolkit/Typography'
 
 // Utils
-import { isRichText, isSelect } from './normalizeType'
+import { isDate, isRichText, isSelect } from './normalizeType'
 
 // Types
 import type { UpdateCellParams } from '../types/cell'
 import { type ColumnDef, ColumnType } from '../types'
 import type { CustomColumnDef, CustomData } from '@components/tables/DataTable'
-import { Types } from '../components/CellValue/modals/CellModal/types'
+import { Types } from '../modals/CellModal/types'
 
 function getIcon(type: ColumnType) {
   if (type === ColumnType.DATE) return <TextIcon />
@@ -45,10 +45,12 @@ function renderCell<T>(
   if (isSelect(column)) {
     return (
       <CellValue
-        selected={value}
+        selected={[value]}
         select={column.select}
         type={ColumnType.SELECT}
-        onChange={console.log}
+        onChange={v =>
+          onChange?.({ ...commonsParams, type: Types.SELECT, select: v })
+        }
       />
     )
   }
@@ -61,6 +63,19 @@ function renderCell<T>(
         rich_text={column.rich_text}
         onChange={v =>
           onChange?.({ ...commonsParams, type: Types.TEXT, text: v })
+        }
+      />
+    )
+  }
+
+  if (isDate(column)) {
+    return (
+      <CellValue
+        value={value}
+        date={column.date}
+        type={ColumnType.DATE}
+        onChange={v =>
+          onChange?.({ ...commonsParams, type: Types.DATE, date: v })
         }
       />
     )

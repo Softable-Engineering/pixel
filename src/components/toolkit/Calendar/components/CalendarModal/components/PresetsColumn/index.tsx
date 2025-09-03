@@ -15,6 +15,7 @@ import type {
 import { Container, ContainerPreset } from './styles'
 
 interface Props {
+  calendarId: string
   context: BuildContext
   presets: PresetGroup[]
   onChangeValue: (range: DateRange) => void
@@ -23,6 +24,7 @@ interface Props {
 export const PresetsColumn: React.FC<Props> = ({
   presets,
   context,
+  calendarId,
   onChangeValue
 }) => {
   // Functions
@@ -33,6 +35,7 @@ export const PresetsColumn: React.FC<Props> = ({
           key={key}
           item={value}
           context={context}
+          calendarId={calendarId}
           onChangeValue={onChangeValue}
         />
       )

@@ -2,12 +2,13 @@
 import type React from 'react'
 
 // Components
+import { DateCell } from './components/DateCell'
 import { SelectCell } from './components/SelectCell'
 import { RichTextCell } from './components/RichTextCell'
 import { Typography } from '@components/toolkit/Typography'
 
 // Utils
-import { isBaseSelect, isBaseText } from './utils'
+import { isBaseDate, isBaseSelect, isBaseText } from './utils'
 
 // Types
 import type { Props } from './types'
@@ -20,6 +21,10 @@ export const CellValue: React.FC<Props> = props => {
 
   if (isBaseText(props)) {
     return <RichTextCell {...props} />
+  }
+
+  if (isBaseDate(props)) {
+    return <DateCell {...props} />
   }
 
   return (

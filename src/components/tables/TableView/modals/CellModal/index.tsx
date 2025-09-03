@@ -1,5 +1,5 @@
 // External Libraries
-/** biome-ignore-all lint/correctness/useExhaustiveDependencies: <explanation> */
+/** biome-ignore-all lint/correctness/useExhaustiveDependencies: <Not needed> */
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 
@@ -42,9 +42,13 @@ export const CellModal: React.FC<Props> = props => {
     setVisible(prev => !prev)
   }
 
+  function handleClose() {
+    setVisible(false)
+  }
+
   function handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Tab') {
-      setVisible(false)
+    if (event.key === 'Tab' || event.key === 'Escape') {
+      handleClose()
     }
   }
 
@@ -65,7 +69,11 @@ export const CellModal: React.FC<Props> = props => {
       <AnimatePresence initial={false}>
         {visible ? (
           <ContainerModal ref={floatingRef}>
-            <ModalField {...props} minHeight={`${minHeight}px`} />
+            <ModalField
+              {...props}
+              minHeight={`${minHeight}px`}
+              onClose={handleClose}
+            />
           </ContainerModal>
         ) : null}
       </AnimatePresence>

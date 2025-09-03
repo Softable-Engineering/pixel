@@ -30,6 +30,7 @@ import { Container, ContainerCalendar, Content, Footer, Header } from './styles'
 interface Props {
   locale: string
   variant?: Variant
+  calendarId: string
   visibleMonths?: number
   value: DateRangeValue
   presets?: PresetGroup[]
@@ -41,6 +42,7 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
   (params, ref) => {
     // Constants
     const operatorOptions = getOperatorOptions()
+    const { calendarId } = params
 
     // Hooks
     const {
@@ -85,6 +87,7 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
           <PresetsColumn
             presets={presets}
             context={context}
+            calendarId={calendarId}
             onChangeValue={handleChangeDateRange}
           />
         ) : null}

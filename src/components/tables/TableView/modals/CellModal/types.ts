@@ -2,6 +2,7 @@
 import type { PropsWithChildren } from 'react'
 
 // Types
+import type { SelectOption } from '@components/tables/TableView/types'
 import type { UseFollowElementPositionOptions } from '@hooks/useFollowElementPosition/types'
 
 export enum Types {
@@ -22,7 +23,8 @@ export type TextProps = {
 
 export type SelectProps = {
   type: Types.SELECT
-  select: string[]
+  selected: string[]
+  options: SelectOption[]
   multiple?: boolean
   onChange: (select: string[]) => void
 }

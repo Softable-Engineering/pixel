@@ -1,5 +1,5 @@
 // Types
-import type { Types } from '../components/CellValue/modals/CellModal/types'
+import type { Types } from '../modals/CellModal/types'
 
 export interface TextUpdateParams {
   type: Types.TEXT

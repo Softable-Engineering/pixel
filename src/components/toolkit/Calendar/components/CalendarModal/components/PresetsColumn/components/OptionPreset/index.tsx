@@ -18,6 +18,7 @@ import { Action } from './components/Action'
 
 interface Props {
   item: Preset
+  calendarId: string
   context: BuildContext
   onChangeValue: (range: DateRange) => void
 }
@@ -25,6 +26,7 @@ interface Props {
 export const OptionPreset: React.FC<Props> = ({
   item,
   context,
+  calendarId,
   onChangeValue
 }) => {
   if (isShortcutGroup(item)) {
@@ -32,6 +34,7 @@ export const OptionPreset: React.FC<Props> = ({
       <OptionGroup
         group={item}
         context={context}
+        calendarId={calendarId}
         onChangeValue={onChangeValue}
       />
     )
