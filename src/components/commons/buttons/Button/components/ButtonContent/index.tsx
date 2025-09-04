@@ -1,5 +1,5 @@
 // External Libraries
-import React from 'react'
+import type React from 'react'
 import { AnimatePresence } from 'framer-motion'
 
 // Components
@@ -10,7 +10,7 @@ import { Typography } from '@components/toolkit/Typography'
 import { LABEL_COLOR_MAPPER } from '../../mappers/label'
 
 // Types
-import { ButtonTextProps, ButtonVariant } from '../../types'
+import type { ButtonTextProps, ButtonVariant } from '../../types'
 
 // Styles
 import { Container } from './styles'

@@ -94,7 +94,7 @@ export const OptionDisplay = <T,>(props: Props<T>) => {
     const newDate = getDate()
     if (newDate && newDate !== '') return onChange(newDate)
 
-    if (!!props.value) return onChange(props.value as T)
+    if (props.value) return onChange(props.value as T)
   }
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {

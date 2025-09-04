@@ -42,7 +42,7 @@ export const MaskModule = {
   },
 
   reset(): void {
-    Object.keys(locales).forEach((locale) => {
+    Object.keys(locales).forEach(locale => {
       delete locales[locale as Locale]
     })
   }
