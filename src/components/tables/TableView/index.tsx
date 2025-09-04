@@ -10,14 +10,7 @@ import type { Props } from './types'
 // Styles
 import { Container } from './styles'
 
-export {
-  Props,
-  ColumnDef,
-  BaseColumn,
-  ColumnType,
-  BaseColumnData,
-  UpdateCellParams
-} from './types'
+export * from './types'
 
 export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
   // Constants
