@@ -9,13 +9,12 @@ import { HeaderCell } from '../components/HeaderCell'
 import { Typography } from '@components/toolkit/Typography'
 
 // Utils
-import { isDate, isRichText, isSelect } from './normalizeType'
+import { isDate, isMultiSelect, isRichText, isSelect } from './normalizeType'
 
 // Types
 import type { UpdateCellParams } from '../types/cell'
-import { type ColumnDef, ColumnType } from '../types'
+import { CellTypes, type ColumnDef, ColumnType } from '../types'
 import type { CustomColumnDef, CustomData } from '@components/tables/DataTable'
-import { Types } from '../modals/CellModal/types'
 
 function getIcon(type: ColumnType) {
   if (type === ColumnType.DATE) return <TextIcon />
@@ -34,22 +33,37 @@ function getContent<T>(column: ColumnDef<T>) {
   return <HeaderCell icon={icon} title={title} />
 }
 
+function normalizeString(value: string | string[]) {
+  if (Array.isArray(value)) return value.join(', ')
+  if (typeof value === 'string') return value
+
+  return ''
+}
+
+function normalizeArray(value: string | string[]) {
+  if (Array.isArray(value)) return value
+  if (typeof value === 'string') return [value]
+
+  return []
+}
+
 function renderCell<T>(
   row: CustomData<T>,
   column: ColumnDef<T>,
   onChange?: (params: UpdateCellParams) => void
 ) {
+  // Constants
   const commonsParams = { columnId: column.id, rowId: row.data.id }
   const value = column.accessorFn(row.data)
 
   if (isSelect(column)) {
     return (
       <CellValue
-        selected={[value]}
         select={column.select}
         type={ColumnType.SELECT}
+        selected={normalizeArray(value)}
         onChange={v =>
-          onChange?.({ ...commonsParams, type: Types.SELECT, select: v })
+          onChange?.({ ...commonsParams, type: CellTypes.SELECT, select: v })
         }
       />
     )
@@ -58,11 +72,11 @@ function renderCell<T>(
   if (isRichText(column)) {
     return (
       <CellValue
-        text={value}
         type={ColumnType.RICH_TEXT}
         rich_text={column.rich_text}
+        text={normalizeString(value)}
         onChange={v =>
-          onChange?.({ ...commonsParams, type: Types.TEXT, text: v })
+          onChange?.({ ...commonsParams, type: CellTypes.TEXT, text: v })
         }
       />
     )
@@ -71,11 +85,28 @@ function renderCell<T>(
   if (isDate(column)) {
     return (
       <CellValue
-        value={value}
         date={column.date}
         type={ColumnType.DATE}
+        value={normalizeString(value)}
         onChange={v =>
-          onChange?.({ ...commonsParams, type: Types.DATE, date: v })
+          onChange?.({ ...commonsParams, type: CellTypes.DATE, date: v })
+        }
+      />
+    )
+  }
+
+  if (isMultiSelect(column)) {
+    return (
+      <CellValue
+        select={{ ...column.select }}
+        type={ColumnType.MULTI_SELECT}
+        selected={normalizeArray(value)}
+        onChange={v =>
+          onChange?.({
+            ...commonsParams,
+            type: CellTypes.MULTI_SELECT,
+            select: v
+          })
         }
       />
     )

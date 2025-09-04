@@ -8,7 +8,12 @@ import { RichTextCell } from './components/RichTextCell'
 import { Typography } from '@components/toolkit/Typography'
 
 // Utils
-import { isBaseDate, isBaseSelect, isBaseText } from './utils'
+import {
+  isBaseDate,
+  isBaseMultiSelect,
+  isBaseSelect,
+  isBaseText
+} from './utils'
 
 // Types
 import type { Props } from './types'
@@ -25,6 +30,10 @@ export const CellValue: React.FC<Props> = props => {
 
   if (isBaseDate(props)) {
     return <DateCell {...props} />
+  }
+
+  if (isBaseMultiSelect(props)) {
+    return <SelectCell {...props} />
   }
 
   return (

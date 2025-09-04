@@ -14,7 +14,7 @@ export const ContainerDisplay = styled.div`
   display: flex;
   flex-wrap: wrap;
 
-  background-color: var(--secondary-background-color);
+  background-color: var(--modal-display);
   border-bottom: 1px solid var(--border-color);
 
   padding: 0.5rem;

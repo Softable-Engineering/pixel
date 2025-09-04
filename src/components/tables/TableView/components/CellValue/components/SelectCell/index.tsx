@@ -7,28 +7,55 @@ import { Label } from '../../../Label'
 import { CellModal } from '../../../../modals/CellModal'
 
 // Types
-import type { BaseSelect } from '../../types'
-import { Types } from '../../../../modals/CellModal/types'
+import type { BaseMultiSelect, BaseSelect } from '../../types'
+import { CellTypes, ColumnType } from '@components/tables/TableView/types'
 
 // Styles
 import { Container } from './styles'
 
-interface Props extends BaseSelect {}
+type Variant = BaseSelect | BaseMultiSelect
 
-export const SelectCell: React.FC<Props> = ({ selected, select, onChange }) => {
+type Props = Variant
+
+export const SelectCell: React.FC<Props> = props => {
   // Constants
-  const item = select.options.find(item => item.id === selected[0])
+  const { selected, select, onChange } = props
+  const labels = select.options.filter(option => selected.includes(option.id))
+  const type = isMultipleSelect(props)
+    ? CellTypes.MULTI_SELECT
+    : CellTypes.SELECT
+
+  // Functions
+  function isMultipleSelect(variant: Variant): variant is BaseMultiSelect {
+    return variant.type === ColumnType.MULTI_SELECT
+  }
+
+  function renderLabels() {
+    if (!isMultipleSelect(props)) {
+      const item = labels[0]
+      if (!item) return null
+      return <Label color={item.color} value={item.name} />
+    }
+
+    return labels.map((option, index) => {
+      return (
+        <Label
+          key={`options_${option.id}_${index}`}
+          color={option.color}
+          value={option.name}
+        />
+      )
+    })
+  }
 
   return (
     <CellModal
-      type={Types.SELECT}
+      type={type}
       selected={selected}
       options={select.options}
       onChange={onChange}
     >
-      <Container>
-        {item ? <Label color={item.color} value={item.name} /> : null}
-      </Container>
+      <Container>{renderLabels()}</Container>
     </CellModal>
   )
 }

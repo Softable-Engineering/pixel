@@ -6,5 +6,6 @@ export const Container = styled.div`
   --border-color: ${({ theme }) => theme.colors.border.tertiary};
   --background-color: ${({ theme }) => theme.colors.background.tertiary};
   --secondary-background-color: ${({ theme }) => theme.colors.border.tertiary};
+  --modal-display: #2d2d2d;
   --hover: ${({ theme }) => theme.colors.border.tertiary};
 `

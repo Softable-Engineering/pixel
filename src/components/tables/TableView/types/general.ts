@@ -7,11 +7,17 @@ import type {
   DateColumn,
   TextColumn,
   NumberColumn,
-  SelectColumn
+  SelectColumn,
+  MultiSelectColumn
 } from './columns'
 import type { UpdateCellParams } from './cell'
 
-export type BaseColumn = TextColumn | DateColumn | SelectColumn | NumberColumn
+export type BaseColumn =
+  | TextColumn
+  | DateColumn
+  | SelectColumn
+  | NumberColumn
+  | MultiSelectColumn
 export type BaseColumnData = TextColumnData | DateColumnData | SelectColumnData
 
 export interface DataTableProps<T> {

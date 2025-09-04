@@ -8,13 +8,14 @@ export enum ColumnType {
   PAGE = 'page',
   NUMBER = 'number',
   SELECT = 'select',
-  RICH_TEXT = 'rich_text'
+  RICH_TEXT = 'rich_text',
+  MULTI_SELECT = 'multi_select'
 }
 
 export type Column<T> = {
   id: string
   header: string
-  accessorFn: (row: T) => string
+  accessorFn: (row: T) => string | string[]
 }
 
 export type ColumnDef<T> = BaseColumn & Column<T>
@@ -54,6 +55,11 @@ export interface DateColumn {
 
 export interface SelectColumn {
   type: ColumnType.SELECT
+  select: Select
+}
+
+export interface MultiSelectColumn {
+  type: ColumnType.MULTI_SELECT
   select: Select
 }
 

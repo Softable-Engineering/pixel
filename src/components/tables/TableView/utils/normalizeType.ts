@@ -6,7 +6,8 @@ import {
   type TextColumn,
   type DateColumn,
   type SelectColumn,
-  type NumberColumn
+  type NumberColumn,
+  type MultiSelectColumn
 } from '../types'
 
 export function isRichText<T>(
@@ -25,6 +26,12 @@ export function isSelect<T>(
   column: ColumnDef<T>
 ): column is Column<T> & SelectColumn {
   return column.type === ColumnType.SELECT
+}
+
+export function isMultiSelect<T>(
+  column: ColumnDef<T>
+): column is ColumnDef<T> & MultiSelectColumn {
+  return column.type === ColumnType.MULTI_SELECT
 }
 
 export function isNumber<T>(

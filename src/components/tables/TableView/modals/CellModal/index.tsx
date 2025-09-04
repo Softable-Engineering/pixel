@@ -23,7 +23,7 @@ export const CellModal: React.FC<Props> = props => {
 
   // Constants
   const { children } = props
-  const containerHeight = containerRef.current?.offsetHeight ?? 0
+  const containerHeight = containerCellRef.current?.offsetHeight ?? 0
   const minHeight = containerHeight + 10 || 100
 
   // States
@@ -31,8 +31,7 @@ export const CellModal: React.FC<Props> = props => {
 
   // Hooks
   const { floatingRef } = useFollowElementPosition(containerRef, {
-    placement: 'bottom-start',
-    offsetY: -containerHeight - 5,
+    placement: 'top-left-start',
     offsetX: -5
   })
   useClickOutsideWatcher(containerRef, toggleVisible, !visible)
