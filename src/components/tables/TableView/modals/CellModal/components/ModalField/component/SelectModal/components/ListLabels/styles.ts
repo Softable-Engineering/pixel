@@ -1,14 +1,16 @@
 import { styled } from 'styled-components'
 
 export const Container = styled.div`
-  width: 100%;
+  width: 17rem;
 
   display: flex;
   flex-direction: column;
 
   row-gap: 0.5rem;
-
+  border-radius: 0.25rem;
   padding: 0.5rem;
+
+  background-color: var(--background-color);
 `
 
 export const Row = styled.div`

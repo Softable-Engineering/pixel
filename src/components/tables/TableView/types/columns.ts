@@ -7,6 +7,7 @@ export enum ColumnType {
   DATE = 'date',
   PAGE = 'page',
   EMAIL = 'email',
+  PHONE = 'phone',
   NUMBER = 'number',
   SELECT = 'select',
   RICH_TEXT = 'rich_text',
@@ -24,6 +25,7 @@ export type ColumnDef<T> = BaseColumn & Column<T>
 export interface RichTextFormat {
   bold?: boolean
   italic?: boolean
+  mask?: (value: string) => string
 }
 
 export interface DateFormat {
@@ -45,8 +47,13 @@ export interface Select {
   options: SelectOption[]
 }
 
+export type TextTypes =
+  | ColumnType.RICH_TEXT
+  | ColumnType.EMAIL
+  | ColumnType.PHONE
+
 export interface TextColumn {
-  type: ColumnType.RICH_TEXT
+  type: TextTypes
   rich_text: RichTextFormat
 }
 

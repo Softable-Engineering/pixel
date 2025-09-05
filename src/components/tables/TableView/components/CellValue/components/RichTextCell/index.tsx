@@ -22,12 +22,20 @@ export const RichTextCell: React.FC<Props> = ({
   rich_text,
   onChange
 }) => {
+  // Functions
+  function handleChangeValue(value: string) {
+    if (!rich_text.mask) return onChange?.(value)
+
+    const maskedValue = rich_text.mask(value)
+    onChange?.(maskedValue)
+  }
+
   return (
     <CellModal
       text={text}
       minHeight="100%"
       type={CellTypes.TEXT}
-      onChange={onChange}
+      onChange={handleChangeValue}
     >
       <Container>
         <Typography variant="b2" $align="left">

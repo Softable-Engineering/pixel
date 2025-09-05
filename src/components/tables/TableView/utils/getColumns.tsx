@@ -8,12 +8,10 @@ import { CellValue } from '../components/CellValue'
 import { HeaderCell } from '../components/HeaderCell'
 import { Typography } from '@components/toolkit/Typography'
 
-// Utils
-import { isDate, isMultiSelect, isRichText, isSelect } from './normalizeType'
-
 // Types
 import type { UpdateCellParams } from '../types/cell'
 import { type ColumnDef, ColumnType } from '../types'
+import { type Locale, MaskModule, MaskType } from 'src/services/MaskModule'
 import type { CustomColumnDef, CustomData } from '@components/tables/DataTable'
 
 function getIcon(type: ColumnType) {
@@ -50,13 +48,18 @@ function normalizeArray(value: string | string[]) {
 function renderCell<T>(
   row: CustomData<T>,
   column: ColumnDef<T>,
+  locale: Locale,
   onChange?: (params: UpdateCellParams) => void
 ) {
   // Constants
   const commonsParams = { columnId: column.id, rowId: row.data.id }
   const value = column.accessorFn(row.data)
 
-  if (isSelect(column)) {
+  const phoneMask = MaskModule.getMask(locale, MaskType.PHONE)
+  const numberMask = MaskModule.getMask(locale, MaskType.INTEGER)
+  const emailMask = MaskModule.getMask(locale, MaskType.EMAIL)
+
+  if (column.type === ColumnType.SELECT) {
     return (
       <CellValue
         select={column.select}
@@ -69,7 +72,7 @@ function renderCell<T>(
     )
   }
 
-  if (isRichText(column)) {
+  if (column.type === ColumnType.RICH_TEXT) {
     return (
       <CellValue
         type={ColumnType.RICH_TEXT}
@@ -82,7 +85,46 @@ function renderCell<T>(
     )
   }
 
-  if (isDate(column)) {
+  if (column.type === ColumnType.EMAIL) {
+    return (
+      <CellValue
+        type={ColumnType.RICH_TEXT}
+        rich_text={{ ...column.rich_text, mask: emailMask?.format }}
+        text={normalizeString(value)}
+        onChange={v =>
+          onChange?.({ ...commonsParams, type: ColumnType.EMAIL, text: v })
+        }
+      />
+    )
+  }
+
+  if (column.type === ColumnType.PHONE) {
+    return (
+      <CellValue
+        type={ColumnType.RICH_TEXT}
+        rich_text={{ ...column.rich_text, mask: phoneMask?.format }}
+        text={normalizeString(value)}
+        onChange={v =>
+          onChange?.({ ...commonsParams, type: ColumnType.PHONE, text: v })
+        }
+      />
+    )
+  }
+
+  if (column.type === ColumnType.NUMBER) {
+    return (
+      <CellValue
+        type={ColumnType.RICH_TEXT}
+        rich_text={{ ...column.number, mask: numberMask?.format }}
+        text={normalizeString(value)}
+        onChange={v =>
+          onChange?.({ ...commonsParams, type: ColumnType.NUMBER, text: v })
+        }
+      />
+    )
+  }
+
+  if (column.type === ColumnType.DATE) {
     return (
       <CellValue
         date={column.date}
@@ -95,7 +137,7 @@ function renderCell<T>(
     )
   }
 
-  if (isMultiSelect(column)) {
+  if (column.type === ColumnType.MULTI_SELECT) {
     return (
       <CellValue
         type={ColumnType.SELECT}
@@ -117,12 +159,13 @@ function renderCell<T>(
 
 export function getColumns<T>(
   data: ColumnDef<T>[],
+  locale: Locale,
   onChange?: (params: UpdateCellParams) => void
 ): CustomColumnDef<CustomData<T>>[] {
   return data.map(column => ({
     id: column.header,
     cell: info => info.getValue(),
     header: () => getContent<T>(column),
-    accessorFn: row => renderCell<T>(row, column, onChange)
+    accessorFn: row => renderCell<T>(row, column, locale, onChange)
   }))
 }

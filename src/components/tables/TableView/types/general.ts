@@ -11,6 +11,7 @@ import type {
   MultiSelectColumn
 } from './columns'
 import type { UpdateCellParams } from './cell'
+import type { Locale } from 'src/services/MaskModule'
 
 export type BaseColumn =
   | TextColumn
@@ -18,6 +19,7 @@ export type BaseColumn =
   | SelectColumn
   | NumberColumn
   | MultiSelectColumn
+
 export type BaseColumnData = TextColumnData | DateColumnData | SelectColumnData
 
 export interface DataTableProps<T> {
@@ -39,6 +41,7 @@ export interface DataTableProps<T> {
 }
 
 export interface Props<T> extends DataTableProps<T> {
+  locale: Locale
   actions?: Actions[]
   columns: ColumnDef<T>[]
   onChangeCell?: (data: UpdateCellParams) => void

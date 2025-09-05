@@ -70,7 +70,7 @@ export const CellModal: React.FC<Props> = props => {
           <ContainerModal ref={floatingRef}>
             <ModalField
               {...props}
-              minHeight={`${minHeight}px`}
+              minHeight={minHeight}
               onClose={handleClose}
             />
           </ContainerModal>

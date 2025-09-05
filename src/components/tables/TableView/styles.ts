@@ -7,5 +7,6 @@ export const Container = styled.div`
   --background-color: ${({ theme }) => theme.colors.background.tertiary};
   --secondary-background-color: ${({ theme }) => theme.colors.border.tertiary};
   --modal-display: #2d2d2d;
+  --scrolbar-color: ${({ theme }) => theme.colors.scrollbar};
   --hover: ${({ theme }) => theme.colors.border.tertiary};
 `

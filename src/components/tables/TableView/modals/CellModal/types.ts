@@ -6,7 +6,7 @@ import type { SelectOption } from '@components/tables/TableView/types'
 import type { UseFollowElementPositionOptions } from '@hooks/useFollowElementPosition/types'
 
 export interface BaseProps extends PropsWithChildren {
-  minHeight?: string
+  minHeight: number
 }
 
 export enum CellTypes {

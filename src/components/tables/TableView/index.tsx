@@ -14,8 +14,8 @@ export * from './types'
 
 export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
   // Constants
-  const { columns, onChangeCell, ...dataTableProps } = props
-  const normalizedColumns = getColumns(columns, onChangeCell)
+  const { columns, locale, onChangeCell, ...dataTableProps } = props
+  const normalizedColumns = getColumns(columns, locale, onChangeCell)
 
   return (
     <Container>

@@ -1,7 +1,13 @@
 import type { ColumnType } from './columns'
 
-export interface TextUpdateParams {
-  type: ColumnType.RICH_TEXT
+export type TextTypes =
+  | ColumnType.RICH_TEXT
+  | ColumnType.EMAIL
+  | ColumnType.PHONE
+  | ColumnType.NUMBER
+
+export type TextUpdateParams = {
+  type: TextTypes
   text: string
 }
 
