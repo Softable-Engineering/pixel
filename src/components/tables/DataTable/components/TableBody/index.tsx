@@ -9,7 +9,7 @@ import { TableCell } from './components/TableCell'
 import type { CustomData } from '../../types'
 
 // Styles
-import { Cell, TableRow } from './styles'
+import { Cell, Container, TableRow } from './styles'
 
 interface Props<T> {
   table: Table<T>
@@ -60,5 +60,5 @@ export const TableBody = <T,>({
     })
   }
 
-  return <tbody>{renderRows()}</tbody>
+  return <Container>{renderRows()}</Container>
 }

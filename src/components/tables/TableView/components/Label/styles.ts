@@ -27,6 +27,15 @@ export const Container = styled.div<ContainerProps>`
     cursor: pointer;
     opacity: ${({ $hasHover }) => ($hasHover ? 0.8 : 1)};
   }
+
+  overflow: hidden;
+
+  & > p {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `
 
 export const Button = styled.button`

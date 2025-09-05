@@ -4,7 +4,16 @@ interface RowProps {
   cursor?: string
 }
 
-export const TableRow = styled.tr<RowProps>`
+export const Container = styled.div`
+  width: 100%;
+  height: fit-content;
+`
+
+export const TableRow = styled.div<RowProps>`
+  width: 100%;
+
+  display: flex;
+
   cursor: ${({ cursor }) => (cursor ? cursor : 'default')};
 `
 

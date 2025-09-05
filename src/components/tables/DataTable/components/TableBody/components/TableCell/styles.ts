@@ -6,14 +6,14 @@ interface Props {
   $hasHorizontalDivider: boolean
 }
 
-export const Container = styled.td<Props>`
-  width: min-content;
+export const Container = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
 
   padding: ${({ $cellPadding }) => $cellPadding ?? '0.75rem'};
 
-  border-right: 1px solid
-    ${({ $hasVerticalDivider }) =>
-      $hasVerticalDivider ? 'var(--border-color)' : 'none'};
+  box-shadow: ${({ $hasVerticalDivider }) =>
+    $hasVerticalDivider ? '1px 0 var(--border-color)' : 'none'};
 
   border-top: 1px solid
     ${({ $hasHorizontalDivider }) =>

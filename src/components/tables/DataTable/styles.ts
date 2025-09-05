@@ -6,8 +6,8 @@ interface ContainerProps {
   $borderColor?: string
 }
 
-export const Container = styled.table<ContainerProps>`
-  width: ${({ $fitWidth }) => ($fitWidth ? '100%' : 'auto')};
+export const Container = styled.div<ContainerProps>`
+  width: ${({ $fitWidth }) => ($fitWidth ? '100%' : 'fit-content')};
 
   border-spacing: 0;
 

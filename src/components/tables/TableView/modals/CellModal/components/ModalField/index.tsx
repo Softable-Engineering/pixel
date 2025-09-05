@@ -5,8 +5,8 @@ import type React from 'react'
 import { SelectModal } from './component/SelectModal'
 
 // Types
+import { CellTypes } from '../../types'
 import type { ModalFieldProps } from './types'
-import { CellTypes } from '@components/tables/TableView/types'
 
 // Styles
 import { Container, Textarea } from './styles'
@@ -28,9 +28,6 @@ export const ModalField: React.FC<ModalFieldProps> = props => {
     }
 
     if (type === CellTypes.SELECT)
-      return <SelectModal {...props} onClose={onClose} />
-
-    if (type === CellTypes.MULTI_SELECT)
       return <SelectModal {...props} onClose={onClose} />
   }
 

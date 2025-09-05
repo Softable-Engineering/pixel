@@ -5,7 +5,7 @@ interface ContainerProps {
   $textColorHeader?: string
 }
 
-export const Container = styled.thead<ContainerProps>`
+export const Container = styled.div<ContainerProps>`
   overflow: hidden;
   background-color: ${({ $headColor }) => $headColor ?? 'transparent'};
 
@@ -20,6 +20,12 @@ export const Container = styled.thead<ContainerProps>`
   }
 `
 
-export const ActionsCell = styled.th`
+export const HeaderRow = styled.div`
+  width: 100%;
+
+  display: flex;
+`
+
+export const ActionsCell = styled.div`
   padding: 0 2rem 0 0;
 `

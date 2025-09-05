@@ -8,7 +8,7 @@ import { Typography } from '@components/toolkit/Typography'
 
 // Types
 import type { BaseText } from '../../types'
-import { CellTypes } from '@components/tables/TableView/types'
+import { CellTypes } from '@components/tables/TableView/modals/CellModal/types'
 
 // Styles
 import { Container } from './styles'

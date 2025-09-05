@@ -6,6 +6,7 @@ export type Actions = 'new-column'
 export enum ColumnType {
   DATE = 'date',
   PAGE = 'page',
+  EMAIL = 'email',
   NUMBER = 'number',
   SELECT = 'select',
   RICH_TEXT = 'rich_text',
@@ -40,6 +41,7 @@ export interface SelectOption {
 }
 
 export interface Select {
+  multiple?: boolean
   options: SelectOption[]
 }
 

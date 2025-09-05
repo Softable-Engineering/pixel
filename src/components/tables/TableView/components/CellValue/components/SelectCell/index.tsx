@@ -7,13 +7,13 @@ import { Label } from '../../../Label'
 import { CellModal } from '../../../../modals/CellModal'
 
 // Types
-import type { BaseMultiSelect, BaseSelect } from '../../types'
-import { CellTypes, ColumnType } from '@components/tables/TableView/types'
+import type { BaseSelect } from '../../types'
+import { CellTypes } from '@components/tables/TableView/modals/CellModal/types'
 
 // Styles
 import { Container } from './styles'
 
-type Variant = BaseSelect | BaseMultiSelect
+type Variant = BaseSelect
 
 type Props = Variant
 
@@ -21,17 +21,10 @@ export const SelectCell: React.FC<Props> = props => {
   // Constants
   const { selected, select, onChange } = props
   const labels = select.options.filter(option => selected.includes(option.id))
-  const type = isMultipleSelect(props)
-    ? CellTypes.MULTI_SELECT
-    : CellTypes.SELECT
 
   // Functions
-  function isMultipleSelect(variant: Variant): variant is BaseMultiSelect {
-    return variant.type === ColumnType.MULTI_SELECT
-  }
-
   function renderLabels() {
-    if (!isMultipleSelect(props)) {
+    if (!props.select.multiple) {
       const item = labels[0]
       if (!item) return null
       return <Label color={item.color} value={item.name} />
@@ -50,8 +43,9 @@ export const SelectCell: React.FC<Props> = props => {
 
   return (
     <CellModal
-      type={type}
+      type={CellTypes.SELECT}
       selected={selected}
+      multiple={select.multiple}
       options={select.options}
       onChange={onChange}
     >

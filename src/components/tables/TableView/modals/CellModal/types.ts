@@ -2,14 +2,16 @@
 import type { PropsWithChildren } from 'react'
 
 // Types
-import type {
-  CellTypes,
-  SelectOption
-} from '@components/tables/TableView/types'
+import type { SelectOption } from '@components/tables/TableView/types'
 import type { UseFollowElementPositionOptions } from '@hooks/useFollowElementPosition/types'
 
 export interface BaseProps extends PropsWithChildren {
   minHeight?: string
+}
+
+export enum CellTypes {
+  TEXT = 'text',
+  SELECT = 'select'
 }
 
 export type TextProps = {
@@ -21,17 +23,11 @@ export type TextProps = {
 export type SelectProps = {
   type: CellTypes.SELECT
   selected: string[]
+  multiple?: boolean
   options: SelectOption[]
   onChange: (select: string[]) => void
 }
 
-export type MultiSelectProps = {
-  type: CellTypes.MULTI_SELECT
-  selected: string[]
-  options: SelectOption[]
-  onChange: (select: string[]) => void
-}
-
-export type Variant = TextProps | SelectProps | MultiSelectProps
+export type Variant = TextProps | SelectProps
 
 export type Props = Variant & BaseProps & UseFollowElementPositionOptions

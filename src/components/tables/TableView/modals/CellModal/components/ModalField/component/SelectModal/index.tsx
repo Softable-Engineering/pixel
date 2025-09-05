@@ -6,16 +6,13 @@ import { ListLabels } from './components/ListLabels'
 import { Label } from '@components/tables/TableView/components/Label'
 
 // Types
-import type { MultiSelectProps, SelectProps } from '../../../../types'
-import {
-  CellTypes,
-  type SelectOption
-} from '@components/tables/TableView/types'
+import type { SelectProps } from '../../../../types'
+import type { SelectOption } from '@components/tables/TableView/types'
 
 // Styles
 import { Container, ContainerDisplay, Input } from './styles'
 
-type Variant = SelectProps | MultiSelectProps
+type Variant = SelectProps
 
 type Props = Variant & {
   onClose: () => void
@@ -25,13 +22,8 @@ export const SelectModal: React.FC<Props> = props => {
   // Constants
   const { options, selected, onChange, onClose } = props
   const selecteds = options.filter(option => selected.includes(option.id))
-  const multiple = isMultipleSelect(props)
 
   // Functions
-  function isMultipleSelect(variant: Variant): variant is MultiSelectProps {
-    return variant.type === CellTypes.MULTI_SELECT
-  }
-
   function renderLabels() {
     return selecteds.map((option, index) => {
       return (
@@ -46,7 +38,7 @@ export const SelectModal: React.FC<Props> = props => {
   }
 
   function handleClickOption(opt: SelectOption) {
-    if (multiple) {
+    if (props.multiple) {
       return onChange([...selected, opt.id])
     }
 

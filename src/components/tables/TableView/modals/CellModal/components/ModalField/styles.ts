@@ -5,7 +5,7 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  width: 15rem;
+  width: 18rem;
   min-height: ${({ $minHeight }) => $minHeight ?? '1rem'};
 
   display: flex;

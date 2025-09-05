@@ -1,28 +1,22 @@
-// Types
-export enum CellTypes {
-  DATE = 'date',
-  TEXT = 'text',
-  SELECT = 'select',
-  MULTI_SELECT = 'multi_select'
-}
+import type { ColumnType } from './columns'
 
 export interface TextUpdateParams {
-  type: CellTypes.TEXT
+  type: ColumnType.RICH_TEXT
   text: string
 }
 
 export interface DateUpdateParams {
-  type: CellTypes.DATE
+  type: ColumnType.DATE
   date: string
 }
 
 export interface SelectUpdateParams {
-  type: CellTypes.SELECT
+  type: ColumnType.SELECT
   select: string[]
 }
 
 export interface MultipleSelectUpdateParams {
-  type: CellTypes.MULTI_SELECT
+  type: ColumnType.MULTI_SELECT
   select: string[]
 }
 

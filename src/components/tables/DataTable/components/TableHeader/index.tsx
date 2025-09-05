@@ -10,7 +10,7 @@ import type { Table } from '@tanstack/react-table'
 import { DraggableColumnHeader } from './components/DraggableColumnHeader'
 
 // Styles
-import { ActionsCell, Container } from './styles'
+import { ActionsCell, Container, HeaderRow } from './styles'
 
 interface Props<T> {
   table: Table<T>
@@ -38,7 +38,7 @@ export const TableHeader = <T,>({
   return (
     <Container $headColor={headerColor} $textColorHeader={textColorHeader}>
       {table.getHeaderGroups().map(headerGroup => (
-        <tr key={headerGroup.id}>
+        <HeaderRow key={headerGroup.id}>
           <SortableContext
             items={columnOrder}
             strategy={horizontalListSortingStrategy}
@@ -62,7 +62,7 @@ export const TableHeader = <T,>({
           </SortableContext>
 
           {actionsColumn ? <ActionsCell>{actionsColumn}</ActionsCell> : null}
-        </tr>
+        </HeaderRow>
       ))}
     </Container>
   )

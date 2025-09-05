@@ -13,7 +13,7 @@ import { isDate, isMultiSelect, isRichText, isSelect } from './normalizeType'
 
 // Types
 import type { UpdateCellParams } from '../types/cell'
-import { CellTypes, type ColumnDef, ColumnType } from '../types'
+import { type ColumnDef, ColumnType } from '../types'
 import type { CustomColumnDef, CustomData } from '@components/tables/DataTable'
 
 function getIcon(type: ColumnType) {
@@ -63,7 +63,7 @@ function renderCell<T>(
         type={ColumnType.SELECT}
         selected={normalizeArray(value)}
         onChange={v =>
-          onChange?.({ ...commonsParams, type: CellTypes.SELECT, select: v })
+          onChange?.({ ...commonsParams, type: ColumnType.SELECT, select: v })
         }
       />
     )
@@ -76,7 +76,7 @@ function renderCell<T>(
         rich_text={column.rich_text}
         text={normalizeString(value)}
         onChange={v =>
-          onChange?.({ ...commonsParams, type: CellTypes.TEXT, text: v })
+          onChange?.({ ...commonsParams, type: ColumnType.RICH_TEXT, text: v })
         }
       />
     )
@@ -89,7 +89,7 @@ function renderCell<T>(
         type={ColumnType.DATE}
         value={normalizeString(value)}
         onChange={v =>
-          onChange?.({ ...commonsParams, type: CellTypes.DATE, date: v })
+          onChange?.({ ...commonsParams, type: ColumnType.DATE, date: v })
         }
       />
     )
@@ -98,13 +98,13 @@ function renderCell<T>(
   if (isMultiSelect(column)) {
     return (
       <CellValue
-        select={{ ...column.select }}
-        type={ColumnType.MULTI_SELECT}
+        type={ColumnType.SELECT}
         selected={normalizeArray(value)}
+        select={{ ...column.select, multiple: true }}
         onChange={v =>
           onChange?.({
             ...commonsParams,
-            type: CellTypes.MULTI_SELECT,
+            type: ColumnType.MULTI_SELECT,
             select: v
           })
         }

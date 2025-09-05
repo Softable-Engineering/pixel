@@ -5,7 +5,7 @@ export const Container = styled.button`
   height: 100%;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
 
   padding: 0.75rem;
@@ -14,5 +14,10 @@ export const Container = styled.button`
 
   &:focus {
     outline: 1px solid var(--primary);
+  }
+
+  & > p {
+    word-wrap: break-word;
+    width: 100%;
   }
 `
