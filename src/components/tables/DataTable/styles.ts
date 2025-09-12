@@ -4,6 +4,7 @@ interface ContainerProps {
   $fitWidth?: boolean
   $hasBorder?: boolean
   $borderColor?: string
+  $enableRowReordering?: boolean
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -19,8 +20,13 @@ export const Container = styled.div<ContainerProps>`
   --border-color: ${({ $borderColor, theme }) =>
     $borderColor ?? theme.colors.border.primary};
 
+padding-left: ${({ $enableRowReordering }) => ($enableRowReordering ? '3rem' : 0)};
+`
+
+export const Content = styled.div<ContainerProps>`
   border: ${({ $hasBorder }) => ($hasBorder ? '1px solid var(--border-color)' : null)};
-  border-bottom: 1px solid var(--border-color)
+  border-bottom: 0;
+  border-radius: 0.5rem;
 `
 
 export const LoaderContainer = styled.div`

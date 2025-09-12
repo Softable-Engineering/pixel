@@ -13,16 +13,15 @@ import { Container } from './styles'
 export * from './types'
 
 export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
-  // Constants
-  const { columns, locale, onChangeCell, ...dataTableProps } = props
-  const normalizedColumns = getColumns(columns, locale, onChangeCell)
+  const normalizedColumns = getColumns(props)
 
   return (
-    <Container>
+    <Container id="table-column-actions-panel">
       <DataTable<T>
         cellPadding="1px"
-        {...dataTableProps}
+        {...props}
         columns={normalizedColumns}
+        tableStyles={{ border: 0 }}
       />
     </Container>
   )

@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 
 interface Props {
   $hasVerticalDivider?: boolean
+  $hasHorizontalDivider?: boolean
 }
 
 interface ContentProps {
@@ -17,6 +18,10 @@ export const Container = styled.div<Props>`
 
   box-shadow: ${({ $hasVerticalDivider }) =>
     $hasVerticalDivider ? '1px 0 var(--border-color)' : 'none'};
+
+  border-bottom: 1px solid
+    ${({ $hasHorizontalDivider }) =>
+      $hasHorizontalDivider ? 'var(--border-color)' : 'none'};
 `
 
 export const ColumnHeader = styled.div`

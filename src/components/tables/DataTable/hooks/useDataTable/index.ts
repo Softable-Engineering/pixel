@@ -23,18 +23,25 @@ import type { UseDataTableParams } from './types'
 export function useDataTable<T>({
   data,
   columns,
+  enableRowReordering,
   enableColumnOrdering,
-  onReorder
+  onReorder,
+  onReorderRows
 }: UseDataTableParams<T>) {
   // Constants
   const initialColumnOrder = useMemo(
     () => columns.map(c => c.id ?? c.header) as string[],
     [columns]
   )
+  const initialRowsOrder = useMemo(
+    () => data.map(d => d.data.id) as string[],
+    [data]
+  )
 
   // States
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([])
+  const [rowsOrder, setRowsOrder] = useState<string[]>(initialRowsOrder)
   const [columnOrder, setColumnOrder] = useState<string[]>(initialColumnOrder)
 
   const state = { sorting, columnOrder, rowSelection }
@@ -46,11 +53,26 @@ export function useDataTable<T>({
     }
   }, [columnOrder.length, initialColumnOrder])
 
+  useEffect(() => {
+    if (rowsOrder.length !== initialRowsOrder.length) {
+      setRowsOrder(initialRowsOrder)
+    }
+  }, [rowsOrder.length, initialRowsOrder])
+
+  // Constants
+  const orderedData = useMemo(() => {
+    const byId = new Map(data.map(item => [item.data.id, item]))
+
+    return rowsOrder
+      .map(id => byId.get(id))
+      .filter((item): item is CustomData<T> => item !== undefined)
+  }, [data, rowsOrder])
+
   // Hooks
   const table = useReactTable<CustomData<T>>({
-    data,
     columns,
     state: state,
+    data: orderedData,
     enableSorting: true,
     enableColumnResizing: true,
     columnResizeMode: 'onChange',
@@ -69,7 +91,7 @@ export function useDataTable<T>({
   )
 
   // Functions
-  function handleDragEnd(event: DragEndEvent) {
+  function handleColumnDragEnd(event: DragEndEvent) {
     if (!enableColumnOrdering) return
 
     const { active, over } = event
@@ -87,10 +109,28 @@ export function useDataTable<T>({
     }
   }
 
+  function handleRowDragEnd(event: DragEndEvent) {
+    if (!enableRowReordering) return
+
+    const { active, over } = event
+
+    if (active && over && active.id !== over.id) {
+      const oldIndex = rowsOrder.indexOf(active.id as string)
+      const newIndex = rowsOrder.indexOf(over.id as string)
+      const newRowsOrder = arrayMove(rowsOrder, oldIndex, newIndex)
+
+      setRowsOrder(newRowsOrder)
+
+      onReorderRows?.(newRowsOrder)
+    }
+  }
+
   return {
     table,
-    sensors: enableColumnOrdering ? sensors : [],
+    rowsOrder,
     columnOrder,
-    handleDragEnd
+    sensors: enableColumnOrdering || enableRowReordering ? sensors : [],
+    handleRowDragEnd,
+    handleDragEnd: handleColumnDragEnd
   }
 }

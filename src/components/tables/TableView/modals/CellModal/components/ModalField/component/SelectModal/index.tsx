@@ -11,6 +11,7 @@ import type { SelectOption } from '@components/tables/TableView/types'
 
 // Styles
 import { Container, ContainerDisplay, Input } from './styles'
+import { useState } from 'react'
 
 type Variant = SelectProps
 
@@ -23,14 +24,21 @@ export const SelectModal: React.FC<Props> = props => {
   const { options, selected, onChange, onClose } = props
   const selecteds = options.filter(option => selected.includes(option.id))
 
+  // States
+  const [search, setSearch] = useState('')
+
+  const optionsFiltered = options.filter(option =>
+    option.name.toLowerCase().includes(search.toLowerCase())
+  )
+
   // Functions
   function renderLabels() {
     return selecteds.map((option, index) => {
       return (
         <Label
           key={`options_${option.id}_${index}`}
-          color={option.color}
           value={option.name}
+          color={option.color}
           onRemove={() => handleClickRemoveOption(option)}
         />
       )
@@ -38,9 +46,7 @@ export const SelectModal: React.FC<Props> = props => {
   }
 
   function handleClickOption(opt: SelectOption) {
-    if (props.multiple) {
-      return onChange([...selected, opt.id])
-    }
+    if (props.multiple) return onChange([...selected, opt.id])
 
     onChange([opt.id])
     onClose()
@@ -55,10 +61,10 @@ export const SelectModal: React.FC<Props> = props => {
       <ContainerDisplay>
         {renderLabels()}
 
-        <Input autoFocus />
+        <Input autoFocus onChange={e => setSearch(e.target.value)} />
       </ContainerDisplay>
 
-      <ListLabels options={options} onClick={handleClickOption} />
+      <ListLabels options={optionsFiltered} onClick={handleClickOption} />
     </Container>
   )
 }

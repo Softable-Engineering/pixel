@@ -3,27 +3,32 @@ import type { ReactNode } from 'react'
 import type { Row, Table } from '@tanstack/react-table'
 
 // Components
-import { TableCell } from './components/TableCell'
+import { DraggableRow } from './components/DraggableRow'
 
 // Types
 import type { CustomData } from '../../types'
 
 // Styles
-import { Cell, Container, TableRow } from './styles'
+import { Container } from './styles'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 
 interface Props<T> {
   table: Table<T>
+  rowsOrder: string[]
   cellPadding?: string
   actionsColumn?: ReactNode
   hasVerticalDivider: boolean
+  enableRowReordering?: boolean
   hasHorizontalDivider: boolean
 }
 
 export const TableBody = <T,>({
   table,
+  rowsOrder,
   cellPadding,
   actionsColumn,
   hasVerticalDivider,
+  enableRowReordering,
   hasHorizontalDivider
 }: Props<T>) => {
   const rows = table.getRowModel().rows as unknown as Row<CustomData<T>>[]
@@ -36,29 +41,27 @@ export const TableBody = <T,>({
       const handleClick = () => row.original.onClick?.(row.original.data)
 
       return (
-        <TableRow key={`${row.id}`} cursor={cursor} onClick={handleClick}>
-          {cells.map((cell, index) => {
-            const isLastCell = index === cells.length - 1
-
-            return (
-              <TableCell<T>
-                key={cell.id}
-                row={row}
-                cell={cell}
-                cellPadding={cellPadding}
-                hasHorizontalDivider={hasHorizontalDivider}
-                hasVerticalDivider={
-                  (!isLastCell || !!actionsColumn) && hasVerticalDivider
-                }
-              />
-            )
-          })}
-
-          {actionsColumn ? <Cell /> : null}
-        </TableRow>
+        <DraggableRow
+          row={row}
+          key={row.id}
+          cells={cells}
+          cursor={cursor}
+          cellPadding={cellPadding}
+          actionsColumn={actionsColumn}
+          hasVerticalDivider={hasVerticalDivider}
+          enableRowReordering={enableRowReordering}
+          hasHorizontalDivider={hasHorizontalDivider}
+          handleClick={handleClick}
+        />
       )
     })
   }
 
-  return <Container>{renderRows()}</Container>
+  return (
+    <Container>
+      <SortableContext items={rowsOrder} strategy={verticalListSortingStrategy}>
+        {renderRows()}
+      </SortableContext>
+    </Container>
+  )
 }

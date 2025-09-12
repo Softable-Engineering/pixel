@@ -15,7 +15,7 @@ export const Container = styled.div<Props>`
   box-shadow: ${({ $hasVerticalDivider }) =>
     $hasVerticalDivider ? '1px 0 var(--border-color)' : 'none'};
 
-  border-top: 1px solid
+  border-bottom: 1px solid
     ${({ $hasHorizontalDivider }) =>
       $hasHorizontalDivider ? 'var(--border-color)' : 'none'};
 `

@@ -26,11 +26,17 @@ export interface MultipleSelectUpdateParams {
   select: string[]
 }
 
+export interface CheckboxUpdateParams {
+  type: ColumnType.CHECKBOX
+  checked: boolean
+}
+
 export type VariantUpdateParams =
   | TextUpdateParams
   | DateUpdateParams
   | SelectUpdateParams
   | MultipleSelectUpdateParams
+  | CheckboxUpdateParams
 
 export interface CommonsUpdateParams {
   rowId: string

@@ -1,0 +1,27 @@
+// constants.ts
+export const KEYBOARD_SHORTCUT_MAPPER: Record<string, string> = {
+  cmd: '⌘',
+  command: '⌘',
+  ctrl: '⌃',
+  control: '⌃',
+  alt: '⌥',
+  option: '⌥',
+  shift: '⇧',
+  enter: '↩',
+  return: '↩',
+  esc: '⎋',
+  escape: '⎋',
+  tab: '⇥',
+  backspace: '⌫',
+  delete: '⌦',
+  up: '↑',
+  down: '↓',
+  left: '←',
+  right: '→',
+  space: '␣',
+  capslock: '⇪',
+  pageup: '⇞',
+  pagedown: '⇟',
+  home: '↖',
+  end: '↘'
+}

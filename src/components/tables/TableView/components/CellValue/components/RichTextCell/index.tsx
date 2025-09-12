@@ -33,7 +33,7 @@ export const RichTextCell: React.FC<Props> = ({
   return (
     <CellModal
       text={text}
-      minHeight="100%"
+      minHeight={20 * 16}
       type={CellTypes.TEXT}
       onChange={handleChangeValue}
     >

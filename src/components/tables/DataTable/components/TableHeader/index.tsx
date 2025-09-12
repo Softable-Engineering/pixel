@@ -21,6 +21,8 @@ interface Props<T> {
   actionsColumn?: ReactNode
   hasVerticalDivider: boolean
   enableResizeColumns: boolean
+  enableRowReordering: boolean
+  hasHorizontalDivider: boolean
   enableColumnOrdering: boolean
 }
 
@@ -33,7 +35,8 @@ export const TableHeader = <T,>({
   textColorHeader,
   hasVerticalDivider,
   enableResizeColumns,
-  enableColumnOrdering
+  enableColumnOrdering,
+  hasHorizontalDivider
 }: Props<T>) => {
   return (
     <Container $headColor={headerColor} $textColorHeader={textColorHeader}>
@@ -51,6 +54,7 @@ export const TableHeader = <T,>({
                   key={header.id}
                   header={header}
                   canResetResize={canResetResize}
+                  hasHorizontalDivider={hasHorizontalDivider}
                   enableResizeColumns={enableResizeColumns}
                   enableColumnOrdering={enableColumnOrdering}
                   hasVerticalDivider={

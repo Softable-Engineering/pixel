@@ -5,6 +5,11 @@ interface ContainerProps {
   $textColorHeader?: string
 }
 
+interface ReorderCellProps {
+  $hasVerticalDivider?: boolean
+  $hasHorizontalDivider?: boolean
+}
+
 export const Container = styled.div<ContainerProps>`
   overflow: hidden;
   background-color: ${({ $headColor }) => $headColor ?? 'transparent'};
@@ -28,4 +33,10 @@ export const HeaderRow = styled.div`
 
 export const ActionsCell = styled.div`
   padding: 0 2rem 0 0;
+`
+
+export const ReorderCell = styled.div<ReorderCellProps>`
+  width: 2.5rem;
+
+  border-right: ${({ $hasVerticalDivider }) => ($hasVerticalDivider ? '1px solid var(--border-color)' : 'none')};
 `

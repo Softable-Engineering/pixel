@@ -34,6 +34,15 @@ export const CellModal: React.FC<Props> = props => {
     placement: 'top-left-start',
     offsetX: -5
   })
+
+  // UseEffects
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
   useClickOutsideWatcher(containerRef, toggleVisible, !visible)
 
   // Functions
@@ -46,18 +55,10 @@ export const CellModal: React.FC<Props> = props => {
   }
 
   function handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Tab' || event.key === 'Escape') {
+    if (event.key === 'Escape') {
       handleClose()
     }
   }
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [])
 
   return (
     <Container ref={containerRef}>

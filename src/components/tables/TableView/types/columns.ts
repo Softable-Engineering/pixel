@@ -10,14 +10,17 @@ export enum ColumnType {
   PHONE = 'phone',
   NUMBER = 'number',
   SELECT = 'select',
+  CHECKBOX = 'checkbox',
   RICH_TEXT = 'rich_text',
   MULTI_SELECT = 'multi_select'
 }
 
+export type ResponseAccessor = string | string[] | boolean
+
 export type Column<T> = {
   id: string
   header: string
-  accessorFn: (row: T) => string | string[]
+  accessorFn: (row: T) => ResponseAccessor
 }
 
 export type ColumnDef<T> = BaseColumn & Column<T>
@@ -76,3 +79,50 @@ export interface NumberColumn {
   type: ColumnType.NUMBER
   number: NumberFormat
 }
+
+export interface CheckBoxColumn {
+  type: ColumnType.CHECKBOX
+}
+
+export enum ColumnActions {
+  UpdateColumnName = 'update-column-name',
+  UpdateProperty = 'update-property',
+  UpdateTypeColumn = 'update-type-column',
+  AddFilter = 'add-filter',
+  Calculate = 'calculate',
+  HideColumn = 'hide-column',
+  DuplicateColumn = 'duplicate-column',
+  DeleteColumn = 'delete-column',
+  Freeze = 'freeze-column',
+  ExpandedColumn = 'expanded-column'
+}
+
+export type SimpleActions =
+  | ColumnActions.HideColumn
+  | ColumnActions.Freeze
+  | ColumnActions.AddFilter
+  | ColumnActions.ExpandedColumn
+  | ColumnActions.DeleteColumn
+  | ColumnActions.DuplicateColumn
+
+export interface ManagementHeaderName {
+  type: ColumnActions.UpdateColumnName
+  columnId: string
+  name: string
+}
+
+export interface ManagementHeaderSimpleAction {
+  columnId: string
+  type: SimpleActions
+}
+
+export interface ManagementHeaderType {
+  columnId: string
+  type: ColumnActions.UpdateTypeColumn
+  typeColumn: ColumnType
+}
+
+export type ManagementHeaderParams =
+  | ManagementHeaderName
+  | ManagementHeaderType
+  | ManagementHeaderSimpleAction
