@@ -18,7 +18,7 @@ export const CheckboxCell: React.FC<Props> = ({ checked, onChange }) => {
 
   return (
     <Container onClick={toggleCheckbox} tabIndex={0} role="button">
-      <Checkbox type="checkbox" checked={checked} />
+      <Checkbox type="checkbox" checked={checked} onChange={toggleCheckbox} />
     </Container>
   )
 }

@@ -24,6 +24,7 @@ interface Props<T> {
   height?: number
   loading?: boolean
   fitWidth?: boolean
+  footer?: ReactNode
   cellPadding?: string
   data: CustomData<T>[]
   borderColor?: string
@@ -45,6 +46,7 @@ interface Props<T> {
 
 export const DataTable = <T,>({
   data,
+  footer,
   loading,
   columns,
   headerColor,
@@ -68,8 +70,10 @@ export const DataTable = <T,>({
     sensors,
     rowsOrder,
     columnOrder,
+    selectedRows,
     handleDragEnd,
-    handleRowDragEnd
+    handleRowDragEnd,
+    handleToggleSelection
   } = useDataTable<T>({
     data,
     columns,
@@ -124,12 +128,16 @@ export const DataTable = <T,>({
             table={table}
             rowsOrder={rowsOrder}
             cellPadding={cellPadding}
+            selectedRows={selectedRows}
             actionsColumn={actionsColumn}
             hasVerticalDivider={hasVerticalDivider}
             enableRowReordering={enableRowReordering}
             hasHorizontalDivider={hasHorizontalDivider}
+            toggleSelection={handleToggleSelection}
           />
         </DndContext>
+
+        {footer}
       </Content>
     </Container>
   )

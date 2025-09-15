@@ -43,6 +43,7 @@ export const SelectCell: React.FC<Props> = props => {
 
   return (
     <CellModal
+      minHeight={5 * 16}
       type={CellTypes.SELECT}
       selected={selected}
       multiple={select.multiple}

@@ -1,4 +1,5 @@
 // Components
+import { Footer } from './components/Footer'
 import { type BaseCustomData, DataTable } from '../DataTable'
 
 // Utils
@@ -20,6 +21,7 @@ export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
       <DataTable<T>
         cellPadding="1px"
         {...props}
+        footer={<Footer name="" />}
         columns={normalizedColumns}
         tableStyles={{ border: 0 }}
       />

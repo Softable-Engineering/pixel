@@ -41,6 +41,7 @@ export function useDataTable<T>({
   // States
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([])
+  const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [rowsOrder, setRowsOrder] = useState<string[]>(initialRowsOrder)
   const [columnOrder, setColumnOrder] = useState<string[]>(initialColumnOrder)
 
@@ -91,6 +92,34 @@ export function useDataTable<T>({
   )
 
   // Functions
+  function moveGroup(
+    list: string[],
+    groupIds: string[],
+    overId: string,
+    place: 'before' | 'after'
+  ) {
+    const current = [...list]
+
+    const group = groupIds
+      .filter(id => current.includes(id))
+      .sort((a, b) => current.indexOf(a) - current.indexOf(b))
+    if (group.length === 0) return current
+
+    // Se o alvo está dentro do grupo, o caller deve resolver outro alvo (vizinho)
+    if (group.includes(overId)) return current
+
+    const withoutGroup = current.filter(id => !group.includes(id))
+    let insertIndex = withoutGroup.indexOf(overId)
+    if (insertIndex < 0) return current
+
+    if (place === 'after')
+      insertIndex = Math.min(insertIndex + 1, withoutGroup.length)
+
+    const before = withoutGroup.slice(0, insertIndex)
+    const after = withoutGroup.slice(insertIndex)
+    return [...before, ...group, ...after]
+  }
+
   function handleColumnDragEnd(event: DragEndEvent) {
     if (!enableColumnOrdering) return
 
@@ -111,17 +140,59 @@ export function useDataTable<T>({
 
   function handleRowDragEnd(event: DragEndEvent) {
     if (!enableRowReordering) return
-
     const { active, over } = event
+    if (!(active && over) || active.id === over.id) return
 
-    if (active && over && active.id !== over.id) {
-      const oldIndex = rowsOrder.indexOf(active.id as string)
-      const newIndex = rowsOrder.indexOf(over.id as string)
-      const newRowsOrder = arrayMove(rowsOrder, oldIndex, newIndex)
+    const activeId = String(active.id)
+    const overId = String(over.id)
 
-      setRowsOrder(newRowsOrder)
+    const current = rowsOrder
 
-      onReorderRows?.(newRowsOrder)
+    const hasMulti = selectedRows.includes(activeId) && selectedRows.length > 1
+    const group = (hasMulti ? selectedRows : [activeId])
+      .filter(id => current.includes(id))
+      .sort((a, b) => current.indexOf(a) - current.indexOf(b))
+
+    const firstIdx = current.indexOf(group[0])
+    const lastIdx = current.indexOf(group[group.length - 1])
+    const idxActive = current.indexOf(activeId)
+    const idxOver = current.indexOf(overId)
+    const movingDown = idxOver > idxActive
+
+    let newRowsOrder: string[]
+
+    if (!group.includes(overId)) {
+      const place: 'before' | 'after' = movingDown ? 'after' : 'before'
+      newRowsOrder = moveGroup(current, group, overId, place)
+    } else {
+      if (movingDown) {
+        const afterId = current[lastIdx + 1]
+        if (afterId) {
+          newRowsOrder = moveGroup(current, group, afterId, 'after')
+        } else {
+          const withoutGroup = current.filter(id => !group.includes(id))
+          newRowsOrder = [...withoutGroup, ...group]
+        }
+      } else {
+        const beforeId = current[firstIdx - 1]
+        if (beforeId) {
+          newRowsOrder = moveGroup(current, group, beforeId, 'before')
+        } else {
+          const withoutGroup = current.filter(id => !group.includes(id))
+          newRowsOrder = [...group, ...withoutGroup]
+        }
+      }
+    }
+
+    setRowsOrder(newRowsOrder)
+    onReorderRows?.(newRowsOrder)
+  }
+
+  function handleToggleSelection(rowId: string) {
+    if (selectedRows.includes(rowId)) {
+      setSelectedRows(selectedRows.filter(id => id !== rowId))
+    } else {
+      setSelectedRows([...selectedRows, rowId])
     }
   }
 
@@ -129,8 +200,10 @@ export function useDataTable<T>({
     table,
     rowsOrder,
     columnOrder,
+    selectedRows,
     sensors: enableColumnOrdering || enableRowReordering ? sensors : [],
     handleRowDragEnd,
+    handleToggleSelection,
     handleDragEnd: handleColumnDragEnd
   }
 }

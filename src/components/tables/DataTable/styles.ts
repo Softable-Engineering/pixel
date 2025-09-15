@@ -16,11 +16,13 @@ export const Container = styled.div<ContainerProps>`
 
   border-radius: 0.5rem;
 
+
+  --text-color-secondary: ${({ theme }) => theme.colors.text.secondary};
   --primary: ${({ theme }) => theme.colors.primary};
   --border-color: ${({ $borderColor, theme }) =>
     $borderColor ?? theme.colors.border.primary};
 
-padding-left: ${({ $enableRowReordering }) => ($enableRowReordering ? '3rem' : 0)};
+  padding-left: ${({ $enableRowReordering }) => ($enableRowReordering ? '4rem' : 0)};
 `
 
 export const Content = styled.div<ContainerProps>`

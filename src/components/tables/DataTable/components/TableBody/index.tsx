@@ -1,6 +1,7 @@
 // External Libraries
 import type { ReactNode } from 'react'
 import type { Row, Table } from '@tanstack/react-table'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 
 // Components
 import { DraggableRow } from './components/DraggableRow'
@@ -10,33 +11,38 @@ import type { CustomData } from '../../types'
 
 // Styles
 import { Container } from './styles'
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 
 interface Props<T> {
   table: Table<T>
   rowsOrder: string[]
   cellPadding?: string
+  selectedRows: string[]
   actionsColumn?: ReactNode
   hasVerticalDivider: boolean
   enableRowReordering?: boolean
   hasHorizontalDivider: boolean
+  toggleSelection: (id: string) => void
 }
 
 export const TableBody = <T,>({
   table,
   rowsOrder,
   cellPadding,
+  selectedRows,
   actionsColumn,
   hasVerticalDivider,
   enableRowReordering,
-  hasHorizontalDivider
+  hasHorizontalDivider,
+  toggleSelection
 }: Props<T>) => {
+  // Constants
   const rows = table.getRowModel().rows as unknown as Row<CustomData<T>>[]
 
   // Functions
   function renderRows() {
     return rows.map(row => {
       const cells = row.getVisibleCells()
+      const isSelected = selectedRows.includes(row.original.data.id)
       const cursor = row.original.onClick ? 'pointer' : 'default'
       const handleClick = () => row.original.onClick?.(row.original.data)
 
@@ -46,12 +52,14 @@ export const TableBody = <T,>({
           key={row.id}
           cells={cells}
           cursor={cursor}
+          isSelected={isSelected}
           cellPadding={cellPadding}
           actionsColumn={actionsColumn}
           hasVerticalDivider={hasVerticalDivider}
           enableRowReordering={enableRowReordering}
           hasHorizontalDivider={hasHorizontalDivider}
-          handleClick={handleClick}
+          onClick={handleClick}
+          onToggleSelectedRow={() => toggleSelection(row.original.data.id)}
         />
       )
     })

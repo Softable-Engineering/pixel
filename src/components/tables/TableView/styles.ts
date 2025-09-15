@@ -1,9 +1,12 @@
 import { styled } from 'styled-components'
 
 export const Container = styled.div`
+  width: fit-content;
+
   --primary: ${({ theme }) => theme.colors.primary};
   --text-color: ${({ theme }) => theme.colors.text.primary};
   --text-color-secondary: ${({ theme }) => theme.colors.text.secondary};
+  --primary-border-color: ${({ theme }) => theme.colors.border.primary};
   --border-color: ${({ theme }) => theme.colors.border.tertiary};
   --background-color: ${({ theme }) => theme.colors.background.tertiary};
   --secondary-background-color: ${({ theme }) => theme.colors.background.secondary};
