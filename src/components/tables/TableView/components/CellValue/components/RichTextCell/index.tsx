@@ -8,7 +8,7 @@ import { Typography } from '@components/toolkit/Typography'
 
 // Types
 import type { BaseText } from '../../types'
-import { CellTypes } from '@components/tables/TableView/types'
+import { CellTypes } from '@components/tables/TableView/modals/CellModal/types'
 
 // Styles
 import { Container } from './styles'
@@ -22,12 +22,20 @@ export const RichTextCell: React.FC<Props> = ({
   rich_text,
   onChange
 }) => {
+  // Functions
+  function handleChangeValue(value: string) {
+    if (!rich_text.mask) return onChange?.(value)
+
+    const maskedValue = rich_text.mask(value)
+    onChange?.(maskedValue)
+  }
+
   return (
     <CellModal
       text={text}
-      minHeight="100%"
+      minHeight={20 * 16}
       type={CellTypes.TEXT}
-      onChange={onChange}
+      onChange={handleChangeValue}
     >
       <Container>
         <Typography variant="b2" $align="left">

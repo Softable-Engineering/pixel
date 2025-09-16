@@ -5,26 +5,29 @@ import type React from 'react'
 import { DateCell } from './components/DateCell'
 import { SelectCell } from './components/SelectCell'
 import { RichTextCell } from './components/RichTextCell'
+import { CheckboxCell } from './components/CheckboxCell'
 import { Typography } from '@components/toolkit/Typography'
-
-// Utils
-import { isBaseDate, isBaseSelect, isBaseText } from './utils'
 
 // Types
 import type { Props } from './types'
+import { ColumnType } from '../../types'
 
 // Styles
 import { Container } from './styles'
 
 export const CellValue: React.FC<Props> = props => {
-  if (isBaseSelect(props)) return <SelectCell {...props} />
+  if (props.type === ColumnType.SELECT) return <SelectCell {...props} />
 
-  if (isBaseText(props)) {
+  if (props.type === ColumnType.RICH_TEXT) {
     return <RichTextCell {...props} />
   }
 
-  if (isBaseDate(props)) {
+  if (props.type === ColumnType.DATE) {
     return <DateCell {...props} />
+  }
+
+  if (props.type === ColumnType.CHECKBOX) {
+    return <CheckboxCell {...props} />
   }
 
   return (

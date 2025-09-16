@@ -1,6 +1,8 @@
 import { styled } from 'styled-components'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  flex: 1;
+`
 
 export const ContainerCell = styled.div`
   width: 100%;
@@ -8,7 +10,7 @@ export const ContainerCell = styled.div`
 `
 
 export const ContainerModal = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 
@@ -17,6 +19,4 @@ export const ContainerModal = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-
 `

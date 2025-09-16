@@ -12,6 +12,7 @@ export type Align =
   | 'right-end'
   | 'right-start'
   | 'center'
+  | 'top-left-start'
 
 export interface UseFollowElementPositionOptions {
   offsetX?: number

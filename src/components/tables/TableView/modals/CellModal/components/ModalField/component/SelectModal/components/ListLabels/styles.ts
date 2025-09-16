@@ -7,7 +7,6 @@ export const Container = styled.div`
   flex-direction: column;
 
   row-gap: 0.5rem;
-
   padding: 0.5rem;
 `
 
@@ -25,6 +24,10 @@ export const Row = styled.div`
   &:hover {
     transition: 0.5s;
     cursor: pointer;
-    background-color: var(--secondary-background-color);
+    background-color: var(--secondary-hover);
+  }
+
+  &:focus {
+    outline: 2px solid ${({ theme }) => theme.colors.border.primary};
   }
 `

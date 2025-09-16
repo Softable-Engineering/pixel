@@ -5,7 +5,8 @@ export default defineConfig({
     index: 'src/index.ts',
     calendar: 'src/components/toolkit/Calendar/index.tsx',
     'data-table': 'src/components/tables/DataTable/index.tsx',
-    'table-view': 'src/components/tables/TableView/index.tsx'
+    'table-view': 'src/components/tables/TableView/index.tsx',
+    'mask-modules': 'src/services/MaskModule/index.ts'
   },
   format: ['esm'],
   dts: true,

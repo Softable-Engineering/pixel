@@ -1,5 +1,5 @@
 // External Libraries
-/** biome-ignore-all lint/a11y/useSemanticElements: <explanation> */
+/** biome-ignore-all lint/a11y/useSemanticElements: <Not needed> */
 import type React from 'react'
 
 // Components

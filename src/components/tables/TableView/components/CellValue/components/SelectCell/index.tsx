@@ -8,27 +8,49 @@ import { CellModal } from '../../../../modals/CellModal'
 
 // Types
 import type { BaseSelect } from '../../types'
-import { CellTypes } from '@components/tables/TableView/types'
+import { CellTypes } from '@components/tables/TableView/modals/CellModal/types'
 
 // Styles
 import { Container } from './styles'
 
-interface Props extends BaseSelect {}
+type Variant = BaseSelect
 
-export const SelectCell: React.FC<Props> = ({ selected, select, onChange }) => {
+type Props = Variant
+
+export const SelectCell: React.FC<Props> = props => {
   // Constants
-  const item = select.options.find(item => item.id === selected[0])
+  const { selected, select, onChange } = props
+  const labels = select.options.filter(option => selected.includes(option.id))
+
+  // Functions
+  function renderLabels() {
+    if (!props.select.multiple) {
+      const item = labels[0]
+      if (!item) return null
+      return <Label color={item.color} value={item.name} />
+    }
+
+    return labels.map((option, index) => {
+      return (
+        <Label
+          key={`options_${option.id}_${index}`}
+          color={option.color}
+          value={option.name}
+        />
+      )
+    })
+  }
 
   return (
     <CellModal
+      minHeight={5 * 16}
       type={CellTypes.SELECT}
       selected={selected}
+      multiple={select.multiple}
       options={select.options}
       onChange={onChange}
     >
-      <Container>
-        {item ? <Label color={item.color} value={item.name} /> : null}
-      </Container>
+      <Container>{renderLabels()}</Container>
     </CellModal>
   )
 }

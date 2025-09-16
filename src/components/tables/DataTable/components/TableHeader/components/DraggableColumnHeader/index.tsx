@@ -21,6 +21,7 @@ interface Props<T> {
   header: Header<T, unknown>
   hasVerticalDivider: boolean
   enableResizeColumns: boolean
+  hasHorizontalDivider: boolean
   enableColumnOrdering: boolean
 }
 
@@ -31,6 +32,7 @@ export const DraggableColumnHeader = <T,>({
   canResetResize,
   hasVerticalDivider,
   enableResizeColumns,
+  hasHorizontalDivider,
   enableColumnOrdering
 }: Props<T>) => {
   // Constants
@@ -63,6 +65,7 @@ export const DraggableColumnHeader = <T,>({
       ref={setNodeRef}
       style={style}
       $hasVerticalDivider={hasVerticalDivider}
+      $hasHorizontalDivider={hasHorizontalDivider}
     >
       <ColumnHeader
         onMouseEnter={() => setHover(true)}

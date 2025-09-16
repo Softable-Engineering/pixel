@@ -6,15 +6,21 @@ export type Actions = 'new-column'
 export enum ColumnType {
   DATE = 'date',
   PAGE = 'page',
+  EMAIL = 'email',
+  PHONE = 'phone',
   NUMBER = 'number',
   SELECT = 'select',
-  RICH_TEXT = 'rich_text'
+  CHECKBOX = 'checkbox',
+  RICH_TEXT = 'rich_text',
+  MULTI_SELECT = 'multi_select'
 }
+
+export type ResponseAccessor = string | string[] | boolean
 
 export type Column<T> = {
   id: string
   header: string
-  accessorFn: (row: T) => string
+  accessorFn: (row: T) => ResponseAccessor
 }
 
 export type ColumnDef<T> = BaseColumn & Column<T>
@@ -22,6 +28,7 @@ export type ColumnDef<T> = BaseColumn & Column<T>
 export interface RichTextFormat {
   bold?: boolean
   italic?: boolean
+  mask?: (value: string) => string
 }
 
 export interface DateFormat {
@@ -39,11 +46,17 @@ export interface SelectOption {
 }
 
 export interface Select {
+  multiple?: boolean
   options: SelectOption[]
 }
 
+export type TextTypes =
+  | ColumnType.RICH_TEXT
+  | ColumnType.EMAIL
+  | ColumnType.PHONE
+
 export interface TextColumn {
-  type: ColumnType.RICH_TEXT
+  type: TextTypes
   rich_text: RichTextFormat
 }
 
@@ -57,7 +70,72 @@ export interface SelectColumn {
   select: Select
 }
 
+export interface MultiSelectColumn {
+  type: ColumnType.MULTI_SELECT
+  select: Select
+}
+
 export interface NumberColumn {
   type: ColumnType.NUMBER
   number: NumberFormat
 }
+
+export interface CheckBoxColumn {
+  type: ColumnType.CHECKBOX
+}
+
+export enum ColumnActions {
+  UpdateColumnName = 'update-column-name',
+  UpdateProperty = 'update-property',
+  UpdateTypeColumn = 'update-type-column',
+  AddFilter = 'add-filter',
+  Calculate = 'calculate',
+  HideColumn = 'hide-column',
+  DuplicateColumn = 'duplicate-column',
+  DeleteColumn = 'delete-column',
+  Freeze = 'freeze-column',
+  ExpandedColumn = 'expanded-column',
+  AddColumn = 'add-column',
+  AddLine = 'add-line'
+}
+
+export type SimpleActions =
+  | ColumnActions.HideColumn
+  | ColumnActions.Freeze
+  | ColumnActions.AddFilter
+  | ColumnActions.ExpandedColumn
+  | ColumnActions.DeleteColumn
+  | ColumnActions.DuplicateColumn
+
+export interface ManagementHeaderName {
+  type: ColumnActions.UpdateColumnName
+  columnId: string
+  name: string
+}
+
+export interface ManagementAddLine {
+  type: ColumnActions.AddLine
+}
+
+export interface ManagementHeaderSimpleAction {
+  columnId: string
+  type: SimpleActions
+}
+
+export interface ManagementHeaderType {
+  columnId: string
+  type: ColumnActions.UpdateTypeColumn
+  typeColumn: ColumnType
+}
+
+export interface ManagementAddColumn {
+  type: ColumnActions.AddColumn
+  typeColumn: ColumnType
+}
+
+export type ManagementHeaderParams =
+  | ManagementHeaderName
+  | ManagementHeaderType
+  | ManagementAddColumn
+  | ManagementHeaderSimpleAction
+  | ManagementAddLine

@@ -1,28 +1,31 @@
 // Components
-import { DataTable } from '../DataTable'
+import { Footer } from './components/Footer'
+import { ActionsButtons } from './components/ActionsButtons'
+import { type BaseCustomData, DataTable } from '../DataTable'
 
 // Utils
 import { getColumns } from './utils'
 
 // Types
-import type { BaseColumnData, Props } from './types'
+import type { Props } from './types'
 
 // Styles
 import { Container } from './styles'
 
 export * from './types'
 
-export const TableView = <T extends BaseColumnData>(props: Props<T>) => {
+export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
   // Constants
-  const { columns, onChangeCell, ...dataTableProps } = props
-  const normalizedColumns = getColumns(columns, onChangeCell)
+  const normalizedColumns = getColumns(props)
 
   return (
-    <Container>
+    <Container id="table-column-actions-panel">
       <DataTable<T>
         cellPadding="1px"
-        {...dataTableProps}
+        {...props}
         columns={normalizedColumns}
+        actionsColumn={<ActionsButtons {...props} />}
+        footer={<Footer onManagementHeader={props.onManagementHeader} />}
       />
     </Container>
   )

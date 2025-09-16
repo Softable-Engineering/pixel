@@ -78,6 +78,8 @@ export function getPosition(params: GetPositionParams) {
       left = rect.left + rect.width / 2 - floatingRect.width / 2 + offsetX
       top = rect.top + rect.height / 2 - floatingRect.height / 2 + offsetY
       break
+    case 'top-left-start':
+      break
   }
 
   return { top, left }

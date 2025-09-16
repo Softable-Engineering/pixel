@@ -23,7 +23,7 @@ export const CellModal: React.FC<Props> = props => {
 
   // Constants
   const { children } = props
-  const containerHeight = containerRef.current?.offsetHeight ?? 0
+  const containerHeight = containerCellRef.current?.offsetHeight ?? 0
   const minHeight = containerHeight + 10 || 100
 
   // States
@@ -31,10 +31,18 @@ export const CellModal: React.FC<Props> = props => {
 
   // Hooks
   const { floatingRef } = useFollowElementPosition(containerRef, {
-    placement: 'bottom-start',
-    offsetY: -containerHeight - 5,
+    placement: 'top-left-start',
     offsetX: -5
   })
+
+  // UseEffects
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
   useClickOutsideWatcher(containerRef, toggleVisible, !visible)
 
   // Functions
@@ -47,18 +55,10 @@ export const CellModal: React.FC<Props> = props => {
   }
 
   function handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Tab' || event.key === 'Escape') {
+    if (event.key === 'Escape') {
       handleClose()
     }
   }
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [])
 
   return (
     <Container ref={containerRef}>
@@ -71,7 +71,7 @@ export const CellModal: React.FC<Props> = props => {
           <ContainerModal ref={floatingRef}>
             <ModalField
               {...props}
-              minHeight={`${minHeight}px`}
+              minHeight={minHeight}
               onClose={handleClose}
             />
           </ContainerModal>

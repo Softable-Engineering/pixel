@@ -1,6 +1,8 @@
 import { styled } from 'styled-components'
 
 export const Container = styled.div`
+  flex: 1;
+  display: flex;
   position: relative;
 
   --primary: ${({ theme }) => theme.colors.primary};

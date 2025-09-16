@@ -1,6 +1,7 @@
 // External Libraries
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: Ignored due to no validation needed */
 import type { ReactNode } from 'react'
+import type { CSSProperties } from 'styled-components'
 import { DndContext, closestCenter } from '@dnd-kit/core'
 
 // Components
@@ -15,7 +16,7 @@ import { useDataTable } from './hooks/useDataTable'
 import type { CustomColumnDef, CustomData } from './types'
 
 // Styles
-import { Container, LoaderContainer } from './styles'
+import { Container, Content, LoaderContainer } from './styles'
 
 export * from './types'
 
@@ -23,6 +24,7 @@ interface Props<T> {
   height?: number
   loading?: boolean
   fitWidth?: boolean
+  footer?: ReactNode
   cellPadding?: string
   data: CustomData<T>[]
   borderColor?: string
@@ -31,35 +33,51 @@ interface Props<T> {
   canResetResize?: boolean
   actionsColumn?: ReactNode
   enableSelection?: boolean
+  tableStyles?: CSSProperties
   hasVerticalDivider?: boolean
-  hasHorizontalDivider?: boolean
+  enableRowReordering?: boolean
   enableResizeColumns?: boolean
+  hasHorizontalDivider?: boolean
   enableColumnOrdering?: boolean
   columns: CustomColumnDef<CustomData<T>>[]
   onReorder?: (ids: string[]) => Promise<void>
+  onReorderRows?: (ids: string[]) => Promise<void>
 }
 
 export const DataTable = <T,>({
   data,
+  footer,
   loading,
   columns,
   headerColor,
   borderColor,
   cellPadding,
+  tableStyles,
   actionsColumn,
   textColorHeader,
   fitWidth = false,
   canResetResize = false,
   hasVerticalDivider = false,
+  enableRowReordering = false,
   hasHorizontalDivider = true,
   enableResizeColumns = false,
   enableColumnOrdering = false,
   onReorder
 }: Props<T>) => {
   // Hooks
-  const { table, sensors, columnOrder, handleDragEnd } = useDataTable<T>({
+  const {
+    table,
+    sensors,
+    rowsOrder,
+    columnOrder,
+    selectedRows,
+    handleDragEnd,
+    handleRowDragEnd,
+    handleToggleSelection
+  } = useDataTable<T>({
     data,
     columns,
+    enableRowReordering,
     enableColumnOrdering,
     onReorder
   })
@@ -75,36 +93,52 @@ export const DataTable = <T,>({
   }
 
   return (
-    <DndContext
-      sensors={sensors}
-      onDragEnd={handleDragEnd}
-      collisionDetection={closestCenter}
-    >
-      <Container
-        $fitWidth={fitWidth}
+    <Container $fitWidth={fitWidth} $enableRowReordering={enableRowReordering}>
+      <Content
+        style={tableStyles}
         $borderColor={borderColor}
         $hasBorder={!actionsColumn}
       >
-        <TableHeader<CustomData<T>>
-          table={table}
-          headerColor={headerColor}
-          columnOrder={columnOrder}
-          actionsColumn={actionsColumn}
-          canResetResize={canResetResize}
-          textColorHeader={textColorHeader}
-          hasVerticalDivider={hasVerticalDivider}
-          enableResizeColumns={enableResizeColumns}
-          enableColumnOrdering={enableColumnOrdering}
-        />
+        <DndContext
+          sensors={sensors}
+          onDragEnd={handleDragEnd}
+          collisionDetection={closestCenter}
+        >
+          <TableHeader<CustomData<T>>
+            table={table}
+            headerColor={headerColor}
+            columnOrder={columnOrder}
+            actionsColumn={actionsColumn}
+            canResetResize={canResetResize}
+            textColorHeader={textColorHeader}
+            hasVerticalDivider={hasVerticalDivider}
+            enableRowReordering={enableRowReordering}
+            enableResizeColumns={enableResizeColumns}
+            hasHorizontalDivider={hasHorizontalDivider}
+            enableColumnOrdering={enableColumnOrdering}
+          />
+        </DndContext>
 
-        <TableBody
-          table={table}
-          cellPadding={cellPadding}
-          actionsColumn={actionsColumn}
-          hasVerticalDivider={hasVerticalDivider}
-          hasHorizontalDivider={hasHorizontalDivider}
-        />
-      </Container>
-    </DndContext>
+        <DndContext
+          sensors={sensors}
+          onDragEnd={handleRowDragEnd}
+          collisionDetection={closestCenter}
+        >
+          <TableBody
+            table={table}
+            rowsOrder={rowsOrder}
+            cellPadding={cellPadding}
+            selectedRows={selectedRows}
+            actionsColumn={actionsColumn}
+            hasVerticalDivider={hasVerticalDivider}
+            enableRowReordering={enableRowReordering}
+            hasHorizontalDivider={hasHorizontalDivider}
+            toggleSelection={handleToggleSelection}
+          />
+        </DndContext>
+
+        {footer}
+      </Content>
+    </Container>
   )
 }

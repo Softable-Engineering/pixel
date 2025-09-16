@@ -22,6 +22,7 @@ export const ListLabels: React.FC<Props> = ({ options, onClick }) => {
     return options.map((option, index) => {
       return (
         <Row
+          tabIndex={0}
           key={`options_${option.id}_${index}`}
           onClick={() => onClick(option)}
         >

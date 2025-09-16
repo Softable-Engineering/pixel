@@ -8,8 +8,10 @@ export const Container = styled.button`
   width: 100%;
   height: 100%;
 
-  display: table-cell;
+  display: flex;
+  flex-wrap: wrap;
 
+  gap: 0.5rem;
   padding: 0.75rem;
 
   &:focus {

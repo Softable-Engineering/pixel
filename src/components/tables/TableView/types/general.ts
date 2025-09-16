@@ -7,11 +7,22 @@ import type {
   DateColumn,
   TextColumn,
   NumberColumn,
-  SelectColumn
+  SelectColumn,
+  CheckBoxColumn,
+  MultiSelectColumn,
+  ManagementHeaderParams
 } from './columns'
 import type { UpdateCellParams } from './cell'
+import type { Locale } from 'src/services/MaskModule'
 
-export type BaseColumn = TextColumn | DateColumn | SelectColumn | NumberColumn
+export type BaseColumn =
+  | TextColumn
+  | DateColumn
+  | SelectColumn
+  | NumberColumn
+  | MultiSelectColumn
+  | CheckBoxColumn
+
 export type BaseColumnData = TextColumnData | DateColumnData | SelectColumnData
 
 export interface DataTableProps<T> {
@@ -25,15 +36,18 @@ export interface DataTableProps<T> {
   canResetResize?: boolean
   enableSelection?: boolean
   hasVerticalDivider?: boolean
-  hasHorizontalDivider?: boolean
   enableResizeColumns?: boolean
+  enableRowReordering?: boolean
+  hasHorizontalDivider?: boolean
   enableColumnOrdering?: boolean
   // columns: CustomColumnDef<CustomData<T>>[]
   onReorder?: (ids: string[]) => Promise<void>
 }
 
 export interface Props<T> extends DataTableProps<T> {
+  locale: Locale
   actions?: Actions[]
   columns: ColumnDef<T>[]
+  onManagementHeader: (data: ManagementHeaderParams) => void
   onChangeCell?: (data: UpdateCellParams) => void
 }

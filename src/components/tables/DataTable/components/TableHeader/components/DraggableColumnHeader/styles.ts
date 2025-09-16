@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 
 interface Props {
   $hasVerticalDivider?: boolean
+  $hasHorizontalDivider?: boolean
 }
 
 interface ContentProps {
@@ -10,14 +11,17 @@ interface ContentProps {
   $maxWidth?: number
 }
 
-export const Container = styled.th<Props>`
+export const Container = styled.div<Props>`
   height: 2.5rem;
 
   text-align: left;
 
-  border-right: 1px solid
-    ${({ $hasVerticalDivider }) =>
-      $hasVerticalDivider ? 'var(--border-color)' : 'none'};
+  box-shadow: ${({ $hasVerticalDivider }) =>
+    $hasVerticalDivider ? '1px 0 var(--border-color)' : 'none'};
+
+  border-bottom: 1px solid
+    ${({ $hasHorizontalDivider }) =>
+      $hasHorizontalDivider ? 'var(--border-color)' : 'none'};
 `
 
 export const ColumnHeader = styled.div`

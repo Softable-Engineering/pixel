@@ -10,7 +10,7 @@ import type { Table } from '@tanstack/react-table'
 import { DraggableColumnHeader } from './components/DraggableColumnHeader'
 
 // Styles
-import { ActionsCell, Container } from './styles'
+import { ActionsCell, Container, HeaderRow } from './styles'
 
 interface Props<T> {
   table: Table<T>
@@ -21,6 +21,8 @@ interface Props<T> {
   actionsColumn?: ReactNode
   hasVerticalDivider: boolean
   enableResizeColumns: boolean
+  enableRowReordering: boolean
+  hasHorizontalDivider: boolean
   enableColumnOrdering: boolean
 }
 
@@ -33,12 +35,13 @@ export const TableHeader = <T,>({
   textColorHeader,
   hasVerticalDivider,
   enableResizeColumns,
-  enableColumnOrdering
+  enableColumnOrdering,
+  hasHorizontalDivider
 }: Props<T>) => {
   return (
     <Container $headColor={headerColor} $textColorHeader={textColorHeader}>
       {table.getHeaderGroups().map(headerGroup => (
-        <tr key={headerGroup.id}>
+        <HeaderRow key={headerGroup.id}>
           <SortableContext
             items={columnOrder}
             strategy={horizontalListSortingStrategy}
@@ -51,6 +54,7 @@ export const TableHeader = <T,>({
                   key={header.id}
                   header={header}
                   canResetResize={canResetResize}
+                  hasHorizontalDivider={hasHorizontalDivider}
                   enableResizeColumns={enableResizeColumns}
                   enableColumnOrdering={enableColumnOrdering}
                   hasVerticalDivider={
@@ -61,8 +65,12 @@ export const TableHeader = <T,>({
             })}
           </SortableContext>
 
-          {actionsColumn ? <ActionsCell>{actionsColumn}</ActionsCell> : null}
-        </tr>
+          {actionsColumn ? (
+            <ActionsCell $hasHorizontalDivider={hasHorizontalDivider}>
+              {actionsColumn}
+            </ActionsCell>
+          ) : null}
+        </HeaderRow>
       ))}
     </Container>
   )

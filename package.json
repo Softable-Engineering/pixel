@@ -26,6 +26,10 @@
     "./table-view": {
       "types": "./dist/table-view.d.ts",
       "import": "./dist/table-view.js"
+    },
+    "./mask-modules": {
+      "types": "./dist/mask-modules.d.ts",
+      "import": "./dist/mask-modules.js"
     }
   },
   "peerDependencies": {
