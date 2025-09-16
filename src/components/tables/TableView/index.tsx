@@ -1,5 +1,6 @@
 // Components
 import { Footer } from './components/Footer'
+import { ActionsButtons } from './components/ActionsButtons'
 import { type BaseCustomData, DataTable } from '../DataTable'
 
 // Utils
@@ -14,6 +15,7 @@ import { Container } from './styles'
 export * from './types'
 
 export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
+  // Constants
   const normalizedColumns = getColumns(props)
 
   return (
@@ -21,9 +23,9 @@ export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
       <DataTable<T>
         cellPadding="1px"
         {...props}
-        footer={<Footer name="" />}
         columns={normalizedColumns}
-        tableStyles={{ border: 0 }}
+        actionsColumn={<ActionsButtons {...props} />}
+        footer={<Footer onManagementHeader={props.onManagementHeader} />}
       />
     </Container>
   )

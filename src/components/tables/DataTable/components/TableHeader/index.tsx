@@ -65,7 +65,11 @@ export const TableHeader = <T,>({
             })}
           </SortableContext>
 
-          {actionsColumn ? <ActionsCell>{actionsColumn}</ActionsCell> : null}
+          {actionsColumn ? (
+            <ActionsCell $hasHorizontalDivider={hasHorizontalDivider}>
+              {actionsColumn}
+            </ActionsCell>
+          ) : null}
         </HeaderRow>
       ))}
     </Container>

@@ -20,6 +20,6 @@ export const Container = styled.div`
   }
 
  & > div > div > div > div > div {
-  box-shadow: none;
+  /* box-shadow: none; */
  }
 `

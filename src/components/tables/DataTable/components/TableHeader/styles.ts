@@ -10,6 +10,10 @@ interface ReorderCellProps {
   $hasHorizontalDivider?: boolean
 }
 
+interface ActionsCellProps {
+  $hasHorizontalDivider?: boolean
+}
+
 export const Container = styled.div<ContainerProps>`
   overflow: hidden;
   background-color: ${({ $headColor }) => $headColor ?? 'transparent'};
@@ -31,8 +35,16 @@ export const HeaderRow = styled.div`
   display: flex;
 `
 
-export const ActionsCell = styled.div`
+export const ActionsCell = styled.div<ActionsCellProps>`
+  flex: 1;
+
+  display: flex;
+
   padding: 0 2rem 0 0;
+
+    border-bottom: 1px solid
+    ${({ $hasHorizontalDivider }) =>
+      $hasHorizontalDivider ? 'var(--border-color)' : 'none'};
 `
 
 export const ReorderCell = styled.div<ReorderCellProps>`

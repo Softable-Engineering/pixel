@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 interface RowProps {
   cursor?: string
@@ -15,11 +15,11 @@ export const Container = styled.div<RowProps>`
 `
 
 export const EmptyCell = styled.div`
-  width: min-content;
+  flex: 1;
 
   padding: 0.75rem;
 
-  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 `
 
 export const ContainerDragIcon = styled.div`

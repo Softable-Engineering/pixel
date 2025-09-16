@@ -5,7 +5,7 @@ import type React from 'react'
 import { Typography } from '@components/toolkit/Typography'
 
 // Utils
-import { COLUMN_TYPE_MAP } from '../../constants/columns'
+import { COLUMN_TYPE_MAP } from '@components/tables/TableView/utils/columnInfos'
 
 // Types
 import type { ColumnType } from '@components/tables/TableView/types'

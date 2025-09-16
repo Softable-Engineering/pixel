@@ -94,7 +94,9 @@ export enum ColumnActions {
   DuplicateColumn = 'duplicate-column',
   DeleteColumn = 'delete-column',
   Freeze = 'freeze-column',
-  ExpandedColumn = 'expanded-column'
+  ExpandedColumn = 'expanded-column',
+  AddColumn = 'add-column',
+  AddLine = 'add-line'
 }
 
 export type SimpleActions =
@@ -111,6 +113,10 @@ export interface ManagementHeaderName {
   name: string
 }
 
+export interface ManagementAddLine {
+  type: ColumnActions.AddLine
+}
+
 export interface ManagementHeaderSimpleAction {
   columnId: string
   type: SimpleActions
@@ -122,7 +128,14 @@ export interface ManagementHeaderType {
   typeColumn: ColumnType
 }
 
+export interface ManagementAddColumn {
+  type: ColumnActions.AddColumn
+  typeColumn: ColumnType
+}
+
 export type ManagementHeaderParams =
   | ManagementHeaderName
   | ManagementHeaderType
+  | ManagementAddColumn
   | ManagementHeaderSimpleAction
+  | ManagementAddLine

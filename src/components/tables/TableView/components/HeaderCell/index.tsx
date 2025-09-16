@@ -57,6 +57,7 @@ export const HeaderCell: React.FC<Props> = ({
     if (action === ColumnActions.Calculate) return
     if (action === ColumnActions.UpdateProperty) return
     if (action === ColumnActions.UpdateColumnName) return
+    if (action === ColumnActions.AddColumn) return
     if (action === ColumnActions.UpdateTypeColumn)
       return onClickOption({
         type: action,
