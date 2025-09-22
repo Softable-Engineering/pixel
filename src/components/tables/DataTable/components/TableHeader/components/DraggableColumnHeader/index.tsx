@@ -17,6 +17,7 @@ import {
 } from './styles'
 
 interface Props<T> {
+  fitWidth: boolean
   canResetResize: boolean
   header: Header<T, unknown>
   hasVerticalDivider: boolean
@@ -29,6 +30,7 @@ const OPACITY_DRAGGING = 0.5
 
 export const DraggableColumnHeader = <T,>({
   header,
+  fitWidth,
   canResetResize,
   hasVerticalDivider,
   enableResizeColumns,
@@ -73,6 +75,7 @@ export const DraggableColumnHeader = <T,>({
       >
         <Content
           $padding={padding}
+          $fitWidth={fitWidth}
           $width={header.column.getSize()}
           onDoubleClick={() => resetSize()}
         >

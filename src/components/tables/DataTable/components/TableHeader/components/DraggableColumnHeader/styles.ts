@@ -7,6 +7,7 @@ interface Props {
 
 interface ContentProps {
   $width?: number
+  $fitWidth?: boolean
   $padding?: string
   $maxWidth?: number
 }
@@ -34,7 +35,7 @@ export const ColumnHeader = styled.div`
 `
 
 export const Content = styled.div<ContentProps>`
-  width: ${({ $width }) => `${$width}px`};
+  width: ${({ $width, $fitWidth }) => ($fitWidth ? '100%' : `${$width}px`)};
   height: 100%;
 
   display: flex;
