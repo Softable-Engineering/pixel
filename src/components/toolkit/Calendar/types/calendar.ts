@@ -41,12 +41,6 @@ export interface CalendarProps
   extends PropsWithChildren,
     UseFollowElementPositionOptions {
   /**
-   * Unique identifier for the portal wrapper.
-   * Used to identify the portal wrapper element.
-   * @default "calendar-portal"
-   */
-  wrapperId?: string
-  /**
    * Locale (BCP-47) used for month/day names,
    * formatting and week start.
    * Examples: "en-US", "pt-BR".
