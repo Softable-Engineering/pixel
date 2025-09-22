@@ -4,6 +4,7 @@ import React, { useEffect, useImperativeHandle, useRef, useState } from 'react'
 
 // Components
 import { CalendarModal } from './components/CalendarModal'
+import { Portal } from '@components/commons/modals/Portal'
 
 // Hooks
 import { useClickOutsideWatcher } from '@hooks/useClickOutsideWatcher'
@@ -70,12 +71,14 @@ export const Calendar = React.forwardRef<CalendarMethods, CalendarProps>(
 
         <AnimatePresence initial={false}>
           {visible ? (
-            <CalendarModal
-              ref={floatingRef}
-              {...rest}
-              calendarId={calendarId}
-              onClose={handleClose}
-            />
+            <Portal wrapperId={rest.wrapperId}>
+              <CalendarModal
+                ref={floatingRef}
+                {...rest}
+                calendarId={calendarId}
+                onClose={handleClose}
+              />
+            </Portal>
           ) : null}
         </AnimatePresence>
       </Container>
