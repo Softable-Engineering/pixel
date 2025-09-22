@@ -17,8 +17,18 @@ export const Container = styled(motion.div)`
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
 
-
   user-select: none;
+
+  --primary: ${({ theme }) => theme.colors.primary};
+
+  --scrolbar-color: ${({ theme }) => theme.colors.scrollbar};
+
+  --border-color: ${({ theme }) => theme.colors.border.secondary};
+  --text-color: ${({ theme }) => theme.colors.text.secondary};
+  --option-background-color: ${({ theme }) => theme.colors.background.secondary};
+  --option-background-hover: ${({ theme }) => theme.colors.background.hover_secondary};
+  --option-secondary-background-color: ${({ theme }) => theme.colors.background.hover_secondary};
+  --background-color: ${({ theme }) => theme.colors.background.secondary};
 `
 
 export const ContainerCalendar = styled.div`
