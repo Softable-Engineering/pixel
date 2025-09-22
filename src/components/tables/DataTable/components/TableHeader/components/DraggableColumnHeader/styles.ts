@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 
 interface Props {
+  $fitWidth?: boolean
   $hasVerticalDivider?: boolean
   $hasHorizontalDivider?: boolean
 }
@@ -13,6 +14,8 @@ interface ContentProps {
 }
 
 export const Container = styled.div<Props>`
+  width: ${$fitWidth => ($fitWidth ? '100%' : 'fit-content')};
+
   height: 2.5rem;
 
   text-align: left;
@@ -35,7 +38,7 @@ export const ColumnHeader = styled.div`
 `
 
 export const Content = styled.div<ContentProps>`
-  width: ${({ $width, $fitWidth }) => ($fitWidth ? '100%' : `${$width}px`)};
+  width: ${({ $width }) => `${$width}px`};
   height: 100%;
 
   display: flex;
@@ -43,7 +46,7 @@ export const Content = styled.div<ContentProps>`
   justify-content: left;
 
   span {
-    width: ${({ $width, $fitWidth }) => ($fitWidth ? '100%' : `${$width}px`)};
+    width: ${({ $width }) => `${$width}px`};
     height: 100%;
 
     display: flex;

@@ -127,6 +127,7 @@ export const DataTable = <T,>({
         >
           <TableBody
             table={table}
+            fitWidth={fitWidth}
             rowsOrder={rowsOrder}
             cellPadding={cellPadding}
             selectedRows={selectedRows}
