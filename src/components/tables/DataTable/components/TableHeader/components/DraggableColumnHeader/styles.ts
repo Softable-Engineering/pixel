@@ -43,7 +43,7 @@ export const Content = styled.div<ContentProps>`
   justify-content: left;
 
   span {
-    width: ${({ $width }) => `${$width}px`};
+    width: ${({ $width, $fitWidth }) => ($fitWidth ? '100%' : `${$width}px`)};
     height: 100%;
 
     display: flex;
