@@ -46,6 +46,7 @@ export interface DataTableProps<T> {
 
 export interface Props<T> extends DataTableProps<T> {
   locale: Locale
+  viewOnly?: boolean
   actions?: Actions[]
   columns: ColumnDef<T>[]
   onManagementHeader: (data: ManagementHeaderParams) => void

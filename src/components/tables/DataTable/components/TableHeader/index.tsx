@@ -14,7 +14,6 @@ import { ActionsCell, Container, HeaderRow } from './styles'
 
 interface Props<T> {
   table: Table<T>
-  fitWidth: boolean
   headerColor?: string
   columnOrder: string[]
   canResetResize: boolean
@@ -29,7 +28,6 @@ interface Props<T> {
 
 export const TableHeader = <T,>({
   table,
-  fitWidth,
   columnOrder,
   headerColor,
   actionsColumn,
@@ -55,7 +53,6 @@ export const TableHeader = <T,>({
                 <DraggableColumnHeader<T>
                   key={header.id}
                   header={header}
-                  fitWidth={fitWidth}
                   canResetResize={canResetResize}
                   hasHorizontalDivider={hasHorizontalDivider}
                   enableResizeColumns={enableResizeColumns}

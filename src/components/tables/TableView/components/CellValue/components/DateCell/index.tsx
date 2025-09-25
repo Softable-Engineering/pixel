@@ -17,9 +17,11 @@ import type {
 } from '@components/toolkit/Calendar/types'
 import { useRef } from 'react'
 
-interface Props extends BaseDate {}
+interface Props extends BaseDate {
+  viewOnly?: boolean
+}
 
-export const DateCell: React.FC<Props> = ({ value, onChange }) => {
+export const DateCell: React.FC<Props> = ({ viewOnly, value, onChange }) => {
   // Refs
   const calendarRef = useRef<CalendarMethods>(null)
 
@@ -31,6 +33,8 @@ export const DateCell: React.FC<Props> = ({ value, onChange }) => {
 
   // Functions
   function handleOpenCalendar() {
+    if (viewOnly) return null
+
     calendarRef.current?.open()
   }
 

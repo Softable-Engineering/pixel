@@ -14,7 +14,6 @@ import { Container } from './styles'
 
 interface Props<T> {
   table: Table<T>
-  fitWidth: boolean
   rowsOrder: string[]
   cellPadding?: string
   selectedRows: string[]
@@ -27,7 +26,6 @@ interface Props<T> {
 
 export const TableBody = <T,>({
   table,
-  fitWidth,
   rowsOrder,
   cellPadding,
   selectedRows,
@@ -54,7 +52,6 @@ export const TableBody = <T,>({
           key={row.id}
           cells={cells}
           cursor={cursor}
-          fitWidth={fitWidth}
           isSelected={isSelected}
           cellPadding={cellPadding}
           actionsColumn={actionsColumn}

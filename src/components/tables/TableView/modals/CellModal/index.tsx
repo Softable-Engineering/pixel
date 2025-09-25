@@ -47,6 +47,8 @@ export const CellModal: React.FC<Props> = props => {
 
   // Functions
   function toggleVisible() {
+    if (props.viewOnly) return null
+
     setVisible(prev => !prev)
   }
 

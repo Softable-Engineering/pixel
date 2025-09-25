@@ -1,15 +1,12 @@
 import { styled } from 'styled-components'
 
 interface Props {
-  $fitWidth: boolean
   $cellPadding?: string
   $hasVerticalDivider: boolean
   $hasHorizontalDivider: boolean
 }
 
 export const Container = styled.div<Props>`
-  width: ${$fitWidth => ($fitWidth ? '100% !important' : 'fit-content')};
-
   display: flex;
   flex-direction: column;
 

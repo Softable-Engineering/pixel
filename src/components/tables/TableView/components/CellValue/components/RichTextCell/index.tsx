@@ -15,10 +15,12 @@ import { Container } from './styles'
 
 interface Props extends BaseText {
   text: string
+  viewOnly?: boolean
 }
 
 export const RichTextCell: React.FC<Props> = ({
   text,
+  viewOnly,
   rich_text,
   onChange
 }) => {
@@ -34,6 +36,7 @@ export const RichTextCell: React.FC<Props> = ({
     <CellModal
       text={text}
       minHeight={20 * 16}
+      viewOnly={viewOnly}
       type={CellTypes.TEXT}
       onChange={handleChangeValue}
     >

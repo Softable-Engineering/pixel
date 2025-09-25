@@ -24,12 +24,14 @@ interface Props {
   title: string
   icon: ReactNode
   columnId: string
+  viewOnly?: boolean
   onClickOption: (action: ManagementHeaderParams) => void
 }
 
 export const HeaderCell: React.FC<Props> = ({
   icon,
   title,
+  viewOnly,
   columnId,
   onClickOption
 }) => {
@@ -46,6 +48,8 @@ export const HeaderCell: React.FC<Props> = ({
 
   // Functions
   function handleOpenPanel() {
+    if (viewOnly) return null
+
     setIsOpen(true)
   }
 

@@ -15,7 +15,9 @@ import { Container } from './styles'
 
 type Variant = BaseSelect
 
-type Props = Variant
+type Props = Variant & {
+  viewOnly?: boolean
+}
 
 export const SelectCell: React.FC<Props> = props => {
   // Constants
@@ -44,6 +46,7 @@ export const SelectCell: React.FC<Props> = props => {
   return (
     <CellModal
       minHeight={5 * 16}
+      viewOnly={props.viewOnly}
       type={CellTypes.SELECT}
       selected={selected}
       multiple={select.multiple}

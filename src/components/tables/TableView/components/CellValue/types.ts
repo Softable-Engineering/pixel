@@ -46,4 +46,6 @@ export type Variant =
   | BaseCheckbox
   | BaseMultiSelect
 
-export type Props = Variant
+export type Props = Variant & {
+  viewOnly?: boolean
+}

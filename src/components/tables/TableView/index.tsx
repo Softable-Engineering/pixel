@@ -18,14 +18,27 @@ export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
   // Constants
   const normalizedColumns = getColumns(props)
 
+  // Functions
+  function getFooter() {
+    if (props.viewOnly) return null
+
+    return <Footer onManagementHeader={props.onManagementHeader} />
+  }
+
+  function renderActionsButtons() {
+    if (props.viewOnly) return null
+
+    return <ActionsButtons {...props} />
+  }
+
   return (
     <Container id="table-column-actions-panel">
       <DataTable<T>
-        cellPadding="1px"
         {...props}
+        cellPadding="1px"
+        footer={getFooter()}
         columns={normalizedColumns}
-        actionsColumn={<ActionsButtons {...props} />}
-        footer={<Footer onManagementHeader={props.onManagementHeader} />}
+        actionsColumn={renderActionsButtons()}
       />
     </Container>
   )

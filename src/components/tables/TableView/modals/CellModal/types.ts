@@ -30,4 +30,8 @@ export type SelectProps = {
 
 export type Variant = TextProps | SelectProps
 
-export type Props = Variant & BaseProps & UseFollowElementPositionOptions
+export type Props = Variant &
+  BaseProps &
+  UseFollowElementPositionOptions & {
+    viewOnly?: boolean
+  }

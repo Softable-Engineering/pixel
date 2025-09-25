@@ -106,7 +106,6 @@ export const DataTable = <T,>({
         >
           <TableHeader<CustomData<T>>
             table={table}
-            fitWidth={fitWidth}
             headerColor={headerColor}
             columnOrder={columnOrder}
             actionsColumn={actionsColumn}
@@ -127,7 +126,6 @@ export const DataTable = <T,>({
         >
           <TableBody
             table={table}
-            fitWidth={fitWidth}
             rowsOrder={rowsOrder}
             cellPadding={cellPadding}
             selectedRows={selectedRows}

@@ -46,7 +46,8 @@ function getIcon(type: ColumnType) {
 
 function getContent<T>(
   column: ColumnDef<T>,
-  onManagementHeader: (params: ManagementHeaderParams) => void
+  onManagementHeader: (params: ManagementHeaderParams) => void,
+  viewOnly?: boolean
 ) {
   const typeColumn = column.type
   const icon = getIcon(typeColumn)
@@ -56,6 +57,7 @@ function getContent<T>(
     <HeaderCell
       icon={icon}
       title={title}
+      viewOnly={viewOnly}
       columnId={column.id}
       onClickOption={onManagementHeader}
     />
@@ -96,6 +98,7 @@ function renderCell<T>({
   row,
   column,
   locale,
+  viewOnly,
   onChangeCell
 }: Props<T> & {
   row: CustomData<T>
@@ -112,6 +115,7 @@ function renderCell<T>({
   if (column.type === ColumnType.SELECT) {
     return (
       <CellValue
+        viewOnly={viewOnly}
         select={column.select}
         type={ColumnType.SELECT}
         selected={normalizeArray(value)}
@@ -129,6 +133,7 @@ function renderCell<T>({
   if (column.type === ColumnType.RICH_TEXT) {
     return (
       <CellValue
+        viewOnly={viewOnly}
         type={ColumnType.RICH_TEXT}
         rich_text={column.rich_text}
         text={normalizeString(value)}
@@ -146,6 +151,7 @@ function renderCell<T>({
   if (column.type === ColumnType.EMAIL) {
     return (
       <CellValue
+        viewOnly={viewOnly}
         type={ColumnType.RICH_TEXT}
         rich_text={{ ...column.rich_text, mask: emailMask?.format }}
         text={normalizeString(value)}
@@ -159,6 +165,7 @@ function renderCell<T>({
   if (column.type === ColumnType.PHONE) {
     return (
       <CellValue
+        viewOnly={viewOnly}
         type={ColumnType.RICH_TEXT}
         rich_text={{ ...column.rich_text, mask: phoneMask?.format }}
         text={normalizeString(value)}
@@ -172,6 +179,7 @@ function renderCell<T>({
   if (column.type === ColumnType.NUMBER) {
     return (
       <CellValue
+        viewOnly={viewOnly}
         type={ColumnType.RICH_TEXT}
         rich_text={{ ...column.number, mask: numberMask?.format }}
         text={normalizeString(value)}
@@ -185,6 +193,7 @@ function renderCell<T>({
   if (column.type === ColumnType.DATE) {
     return (
       <CellValue
+        viewOnly={viewOnly}
         date={column.date}
         type={ColumnType.DATE}
         value={normalizeString(value)}
@@ -198,6 +207,7 @@ function renderCell<T>({
   if (column.type === ColumnType.MULTI_SELECT) {
     return (
       <CellValue
+        viewOnly={viewOnly}
         type={ColumnType.SELECT}
         selected={normalizeArray(value)}
         select={{ ...column.select, multiple: true }}
@@ -215,6 +225,7 @@ function renderCell<T>({
   if (column.type === ColumnType.CHECKBOX) {
     return (
       <CellValue
+        viewOnly={viewOnly}
         type={ColumnType.CHECKBOX}
         checked={normalizeBoolean(value)}
         onChange={v =>
@@ -239,7 +250,7 @@ export function getColumns<T>(
   return columns.map(column => ({
     id: column.header,
     cell: info => info.getValue(),
-    header: () => getContent<T>(column, onManagementHeader),
+    header: () => getContent<T>(column, onManagementHeader, props?.viewOnly),
     accessorFn: row => renderCell<T>({ ...props, row, column })
   }))
 }

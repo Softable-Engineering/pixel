@@ -8,11 +8,19 @@ import type { BaseCheckbox } from '../../types'
 // Styles
 import { Checkbox, Container } from './styles'
 
-interface Props extends BaseCheckbox {}
+interface Props extends BaseCheckbox {
+  viewOnly?: boolean
+}
 
-export const CheckboxCell: React.FC<Props> = ({ checked, onChange }) => {
+export const CheckboxCell: React.FC<Props> = ({
+  checked,
+  viewOnly,
+  onChange
+}) => {
   // Functions
   function toggleCheckbox() {
+    if (viewOnly) return
+
     onChange(!checked)
   }
 
