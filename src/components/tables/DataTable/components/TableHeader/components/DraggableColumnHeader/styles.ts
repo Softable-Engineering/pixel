@@ -45,9 +45,12 @@ export const Content = styled.div<ContentProps>`
   align-items: center;
   justify-content: left;
 
+  overflow: hidden;
+
   span {
     width: ${({ $width }) => `${$width}px`};
     height: 100%;
+
 
     display: flex;
     align-items: center;
@@ -57,6 +60,8 @@ export const Content = styled.div<ContentProps>`
   }
 
   p {
+    width: ${({ $width }) => `calc(${$width}px - 60px)`};
+
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
