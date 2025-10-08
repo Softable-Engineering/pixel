@@ -24,6 +24,8 @@ interface ParamsResolveColumn<T> {
 }
 
 export function resolveRow<T>({ row, locale, columns }: Params<T>): Column[] {
+  if (!row.data) return []
+
   return columns.map(column => resolveColumn({ column, row, locale }))
 }
 

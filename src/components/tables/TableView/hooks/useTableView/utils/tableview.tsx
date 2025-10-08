@@ -56,7 +56,7 @@ export function renderCell<T>({
 }) {
   // Constants
   const commonsParams = { columnId: column.id, rowId: row.data.id }
-  const value = column.accessorFn(row.data)
+  const value = column.accessorFn(row?.data)
 
   if (column.type === ColumnType.SELECT) {
     return (

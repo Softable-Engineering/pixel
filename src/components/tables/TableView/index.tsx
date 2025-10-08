@@ -25,6 +25,7 @@ export * from './types'
 export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
   // Constants
   const formulaColumns = useMemo(() => {
+    if (!props.data.length) return []
     return resolveRow({
       row: props.data[0],
       locale: props.locale,

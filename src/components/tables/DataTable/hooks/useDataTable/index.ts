@@ -62,6 +62,7 @@ export function useDataTable<T>({
 
   // Constants
   const orderedData = useMemo(() => {
+    if (!data.length) return []
     const byId = new Map(data.map(item => [item.data.id, item]))
 
     return rowsOrder
