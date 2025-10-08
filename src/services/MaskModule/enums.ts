@@ -17,7 +17,6 @@ export enum Locale {
 export enum MaskType {
   CPF = 'CPF',
   CNPJ = 'CNPJ',
-  EMAIL = 'EMAIL',
   DOCUMENT = 'DOCUMENT',
   PHONE = 'PHONE',
   DATE = 'DATE',

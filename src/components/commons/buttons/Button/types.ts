@@ -1,4 +1,4 @@
-import { TypeVariants } from '@components/toolkit/Typography/types'
+import type { TypeVariants } from '@components/toolkit/Typography/types'
 
 export interface ButtonProps extends ButtonStyleProps, ButtonTextProps {
   loading?: boolean
@@ -19,9 +19,10 @@ export interface ButtonTextProps {
 }
 
 export interface ButtonStyleProps {
-  borderRadius?: string
   color?: string
+  padding?: string
   fitWidth?: boolean
+  borderRadius?: string
   variant?: ButtonVariant
 }
 

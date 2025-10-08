@@ -1,10 +1,18 @@
+// External Libraries
+import { useMemo } from 'react'
+
 // Components
 import { Footer } from './components/Footer'
+import { FormulaModal } from './modals/FormulaModal'
 import { ActionsButtons } from './components/ActionsButtons'
 import { type BaseCustomData, DataTable } from '../DataTable'
 
+// Hooks
+import { useTableView } from './hooks/useTableView'
+import { ModalContextProvider } from '@contexts/useModalContext'
+
 // Utils
-import { getColumns } from './utils'
+import { resolveRow } from './utils'
 
 // Types
 import type { Props } from './types'
@@ -16,7 +24,16 @@ export * from './types'
 
 export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
   // Constants
-  const normalizedColumns = getColumns(props)
+  const formulaColumns = useMemo(() => {
+    return resolveRow({
+      row: props.data[0],
+      locale: props.locale,
+      columns: props.columns
+    })
+  }, [props.columns, props.data, props.locale])
+
+  // Hooks
+  const { formulaModalRef, normalizedColumns } = useTableView(props)
 
   // Functions
   function getFooter() {
@@ -32,14 +49,18 @@ export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
   }
 
   return (
-    <Container id="table-column-actions-panel">
-      <DataTable<T>
-        {...props}
-        cellPadding="1px"
-        footer={getFooter()}
-        columns={normalizedColumns}
-        actionsColumn={renderActionsButtons()}
-      />
-    </Container>
+    <ModalContextProvider>
+      <Container id="table-column-actions-panel">
+        <DataTable<T>
+          {...props}
+          cellPadding="1px"
+          footer={getFooter()}
+          columns={normalizedColumns}
+          actionsColumn={renderActionsButtons()}
+        />
+
+        <FormulaModal ref={formulaModalRef} columns={formulaColumns} />
+      </Container>
+    </ModalContextProvider>
   )
 }

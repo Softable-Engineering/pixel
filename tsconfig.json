@@ -17,6 +17,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@globals/*": ["src/globals/*"],
       "@components/*": ["src/components/*"],
+      "@contexts/*": ["src/contexts/*"],
       "@animations/*": ["src/components/animations/*"]
     },
 

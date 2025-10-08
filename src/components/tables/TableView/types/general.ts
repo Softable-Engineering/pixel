@@ -8,6 +8,7 @@ import type {
   TextColumn,
   NumberColumn,
   SelectColumn,
+  FormulaColumn,
   CheckBoxColumn,
   MultiSelectColumn,
   ManagementHeaderParams
@@ -22,6 +23,7 @@ export type BaseColumn =
   | NumberColumn
   | MultiSelectColumn
   | CheckBoxColumn
+  | FormulaColumn
 
 export type BaseColumnData = TextColumnData | DateColumnData | SelectColumnData
 

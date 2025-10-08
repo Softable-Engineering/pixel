@@ -2,6 +2,7 @@
 import { TextIcon } from '@assets/icons/tables/Text'
 import { ListIcon } from '@assets/icons/tables/List'
 import { EmailIcon } from '@assets/icons/tables/Email'
+import { SigmaIcon } from '@assets/icons/tables/Sigma'
 import { PhoneIcon } from '@assets/icons/tables/Phone'
 import { NumberIcon } from '@assets/icons/tables/Number'
 import { SelectIcon } from '@assets/icons/tables/Select'
@@ -53,5 +54,9 @@ export const COLUMN_TYPE_MAP: Record<ColumnType, ColumntTypeInfos> = {
   checkbox: {
     label: 'Checkbox',
     icon: <CheckboxIcon color="var(--text-color)" />
+  },
+  formula: {
+    label: 'Fórmula',
+    icon: <SigmaIcon color="var(--text-color)" />
   }
 }

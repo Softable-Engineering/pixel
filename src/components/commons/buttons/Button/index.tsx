@@ -14,6 +14,7 @@ export const Button: React.FC<ButtonProps> = ({
   type,
   color,
   fitWidth,
+  padding,
   disabled,
   variant = 'filled',
   borderRadius,
@@ -30,6 +31,7 @@ export const Button: React.FC<ButtonProps> = ({
       type={type}
       tabIndex={0}
       $color={color}
+      $padding={padding}
       $variant={variant}
       disabled={disabled}
       $fitWidth={fitWidth}

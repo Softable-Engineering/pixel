@@ -1,4 +1,5 @@
 // Components
+import { GroupPicker } from '../components/GroupPicker'
 import { ColumnTypePicker } from '../components/ColumnTypePicker'
 
 // Assets
@@ -8,23 +9,25 @@ import { Calc } from '@assets/icons/general/Calc'
 import { Trash } from '@assets/icons/general/Trash'
 import { Freeze } from '@assets/icons/general/Freeze'
 import { Filter } from '@assets/icons/general/Filter'
+import { PencilIcon } from '@assets/icons/tables/Pencil'
 import { Settings } from '@assets/icons/general/Settings'
 import { Expanded } from '@assets/icons/general/Expanded'
 import { Duplicate } from '@assets/icons/general/Duplicate'
 
 // Types
-import {
-  ColumnActions,
-  type ColumnType
-} from '@components/tables/TableView/types'
+import { ColumnActions, ColumnType } from '@components/tables/TableView/types'
 import type { DropdownActionsGroup } from '@components/commons/toolkit/ActionsPanel/types'
 
 interface Params {
+  type: ColumnType
   onChangeTypeColumn: (type: ColumnType) => void
+  onOpenFormulaModal: () => void
 }
 
 export function getActionsGroups({
-  onChangeTypeColumn
+  type,
+  onChangeTypeColumn,
+  onOpenFormulaModal
 }: Params): DropdownActionsGroup<ColumnActions>[] {
   return [
     {
@@ -33,7 +36,8 @@ export function getActionsGroups({
           id: ColumnActions.UpdateProperty,
           label: 'Editar propriedade',
           icon: <Settings color="var(--text-color)" />,
-          type: 'group'
+          type: 'group',
+          children: getGroupModal(type, onOpenFormulaModal)
         },
         {
           id: ColumnActions.UpdateTypeColumn,
@@ -96,4 +100,20 @@ export function getActionsGroups({
       ]
     }
   ]
+}
+
+function getGroupModal(typeColumn: ColumnType, onOpenFormulaModal: () => void) {
+  if (typeColumn === ColumnType.FORMULA)
+    return (
+      <GroupPicker
+        options={[
+          {
+            id: 'formula',
+            label: 'Editar fórmula',
+            startIcon: <PencilIcon color="var(--text-color)" />
+          }
+        ]}
+        onClick={onOpenFormulaModal}
+      />
+    )
 }

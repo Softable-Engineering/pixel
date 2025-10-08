@@ -1,0 +1,93 @@
+// External Libraries
+import { useEffect, useRef } from 'react'
+
+// Utils
+import { FormulaEditor } from './editor'
+import { FUNCTIONS } from '../../../../utils'
+
+// Types
+import type { Column } from '../../../../types'
+import type { UseFormulaInputParams } from './types'
+import type { FormulaInputMethods } from '../../types'
+
+export function useFormulaInput({
+  formula,
+  columns = [],
+  functions = FUNCTIONS,
+  onChangeSearch
+}: UseFormulaInputParams) {
+  // Refs
+  const columnsRef = useRef(columns)
+  const inputRef = useRef<HTMLDivElement | null>(null)
+  const editorRef = useRef<FormulaEditor | null>(null)
+
+  // UseEffects
+  useEffect(() => {
+    const el = inputRef.current
+    if (!el) return
+
+    if (!editorRef.current) {
+      editorRef.current = new FormulaEditor(
+        el,
+        functions,
+        columnsRef.current,
+        onChangeSearch
+      )
+    }
+
+    if (formula) {
+      editorRef.current.insertText(formula)
+    }
+
+    const onInput = (e: Event) => editorRef.current?.handleInput()
+    el.addEventListener('input', onInput)
+
+    return () => {
+      el.removeEventListener('input', onInput)
+      editorRef.current = null
+    }
+  }, [functions, formula, onChangeSearch])
+
+  // Functions
+  function resetContent() {
+    if (!inputRef.current) return
+    inputRef.current.innerHTML = ''
+  }
+
+  function exportFormula() {
+    return editorRef.current?.serialize() ?? ''
+  }
+
+  function setupFormula(f: string) {
+    console.log('setupFormula', f)
+  }
+
+  function focus() {
+    inputRef.current?.focus()
+  }
+
+  function insertColumn(column: Column) {
+    editorRef.current?.insertText(`[col:${column.id}]`, 1)
+  }
+
+  function insertFunction(name: string) {
+    const offSet = name.length + 1
+    editorRef.current?.insertText(name.toLowerCase() + '()', offSet)
+  }
+
+  function handleRefMethods(): FormulaInputMethods {
+    return {
+      focus,
+      reset: resetContent,
+      serialize: exportFormula,
+      deserialize: setupFormula,
+      insertColumnToken: insertColumn,
+      insertFunctionText: insertFunction
+    }
+  }
+
+  return {
+    inputRef,
+    handleRefMethods
+  }
+}

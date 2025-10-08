@@ -1,3 +1,5 @@
 export * from './columnInfos'
-export * from './getColumns'
+export * from './getIcon'
 export * from './normalizeType'
+export * from './normalizeValues'
+export * from './resolveRow'

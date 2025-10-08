@@ -12,6 +12,7 @@ import { CellTypes } from '@components/tables/TableView/modals/CellModal/types'
 
 // Styles
 import { Container } from './styles'
+import { useMemo } from 'react'
 
 type Variant = BaseSelect
 
@@ -22,22 +23,20 @@ type Props = Variant & {
 export const SelectCell: React.FC<Props> = props => {
   // Constants
   const { selected, select, onChange } = props
-  const labels = select.options.filter(option => selected.includes(option.id))
+  const labels = useMemo(() => {
+    return select.options.filter(option => selected.includes(option.id))
+  }, [select.options, selected])
 
   // Functions
   function renderLabels() {
-    if (!props.select.multiple) {
-      const item = labels[0]
-      if (!item) return null
-      return <Label color={item.color} value={item.name} />
-    }
+    if (labels.length === 0) return null
 
     return labels.map((option, index) => {
       return (
         <Label
           key={`options_${option.id}_${index}`}
-          color={option.color}
           value={option.name}
+          color={option.color}
         />
       )
     })
@@ -46,11 +45,11 @@ export const SelectCell: React.FC<Props> = props => {
   return (
     <CellModal
       minHeight={5 * 16}
-      viewOnly={props.viewOnly}
-      type={CellTypes.SELECT}
       selected={selected}
-      multiple={select.multiple}
+      type={CellTypes.SELECT}
       options={select.options}
+      viewOnly={props.viewOnly}
+      multiple={select.multiple}
       onChange={onChange}
     >
       <Container>{renderLabels()}</Container>

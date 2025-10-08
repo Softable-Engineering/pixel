@@ -1,5 +1,4 @@
 // External Libraries
-import type React from 'react'
 import { useRef, useState, type ReactNode } from 'react'
 
 // Components
@@ -14,33 +13,38 @@ import { getActionsGroups } from './utils/options'
 import {
   ColumnType,
   ColumnActions,
-  type ManagementHeaderParams
+  type ManagementHeaderParams,
+  type ColumnDef
 } from '../../types'
 
 // Styles
 import { Container } from './styles'
 
-interface Props {
+interface Props<T> {
   title: string
   icon: ReactNode
-  columnId: string
   viewOnly?: boolean
+  column: ColumnDef<T>
+  onOpenFormulaModal: () => void
   onClickOption: (action: ManagementHeaderParams) => void
 }
 
-export const HeaderCell: React.FC<Props> = ({
+export const HeaderCell = <T,>({
   icon,
   title,
+  column,
   viewOnly,
-  columnId,
-  onClickOption
-}) => {
+  onClickOption,
+  onOpenFormulaModal
+}: Props<T>) => {
   // Refs
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Constants
   const options = getActionsGroups({
-    onChangeTypeColumn: handleChangeTypeColumn
+    type: column.type,
+    onChangeTypeColumn: handleChangeTypeColumn,
+    onOpenFormulaModal: onOpenFormulaModal
   })
 
   // States
@@ -59,24 +63,24 @@ export const HeaderCell: React.FC<Props> = ({
 
   function handleClickOption(action: ColumnActions) {
     if (action === ColumnActions.Calculate) return
+    if (action === ColumnActions.AddColumn) return
     if (action === ColumnActions.UpdateProperty) return
     if (action === ColumnActions.UpdateColumnName) return
-    if (action === ColumnActions.AddColumn) return
     if (action === ColumnActions.UpdateTypeColumn)
       return onClickOption({
         type: action,
-        columnId,
+        columnId: column.id,
         typeColumn: ColumnType.EMAIL
       })
 
-    onClickOption({ type: action, columnId })
+    onClickOption({ type: action, columnId: column.id })
     handleClosePanel()
   }
 
   function handleChangeTypeColumn(type: ColumnType) {
     return onClickOption({
-      columnId,
       typeColumn: type,
+      columnId: column.id,
       type: ColumnActions.UpdateTypeColumn
     })
   }

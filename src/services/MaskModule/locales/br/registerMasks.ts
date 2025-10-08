@@ -18,7 +18,6 @@ import { DateValidator } from './validators/DateValidator'
 import { PhoneValidator } from './validators/PhoneValidator'
 import { FloatValidator } from './validators/FloatValidator'
 import { MoneyValidator } from './validators/MoneyValidator'
-import { EmailValidator } from './validators/EmailValidator'
 import { IntegerValidator } from './validators/IntegerValidator'
 import { ZipCodeValidator } from './validators/ZipCodeValidator'
 import { DocumentValidator } from './validators/DocumentValidator'
@@ -74,6 +73,4 @@ export function registerBrMasks() {
     MaskType.ZIP_CODE,
     new ZipCodeValidator()
   )
-
-  MaskModule.registerValidator(Locale.BR, MaskType.EMAIL, new EmailValidator())
 }

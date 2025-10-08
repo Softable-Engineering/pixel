@@ -10,6 +10,7 @@ export enum ColumnType {
   PHONE = 'phone',
   NUMBER = 'number',
   SELECT = 'select',
+  FORMULA = 'formula',
   CHECKBOX = 'checkbox',
   RICH_TEXT = 'rich_text',
   MULTI_SELECT = 'multi_select'
@@ -84,7 +85,13 @@ export interface CheckBoxColumn {
   type: ColumnType.CHECKBOX
 }
 
+export interface FormulaColumn {
+  type: ColumnType.FORMULA
+  formula: string
+}
+
 export enum ColumnActions {
+  ChangeFormula = 'update-formula',
   UpdateColumnName = 'update-column-name',
   UpdateProperty = 'update-property',
   UpdateTypeColumn = 'update-type-column',
@@ -133,9 +140,14 @@ export interface ManagementAddColumn {
   typeColumn: ColumnType
 }
 
+export interface ManagementPropertieChange {
+  type: ColumnActions.ChangeFormula
+}
+
 export type ManagementHeaderParams =
   | ManagementHeaderName
   | ManagementHeaderType
   | ManagementAddColumn
+  | ManagementPropertieChange
   | ManagementHeaderSimpleAction
   | ManagementAddLine

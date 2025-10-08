@@ -29,7 +29,9 @@ export const ActionsButtons = <T,>({
 
   function getAction(action: Actions) {
     if (action === 'new-column')
-      return <AddColumnButton onClick={addColumnClick} />
+      return (
+        <AddColumnButton key={`action_${action}`} onClick={addColumnClick} />
+      )
   }
 
   function renderActions() {

@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import { css, styled } from 'styled-components'
 
 export const Container = styled.div`
   width: fit-content;
@@ -18,8 +18,39 @@ export const Container = styled.div`
   p, input, textarea {
     font-family: Cereal, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
+`
 
- & > div > div > div > div > div {
-  /* box-shadow: none; */
- }
+export const ScrollStyles = css`
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-track:hover {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-track:active {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: ${({ theme }) => theme.colors.scrollbar};
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: ${({ theme }) => theme.colors.scrollbar};
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background-color: ${({ theme }) => theme.colors.scrollbar};
+  }
+
+  scrollbar-width: 8px;
+  scrollbar-color: ${({ theme }) => theme.colors.scrollbar} transparent;
 `

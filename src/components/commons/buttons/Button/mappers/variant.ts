@@ -15,10 +15,11 @@ export function mapVariantToCss(
 
       &:not(:disabled) {
         &:hover {
-          background-color: ${buttonColor}D9;
+          opacity: 0.5;
+          transition: 0.5s;
         }
       }
-    `
+      `
   }
 
   if (variant === 'outlined') {
@@ -29,9 +30,10 @@ export function mapVariantToCss(
       &:not(:disabled) {
         &:hover {
           opacity: 0.5;
+          transition: 0.5s;
         }
       }
-    `
+      `
   }
 
   if (variant === 'text') {
@@ -42,6 +44,7 @@ export function mapVariantToCss(
       &:not(:disabled) {
         &:hover {
           opacity: 0.5;
+          transition: 0.5s;
         }
       }
     `
