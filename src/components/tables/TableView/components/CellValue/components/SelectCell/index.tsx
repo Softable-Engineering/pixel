@@ -1,18 +1,22 @@
 // External Libraries
 /** biome-ignore-all lint/a11y/useSemanticElements: <Not needed> */
 import type React from 'react'
+import { useMemo } from 'react'
 
 // Components
 import { Label } from '../../../Label'
 import { CellModal } from '../../../../modals/CellModal'
 
+// Hooks
+import { useTableViewContext } from '@components/tables/TableView/contexts/useTableViewContext'
+
 // Types
 import type { BaseSelect } from '../../types'
+import { ColumnType } from '@components/tables/TableView/types'
 import { CellTypes } from '@components/tables/TableView/modals/CellModal/types'
 
 // Styles
 import { Container } from './styles'
-import { useMemo } from 'react'
 
 type Variant = BaseSelect
 
@@ -27,7 +31,21 @@ export const SelectCell: React.FC<Props> = props => {
     return select.options.filter(option => selected.includes(option.id))
   }, [select.options, selected])
 
+  // Hooks
+  const { permissions } = useTableViewContext()
+
+  const canEdit = getCanEdit()
+
   // Functions
+  function getCanEdit() {
+    const rowPermissions = permissions.rows.edit
+
+    if (!rowPermissions.enabled) return false
+    if (rowPermissions.columnTypes === true) return true
+
+    return rowPermissions.columnTypes.includes(ColumnType.SELECT)
+  }
+
   function renderLabels() {
     if (labels.length === 0) return null
 
@@ -48,7 +66,7 @@ export const SelectCell: React.FC<Props> = props => {
       selected={selected}
       type={CellTypes.SELECT}
       options={select.options}
-      viewOnly={props.viewOnly}
+      viewOnly={!canEdit}
       multiple={select.multiple}
       onChange={onChange}
     >

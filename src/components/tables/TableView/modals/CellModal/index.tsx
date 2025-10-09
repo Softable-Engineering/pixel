@@ -45,7 +45,6 @@ export const CellModal: React.FC<Props> = props => {
   }, [])
   useClickOutsideWatcher(containerRef, toggleVisible, !visible)
 
-  // Functions
   function toggleVisible() {
     if (props.viewOnly) return null
 

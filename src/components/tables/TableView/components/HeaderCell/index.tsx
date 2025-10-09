@@ -1,20 +1,24 @@
 // External Libraries
-import { useRef, useState, type ReactNode } from 'react'
+/** biome-ignore-all lint/correctness/useExhaustiveDependencies: <Not needed> */
+import { useMemo, useRef, useState, type ReactNode } from 'react'
 
 // Components
 import { Header } from './components/Input'
 import { Typography } from '@components/toolkit/Typography'
 import { ActionsPanel } from '@components/commons/toolkit/ActionsPanel'
 
+// Hooks
+import { useTableViewContext } from '../../contexts/useTableViewContext'
+
 // Utils
-import { getActionsGroups } from './utils/options'
+import { getActions } from './utils'
 
 // Types
 import {
   ColumnType,
   ColumnActions,
-  type ManagementHeaderParams,
-  type ColumnDef
+  type ColumnDef,
+  type ManagementHeaderParams
 } from '../../types'
 
 // Styles
@@ -40,19 +44,27 @@ export const HeaderCell = <T,>({
   // Refs
   const containerRef = useRef<HTMLDivElement>(null)
 
+  // Hooks
+  const { permissions } = useTableViewContext()
+
   // Constants
-  const options = getActionsGroups({
-    type: column.type,
-    onChangeTypeColumn: handleChangeTypeColumn,
-    onOpenFormulaModal: onOpenFormulaModal
-  })
+  const groupOptions = useMemo(() => {
+    const params = {
+      column,
+      permissions,
+      onChangeTypeColumn: handleChangeTypeColumn,
+      onOpenFormulaModal
+    }
+
+    return getActions(params)
+  }, [permissions, column, onOpenFormulaModal])
 
   // States
   const [isOpen, setIsOpen] = useState(false)
 
   // Functions
   function handleOpenPanel() {
-    if (viewOnly) return null
+    if (!groupOptions.length) return null
 
     setIsOpen(true)
   }
@@ -94,7 +106,7 @@ export const HeaderCell = <T,>({
       <ActionsPanel
         referenceRef={containerRef}
         isOpen={isOpen}
-        options={options}
+        options={groupOptions}
         placement="bottom-start"
         wrapperId="table-column-actions-panel"
         header={<Header value={title} onChange={console.log} />}

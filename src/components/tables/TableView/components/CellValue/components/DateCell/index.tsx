@@ -16,6 +16,8 @@ import type {
   DateRangeValue
 } from '@components/toolkit/Calendar/types'
 import { useRef } from 'react'
+import { useTableViewContext } from '@components/tables/TableView/contexts/useTableViewContext'
+import { ColumnType } from '@components/tables/TableView/types'
 
 interface Props extends BaseDate {
   viewOnly?: boolean
@@ -31,9 +33,24 @@ export const DateCell: React.FC<Props> = ({ viewOnly, value, onChange }) => {
     end: value
   }
 
+  // Hooks
+  const { permissions } = useTableViewContext()
+
+  const canEdit = getCanEdit()
+
+  // Functions
+  function getCanEdit() {
+    const rowPermissions = permissions.rows.edit
+
+    if (!rowPermissions.enabled) return false
+    if (rowPermissions.columnTypes === true) return true
+
+    return rowPermissions.columnTypes.includes(ColumnType.DATE)
+  }
+
   // Functions
   function handleOpenCalendar() {
-    if (viewOnly) return null
+    if (!canEdit) return null
 
     calendarRef.current?.open()
   }

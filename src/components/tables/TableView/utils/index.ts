@@ -1,5 +1,6 @@
 export * from './columnInfos'
 export * from './getIcon'
+export * from './mergePermissions'
 export * from './normalizeType'
 export * from './normalizeValues'
 export * from './resolveRow'

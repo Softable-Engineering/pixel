@@ -4,8 +4,8 @@ import { ColumnTypePicker } from '../components/ColumnTypePicker'
 
 // Assets
 import { Type } from '@assets/icons/general/Type'
-import { Hide } from '@assets/icons/general/Hide'
 import { Calc } from '@assets/icons/general/Calc'
+import { Hide } from '@assets/icons/general/Hide'
 import { Trash } from '@assets/icons/general/Trash'
 import { Freeze } from '@assets/icons/general/Freeze'
 import { Filter } from '@assets/icons/general/Filter'
@@ -15,20 +15,27 @@ import { Expanded } from '@assets/icons/general/Expanded'
 import { Duplicate } from '@assets/icons/general/Duplicate'
 
 // Types
-import { ColumnActions, ColumnType } from '@components/tables/TableView/types'
+import {
+  ColumnType,
+  ColumnActions,
+  type ColumnDef,
+  type TablePermissions
+} from '@components/tables/TableView/types'
 import type { DropdownActionsGroup } from '@components/commons/toolkit/ActionsPanel/types'
 
-interface Params {
-  type: ColumnType
+interface GetOptionsParams<T> {
+  column: ColumnDef<T>
+  permissions: TablePermissions
   onChangeTypeColumn: (type: ColumnType) => void
   onOpenFormulaModal: () => void
 }
 
-export function getActionsGroups({
-  type,
+export function getOptions<T>({
+  column,
+  permissions,
   onChangeTypeColumn,
   onOpenFormulaModal
-}: Params): DropdownActionsGroup<ColumnActions>[] {
+}: GetOptionsParams<T>): DropdownActionsGroup<ColumnActions>[] {
   return [
     {
       actions: [
@@ -37,14 +44,19 @@ export function getActionsGroups({
           label: 'Editar propriedade',
           icon: <Settings color="var(--text-color)" />,
           type: 'group',
-          children: getGroupModal(type, onOpenFormulaModal)
+          children: getGroupModal(column.type, permissions, onOpenFormulaModal)
         },
         {
           id: ColumnActions.UpdateTypeColumn,
           label: 'Alterar tipo',
           icon: <Type color="var(--text-color)" />,
           type: 'group',
-          children: <ColumnTypePicker onClick={onChangeTypeColumn} />
+          children: (
+            <ColumnTypePicker
+              columnType={column.type}
+              onClick={onChangeTypeColumn}
+            />
+          )
         }
       ]
     },
@@ -102,8 +114,15 @@ export function getActionsGroups({
   ]
 }
 
-function getGroupModal(typeColumn: ColumnType, onOpenFormulaModal: () => void) {
-  if (typeColumn === ColumnType.FORMULA)
+function getGroupModal(
+  typeColumn: ColumnType,
+  permissions: TablePermissions,
+  onOpenFormulaModal: () => void
+) {
+  const isFormula = typeColumn === ColumnType.FORMULA
+  const editPermissions = permissions.columns.edit.properties
+
+  if (isFormula && editPermissions.formula === true)
     return (
       <GroupPicker
         options={[

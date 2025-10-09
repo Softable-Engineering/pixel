@@ -15,6 +15,8 @@ import type {
 } from './columns'
 import type { UpdateCellParams } from './cell'
 import type { Locale } from 'src/services/MaskModule'
+import type { TablePermissions } from './permission'
+import type { DeepPartial } from './deepPartial'
 
 export type BaseColumn =
   | TextColumn
@@ -51,6 +53,7 @@ export interface Props<T> extends DataTableProps<T> {
   viewOnly?: boolean
   actions?: Actions[]
   columns: ColumnDef<T>[]
+  permissions?: DeepPartial<TablePermissions>
   onManagementHeader: (data: ManagementHeaderParams) => void
   onChangeCell?: (data: UpdateCellParams) => void
 }

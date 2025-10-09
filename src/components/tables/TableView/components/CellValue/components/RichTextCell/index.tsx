@@ -12,6 +12,8 @@ import { CellTypes } from '@components/tables/TableView/modals/CellModal/types'
 
 // Styles
 import { Container } from './styles'
+import { useTableViewContext } from '@components/tables/TableView/contexts/useTableViewContext'
+import { ColumnType } from '@components/tables/TableView/types'
 
 interface Props extends BaseText {
   text: string
@@ -24,6 +26,21 @@ export const RichTextCell: React.FC<Props> = ({
   rich_text,
   onChange
 }) => {
+  // Hooks
+  const { permissions } = useTableViewContext()
+
+  const canEdit = getCanEdit()
+
+  // Functions
+  function getCanEdit() {
+    const rowPermissions = permissions.rows.edit
+
+    if (!rowPermissions.enabled) return false
+    if (rowPermissions.columnTypes === true) return true
+
+    return rowPermissions.columnTypes.includes(ColumnType.RICH_TEXT)
+  }
+
   // Functions
   function handleChangeValue(value: string) {
     if (!rich_text.mask) return onChange?.(value)
@@ -36,7 +53,7 @@ export const RichTextCell: React.FC<Props> = ({
     <CellModal
       text={text}
       minHeight={20 * 16}
-      viewOnly={viewOnly}
+      viewOnly={!canEdit}
       type={CellTypes.TEXT}
       onChange={handleChangeValue}
     >
