@@ -1,52 +1,48 @@
 // Types
-import { ColumnType, type TablePermissions } from '../types'
-
-function getAllTypeColumns(): ColumnType[] {
-  return Object.values(ColumnType) as ColumnType[]
-}
+import type { TablePermissions } from '../types'
 
 export const DEFAULT_PERMISSIONS: TablePermissions = {
   columns: {
-    create: { enabled: true, types: true },
-    name: { enabled: true, types: true },
+    create: { enabled: false, types: [] },
+    name: { enabled: false, types: [] },
     edit: {
-      enabled: true,
-      types: true,
+      enabled: false,
+      types: [],
       properties: {
-        format: true,
-        options: true,
-        formula: true,
-        decimals: true,
-        dateFormat: true,
-        richText: true
+        format: [],
+        options: [],
+        formula: [],
+        decimals: [],
+        dateFormat: [],
+        richText: []
       }
     },
     changeType: {
-      enabled: true,
+      enabled: false,
       rules: {
-        date: getAllTypeColumns(),
-        page: getAllTypeColumns(),
-        phone: getAllTypeColumns(),
-        email: getAllTypeColumns(),
-        number: getAllTypeColumns(),
-        select: getAllTypeColumns(),
-        formula: getAllTypeColumns(),
-        checkbox: getAllTypeColumns(),
-        rich_text: getAllTypeColumns(),
-        multi_select: getAllTypeColumns()
+        date: [],
+        page: [],
+        phone: [],
+        email: [],
+        number: [],
+        select: [],
+        formula: [],
+        checkbox: [],
+        rich_text: [],
+        multi_select: []
       }
     },
-    hide: { enabled: true, types: true },
-    filter: { enabled: true, types: true },
-    delete: { enabled: true, types: true },
-    freeze: { enabled: true, types: true },
-    expand: { enabled: true, types: true },
-    duplicate: { enabled: true, types: true },
-    calculate: { enabled: true, types: true }
+    hide: { enabled: false, types: [] },
+    filter: { enabled: false, types: [] },
+    delete: { enabled: false, types: [] },
+    freeze: { enabled: false, types: [] },
+    expand: { enabled: false, types: [] },
+    duplicate: { enabled: false, types: [] },
+    calculate: { enabled: false, types: [] }
   },
   rows: {
-    create: { enabled: true },
-    edit: { enabled: true, columnTypes: true },
-    delete: { enabled: true }
+    create: { enabled: false },
+    edit: { enabled: false, columnTypes: [] },
+    delete: { enabled: false }
   }
 }

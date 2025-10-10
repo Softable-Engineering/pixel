@@ -8,6 +8,7 @@ import { FormulaModal } from '../../modals/FormulaModal'
 
 // Hooks
 import { useTableView } from './hooks/useTableView'
+import { useTableViewContext } from '../../contexts/useTableViewContext'
 
 // Utils
 import { resolveRow } from '../../utils'
@@ -31,17 +32,21 @@ export const TableViewInner = <T,>(props: Props<T>) => {
   }, [props.columns, props.data, props.locale])
 
   // Hooks
+  const { permissions } = useTableViewContext()
   const { formulaModalRef, normalizedColumns } = useTableView(props)
 
   // Functions
   function getFooter() {
-    if (props.viewOnly) return null
+    const rowPermissions = permissions.rows.create
+    if (rowPermissions.enabled === false) return null
 
     return <Footer onManagementHeader={props.onManagementHeader} />
   }
 
   function renderActionsButtons() {
-    if (props.viewOnly) return null
+    const columnPermissions = permissions.columns.create
+
+    if (columnPermissions.enabled === false) return null
 
     return <ActionsButtons {...props} />
   }

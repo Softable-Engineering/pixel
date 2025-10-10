@@ -12,6 +12,7 @@ import type { Props } from './types'
 import { TableViewInner } from './components/TableViewInner'
 
 export * from './types'
+export * from './utils/functions'
 
 export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
   return (
