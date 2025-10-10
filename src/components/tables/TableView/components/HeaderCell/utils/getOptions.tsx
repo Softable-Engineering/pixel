@@ -27,7 +27,7 @@ interface GetOptionsParams<T> {
   column: ColumnDef<T>
   permissions: TablePermissions
   onChangeTypeColumn: (type: ColumnType) => void
-  onOpenFormulaModal: () => void
+  onOpenFormulaModal: (columnId: string, formula?: string) => void
 }
 
 export function getOptions<T>({
@@ -44,7 +44,7 @@ export function getOptions<T>({
           label: 'Editar propriedade',
           icon: <Settings color="var(--text-color)" />,
           type: 'group',
-          children: getGroupModal(column.type, permissions, onOpenFormulaModal)
+          children: getGroupModal(column, permissions, onOpenFormulaModal)
         },
         {
           id: ColumnActions.UpdateTypeColumn,
@@ -114,12 +114,12 @@ export function getOptions<T>({
   ]
 }
 
-function getGroupModal(
-  typeColumn: ColumnType,
+function getGroupModal<T>(
+  column: ColumnDef<T>,
   permissions: TablePermissions,
-  onOpenFormulaModal: () => void
+  onOpenFormulaModal: (columnId: string, formula?: string) => void
 ) {
-  const isFormula = typeColumn === ColumnType.FORMULA
+  const isFormula = column.type === ColumnType.FORMULA
   const editPermissions = permissions.columns.edit.properties
 
   if (isFormula && editPermissions.formula === true)
@@ -132,7 +132,7 @@ function getGroupModal(
             startIcon: <PencilIcon color="var(--text-color)" />
           }
         ]}
-        onClick={onOpenFormulaModal}
+        onClick={() => onOpenFormulaModal(column.id, column.formula)}
       />
     )
 }

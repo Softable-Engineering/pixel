@@ -142,6 +142,8 @@ export interface ManagementAddColumn {
 
 export interface ManagementPropertieChange {
   type: ColumnActions.ChangeFormula
+  columnId: string
+  formula: string
 }
 
 export type ManagementHeaderParams =

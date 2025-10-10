@@ -1,3 +1,5 @@
+import type { ManagementHeaderParams } from '../../types'
+
 export enum ColumnType {
   DATE = 'date',
   PAGE = 'page',
@@ -51,10 +53,11 @@ export type BaseColumn = {
 export type Column = BaseColumn & ColumnProperties
 
 export interface FormulaModalMethods {
-  open: () => void
+  open: (columnId: string, formula?: string) => void
   close: () => void
 }
 
 export interface FormulaModalProps {
   columns: Column[]
+  onManagementHeader: (data: ManagementHeaderParams) => void
 }

@@ -29,7 +29,7 @@ interface Props<T> {
   icon: ReactNode
   viewOnly?: boolean
   column: ColumnDef<T>
-  onOpenFormulaModal: () => void
+  onOpenFormulaModal: (columnId: string, formula?: string) => void
   onManagementHeader: (action: ManagementHeaderParams) => void
 }
 
@@ -76,6 +76,7 @@ export const HeaderCell = <T,>({
   function handleClickOption(action: ColumnActions) {
     if (action === ColumnActions.Calculate) return
     if (action === ColumnActions.AddColumn) return
+    if (action === ColumnActions.ChangeFormula) return
     if (action === ColumnActions.UpdateProperty) return
     if (action === ColumnActions.UpdateColumnName) return
     if (action === ColumnActions.UpdateTypeColumn)

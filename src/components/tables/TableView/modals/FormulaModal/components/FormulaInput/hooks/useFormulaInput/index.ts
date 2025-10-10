@@ -36,7 +36,7 @@ export function useFormulaInput({
     }
 
     if (formula) {
-      editorRef.current.insertText(formula)
+      editorRef.current.deserialize(formula)
     }
 
     const onInput = (e: Event) => editorRef.current?.handleInput()
@@ -59,7 +59,7 @@ export function useFormulaInput({
   }
 
   function setupFormula(f: string) {
-    console.log('setupFormula', f)
+    editorRef.current?.deserialize(f)
   }
 
   function focus() {

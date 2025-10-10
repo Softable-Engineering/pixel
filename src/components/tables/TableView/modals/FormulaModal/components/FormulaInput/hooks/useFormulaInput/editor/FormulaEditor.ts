@@ -47,6 +47,15 @@ export class FormulaEditor {
     return this.parser.serialize(this.element)
   }
 
+  public deserialize(formula: string) {
+    const text = this.parser.deserialize(formula)
+
+    this.element.innerHTML = text
+    this.applyTokenization()
+
+    this.cursorManager.restoreOffset(text.length)
+  }
+
   public getElement(): HTMLElement {
     return this.element
   }
@@ -62,6 +71,7 @@ export class FormulaEditor {
     range.insertNode(document.createTextNode(textToInsert))
 
     const { text, columnPositions } = this.parser.extractText(this.element)
+
     const tokens = this.tokenizer.tokenize(text)
     this.renderer.render(tokens, columnPositions)
 

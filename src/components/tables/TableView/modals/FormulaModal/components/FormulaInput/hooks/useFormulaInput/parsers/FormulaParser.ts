@@ -43,6 +43,15 @@ export class FormulaParser {
     return result
   }
 
+  public deserialize(formula: string): string {
+    const deserializedText = formula.replace(
+      /([^:\s]+)::[^\s]*/g,
+      (_, id) => `[col:${id}]`
+    )
+
+    return deserializedText
+  }
+
   public getLastWord(element: HTMLElement): string {
     const text = element.innerText || ''
 

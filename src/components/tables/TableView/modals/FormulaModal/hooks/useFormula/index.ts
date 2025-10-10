@@ -26,6 +26,8 @@ export function useFormula({ columns }: UseFormulaParams) {
   // States
   const [path, setPath] = useState([0, 0])
   const [search, setSearch] = useState('')
+  const [formula, setFormula] = useState('')
+  const [columnId, setColumnId] = useState('')
   const [visible, setVisible] = useState(false)
   const [availableItems, setAvailableItems] = useState<OptionsGroup[]>([])
 
@@ -88,7 +90,10 @@ export function useFormula({ columns }: UseFormulaParams) {
     return { open: handleOpen, close: handleClose }
   }
 
-  function handleOpen() {
+  function handleOpen(columnId: string, formula?: string) {
+    setColumnId(columnId)
+    setFormula(formula || '')
+
     setVisible(true)
   }
 
@@ -100,8 +105,10 @@ export function useFormula({ columns }: UseFormulaParams) {
   return {
     path,
     search,
+    formula,
     visible,
     inputRef,
+    columnId,
     availableItems,
     handleClose,
     onOptionClick,

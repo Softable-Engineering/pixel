@@ -25,7 +25,7 @@ import type { CustomColumnDef, CustomData } from '@components/tables/DataTable'
 export function getContent<T>(
   column: ColumnDef<T>,
   onManagementHeader: (params: ManagementHeaderParams) => void,
-  onOpenFormulaModal: () => void,
+  onOpenFormulaModal: (columnId: string, formula?: string) => void,
   viewOnly?: boolean
 ) {
   const typeColumn = column.type

@@ -23,8 +23,8 @@ export function useTableView<T>(props: Props<T>) {
   }, [props?.permissions])
 
   // Functions
-  function handleOpenFormulaModal() {
-    formulaModalRef.current?.open()
+  function handleOpenFormulaModal(columnId: string, formula?: string) {
+    formulaModalRef.current?.open(columnId, formula)
   }
 
   // Constants

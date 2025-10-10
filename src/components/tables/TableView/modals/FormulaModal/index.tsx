@@ -7,17 +7,20 @@ import { Header } from './components/Header'
 import { Preview } from './components/Preview'
 import { Modal } from '@components/commons/modals/Modal'
 import { FormulaInput } from './components/FormulaInput'
+import { OptionsListPanel } from './components/OptionsListPanel'
 
 // Hooks
 import { useFormula } from './hooks/useFormula'
 
+// Utils
+import { FUNCTIONS } from './utils'
+
 // Types
+import { ColumnActions } from '../../types'
 import type { FormulaModalProps, FormulaModalMethods } from './types'
 
 // Styles
 import { Container, Content, Row } from './styles'
-import { OptionsListPanel } from './components/OptionsListPanel'
-import { FUNCTIONS } from './utils'
 
 export const FormulaModal = React.forwardRef<
   FormulaModalMethods,
@@ -27,7 +30,9 @@ export const FormulaModal = React.forwardRef<
   const {
     path,
     visible,
+    formula,
     inputRef,
+    columnId,
     availableItems,
     handleClose,
     onOptionClick,
@@ -53,6 +58,19 @@ export const FormulaModal = React.forwardRef<
     return () => document.removeEventListener('keydown', keyDown)
   }, [visible, handleClose, handleKeyDown])
 
+  // Functions
+  function applyChangeFormula() {
+    const formula = inputRef.current?.serialize()
+
+    if (columnId && formula) {
+      props.onManagementHeader({
+        formula,
+        columnId,
+        type: ColumnActions.ChangeFormula
+      })
+    }
+  }
+
   return (
     <Modal
       hideHeader
@@ -61,14 +79,12 @@ export const FormulaModal = React.forwardRef<
       onClose={handleClose}
     >
       <Container>
-        <Header
-          title="Edit formula"
-          onDone={() => console.log(inputRef.current?.serialize())}
-        />
+        <Header title="Edit formula" onDone={applyChangeFormula} />
 
         <Content>
           <FormulaInput
             ref={inputRef}
+            formula={formula}
             functions={FUNCTIONS}
             columns={props.columns}
             onChangeSearch={handleChangeSearch}

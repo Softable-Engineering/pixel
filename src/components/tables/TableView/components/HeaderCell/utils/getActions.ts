@@ -14,7 +14,7 @@ export interface GetActionsParams<T> {
   permissions: TablePermissions
   column: ColumnDef<T>
   onChangeTypeColumn: (type: ColumnType) => void
-  onOpenFormulaModal: () => void
+  onOpenFormulaModal: (columnId: string, formula?: string) => void
 }
 
 export function getActions<T>(params: GetActionsParams<T>) {

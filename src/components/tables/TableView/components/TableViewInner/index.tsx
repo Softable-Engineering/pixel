@@ -61,7 +61,11 @@ export const TableViewInner = <T,>(props: Props<T>) => {
         actionsColumn={renderActionsButtons()}
       />
 
-      <FormulaModal ref={formulaModalRef} columns={formulaColumns} />
+      <FormulaModal
+        ref={formulaModalRef}
+        columns={formulaColumns}
+        onManagementHeader={props.onManagementHeader}
+      />
     </Container>
   )
 }
