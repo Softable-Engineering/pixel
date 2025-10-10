@@ -38,7 +38,7 @@ export function getContent<T>(
       title={title}
       column={column}
       viewOnly={viewOnly}
-      onClickOption={onManagementHeader}
+      onManagementHeader={onManagementHeader}
       onOpenFormulaModal={onOpenFormulaModal}
     />
   )

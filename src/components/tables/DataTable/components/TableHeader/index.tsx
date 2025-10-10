@@ -51,7 +51,7 @@ export const TableHeader = <T,>({
 
               return (
                 <DraggableColumnHeader<T>
-                  key={header.id}
+                  key={`column_header_${header.id}_${index}`}
                   header={header}
                   canResetResize={canResetResize}
                   hasHorizontalDivider={hasHorizontalDivider}

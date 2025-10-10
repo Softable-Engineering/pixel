@@ -83,7 +83,7 @@ export const DraggableRow = <T,>({
 
         return (
           <TableCell<T>
-            key={cell.id}
+            key={`row_${cell.id}_${index}`}
             row={row}
             cell={cell}
             cellPadding={cellPadding}

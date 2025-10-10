@@ -30,7 +30,7 @@ interface Props<T> {
   viewOnly?: boolean
   column: ColumnDef<T>
   onOpenFormulaModal: () => void
-  onClickOption: (action: ManagementHeaderParams) => void
+  onManagementHeader: (action: ManagementHeaderParams) => void
 }
 
 export const HeaderCell = <T,>({
@@ -38,7 +38,7 @@ export const HeaderCell = <T,>({
   title,
   column,
   viewOnly,
-  onClickOption,
+  onManagementHeader,
   onOpenFormulaModal
 }: Props<T>) => {
   // Refs
@@ -79,21 +79,29 @@ export const HeaderCell = <T,>({
     if (action === ColumnActions.UpdateProperty) return
     if (action === ColumnActions.UpdateColumnName) return
     if (action === ColumnActions.UpdateTypeColumn)
-      return onClickOption({
+      return onManagementHeader({
         type: action,
         columnId: column.id,
         typeColumn: ColumnType.EMAIL
       })
 
-    onClickOption({ type: action, columnId: column.id })
+    onManagementHeader({ type: action, columnId: column.id })
     handleClosePanel()
   }
 
   function handleChangeTypeColumn(type: ColumnType) {
-    return onClickOption({
+    return onManagementHeader({
       typeColumn: type,
       columnId: column.id,
       type: ColumnActions.UpdateTypeColumn
+    })
+  }
+
+  function handleChangeColumnName(name: string) {
+    return onManagementHeader({
+      name,
+      columnId: column.id,
+      type: ColumnActions.UpdateColumnName
     })
   }
 
@@ -109,7 +117,7 @@ export const HeaderCell = <T,>({
         options={groupOptions}
         placement="bottom-start"
         wrapperId="table-column-actions-panel"
-        header={<Header value={title} onChange={console.log} />}
+        header={<Header value={title} onChange={handleChangeColumnName} />}
         onClose={handleClosePanel}
         onClick={handleClickOption}
       />
