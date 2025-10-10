@@ -1,5 +1,6 @@
 export * from './cell'
 export * from './columns'
+export * from './deepPartial'
 export * from './general'
 export * from './permission'
 export * from './rows'
