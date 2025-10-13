@@ -34,7 +34,14 @@ export class FormulaParser {
     element.childNodes.forEach(node => {
       if (this.isColumnElement(node)) {
         const el = node as HTMLElement
-        result += `${el.dataset.id}::${el.textContent ?? ''}`
+
+        const labelEl = el.querySelector('.column-label') as HTMLElement | null
+
+        const label = labelEl
+          ? (labelEl.textContent ?? '').trim()
+          : (el.dataset.label ?? '').trim()
+
+        result += `${el.dataset.id}::${label}`
       } else {
         result += node.textContent || ''
       }
