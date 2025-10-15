@@ -28,8 +28,7 @@ export function getIcon(type: ColumnType) {
     return <ListIcon color="var(--text-color)" />
   if (type === ColumnType.CHECKBOX)
     return <CheckboxIcon color="var(--text-color)" />
-  if (type === ColumnType.FORMULA)
-    return <SigmaIcon color="var(--text-color)" />
+  if (type === ColumnType.FORMULA) return <SigmaIcon color="var(--primary)" />
 
   return null
 }

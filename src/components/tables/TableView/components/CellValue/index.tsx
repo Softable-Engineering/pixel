@@ -30,6 +30,9 @@ export const CellValue: React.FC<Props> = props => {
     return <CheckboxCell {...props} />
   }
 
+  if (props.type === ColumnType.FORMULA) {
+  }
+
   return (
     <Container>
       <Typography variant="b2">Tipo de celula não encontrado!</Typography>

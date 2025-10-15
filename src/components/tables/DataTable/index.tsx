@@ -6,8 +6,10 @@ import { DndContext, closestCenter } from '@dnd-kit/core'
 
 // Components
 import { TableBody } from './components/TableBody'
+import { ResultsRow } from './components/ResultsRow'
 import { TableHeader } from './components/TableHeader'
 import { Skeleton } from '@components/structure/Skeleton'
+import { Portal } from '@components/commons/modals/Portal'
 
 // Hooks
 import { useDataTable } from './hooks/useDataTable'
@@ -29,6 +31,8 @@ interface Props<T> {
   data: CustomData<T>[]
   borderColor?: string
   headerColor?: string
+  stickyPortalId?: string
+  showResultsRow?: boolean
   textColorHeader?: string
   canResetResize?: boolean
   actionsColumn?: ReactNode
@@ -54,6 +58,8 @@ export const DataTable = <T,>({
   cellPadding,
   tableStyles,
   actionsColumn,
+  showResultsRow,
+  stickyPortalId,
   textColorHeader,
   fitWidth = false,
   canResetResize = false,
@@ -82,6 +88,23 @@ export const DataTable = <T,>({
     onReorder
   })
 
+  // Functions
+  function renderResultsRow() {
+    if (!showResultsRow) return null
+
+    if (stickyPortalId) {
+      return (
+        <Portal wrapperId={stickyPortalId}>
+          <ResultsRow table={table} enableRowReordering={enableRowReordering} />
+        </Portal>
+      )
+    }
+
+    return (
+      <ResultsRow table={table} enableRowReordering={enableRowReordering} />
+    )
+  }
+
   if (loading) {
     return (
       <LoaderContainer>
@@ -99,6 +122,7 @@ export const DataTable = <T,>({
         $borderColor={borderColor}
         $hasBorder={!actionsColumn}
       >
+        {/* <Portal wrapperId="table-column-actions-panel"> */}
         <DndContext
           sensors={sensors}
           onDragEnd={handleDragEnd}
@@ -118,6 +142,7 @@ export const DataTable = <T,>({
             enableColumnOrdering={enableColumnOrdering}
           />
         </DndContext>
+        {/* </Portal> */}
 
         <DndContext
           sensors={sensors}
@@ -138,6 +163,8 @@ export const DataTable = <T,>({
         </DndContext>
 
         {footer}
+
+        {renderResultsRow()}
       </Content>
     </Container>
   )

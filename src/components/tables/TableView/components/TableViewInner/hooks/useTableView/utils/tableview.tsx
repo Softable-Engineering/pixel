@@ -189,6 +189,9 @@ export function renderCell<T>({
     )
   }
 
+  if (column.type === ColumnType.FORMULA) {
+  }
+
   return <Typography variant="b2">{value}</Typography>
 }
 
@@ -199,6 +202,7 @@ export function getColumns<T>(
 
   return columns.map(column => ({
     id: column.header,
+    result: column.result,
     cell: info => info.getValue(),
     header: () =>
       getContent<T>(

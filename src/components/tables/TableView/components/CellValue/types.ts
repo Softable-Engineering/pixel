@@ -4,6 +4,7 @@ import type {
   TextColumn,
   SelectColumn,
   NumberColumn,
+  FormulaColumn,
   CheckBoxColumn,
   MultiSelectColumn
 } from '../../types'
@@ -38,11 +39,16 @@ export type BaseCheckbox = CheckBoxColumn & {
   onChange: (checked: boolean) => void
 }
 
+export type BaseFormula = FormulaColumn & {
+  value: string
+}
+
 export type Variant =
   | BaseText
   | BaseDate
   | BaseSelect
   | BaseNumber
+  | BaseFormula
   | BaseCheckbox
   | BaseMultiSelect
 

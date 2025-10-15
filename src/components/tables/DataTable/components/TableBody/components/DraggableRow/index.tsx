@@ -52,7 +52,8 @@ export const DraggableRow = <T,>({
   const showActionsCell = enableRowReordering && (hover || isSelected)
   const style: CSSProperties = {
     transform: transform ? `translateY(${transform.y}px)` : undefined,
-    opacity: isDragging ? 0.6 : 1
+    opacity: hover ? 0.8 : isDragging ? 0.5 : 1,
+    transition: '0.5s'
   }
 
   return (

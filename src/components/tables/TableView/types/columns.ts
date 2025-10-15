@@ -21,6 +21,7 @@ export type ResponseAccessor = string | string[] | boolean
 export type Column<T> = {
   id: string
   header: string
+  result?: string
   accessorFn: (row: T) => ResponseAccessor
 }
 

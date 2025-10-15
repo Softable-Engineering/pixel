@@ -55,10 +55,12 @@ export const TableViewInner = <T,>(props: Props<T>) => {
     <Container id="table-column-actions-panel">
       <DataTable<T>
         {...props}
+        showResultsRow
         cellPadding="1px"
         footer={getFooter()}
         columns={normalizedColumns}
         actionsColumn={renderActionsButtons()}
+        stickyPortalId="table-column-actions-panel"
       />
 
       <FormulaModal

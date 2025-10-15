@@ -5,6 +5,7 @@ export interface ColumnProps {
 }
 
 export type CustomColumnDef<T> = AccessorFnColumnDef<T, unknown> & {
+  result?: string
   onClick?: (row: T) => void
 }
 
