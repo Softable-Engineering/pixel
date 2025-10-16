@@ -23,7 +23,7 @@ export function useTableView<T>(props: Props<T>) {
   }, [props?.permissions])
 
   // Functions
-  function handleOpenFormulaModal(columnId: string, formula?: string) {
+  function handleOpenFormulaModal(columnId?: string, formula?: string) {
     formulaModalRef.current?.open(columnId, formula)
   }
 
@@ -33,9 +33,14 @@ export function useTableView<T>(props: Props<T>) {
     onOpenFormulaModal: handleOpenFormulaModal
   })
 
+  function handleRefMethods() {
+    return { newFormulaColumn: handleOpenFormulaModal }
+  }
+
   return {
     formulaModalRef,
     normalizedColumns,
+    handleRefMethods,
     handleOpenFormulaModal
   }
 }

@@ -53,7 +53,7 @@ export type BaseColumn = {
 export type Column = BaseColumn & ColumnProperties
 
 export interface FormulaModalMethods {
-  open: (columnId: string, formula?: string) => void
+  open: (columnId?: string, formula?: string) => void
   close: () => void
 }
 

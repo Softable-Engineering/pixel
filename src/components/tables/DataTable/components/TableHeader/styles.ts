@@ -15,8 +15,12 @@ interface ActionsCellProps {
 }
 
 export const Container = styled.div<ContainerProps>`
+  position: sticky;
+  top: 0;
+
+  z-index: 10;
   overflow: hidden;
-  background-color: ${({ $headColor }) => $headColor ?? 'transparent'};
+  background-color: ${({ theme }) => theme.colors.background.primary};
 
   svg path {
     fill: ${({ $textColorHeader }) =>

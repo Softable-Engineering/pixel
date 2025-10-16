@@ -90,8 +90,8 @@ export function useFormula({ columns }: UseFormulaParams) {
     return { open: handleOpen, close: handleClose }
   }
 
-  function handleOpen(columnId: string, formula?: string) {
-    setColumnId(columnId)
+  function handleOpen(columnId?: string, formula?: string) {
+    setColumnId(columnId || '')
     setFormula(formula || '')
 
     setVisible(true)

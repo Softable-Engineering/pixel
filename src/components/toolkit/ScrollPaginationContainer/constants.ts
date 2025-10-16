@@ -1,0 +1,1 @@
+export const DEFAULT_SCROLL_END_THRESHOLD: number = 2000

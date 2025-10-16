@@ -104,6 +104,7 @@ export enum ColumnActions {
   Freeze = 'freeze-column',
   ExpandedColumn = 'expanded-column',
   AddColumn = 'add-column',
+  AddFormulaColumn = 'add-formula-column',
   AddLine = 'add-line'
 }
 
@@ -141,6 +142,12 @@ export interface ManagementAddColumn {
   typeColumn: ColumnType
 }
 
+export interface ManagementAddFormulaColumn {
+  type: ColumnActions.AddFormulaColumn
+  typeColumn: ColumnType.FORMULA
+  formula: string
+}
+
 export interface ManagementPropertieChange {
   type: ColumnActions.ChangeFormula
   columnId: string
@@ -148,9 +155,10 @@ export interface ManagementPropertieChange {
 }
 
 export type ManagementHeaderParams =
+  | ManagementAddLine
+  | ManagementAddColumn
   | ManagementHeaderName
   | ManagementHeaderType
-  | ManagementAddColumn
   | ManagementPropertieChange
+  | ManagementAddFormulaColumn
   | ManagementHeaderSimpleAction
-  | ManagementAddLine

@@ -1,5 +1,11 @@
 // External Libraries
-import { useMemo } from 'react'
+import {
+  forwardRef,
+  type ReactNode,
+  type Ref,
+  useImperativeHandle,
+  useMemo
+} from 'react'
 
 // Components
 import { Footer } from '../Footer'
@@ -15,12 +21,12 @@ import { resolveRow } from '../../utils'
 import { ActionsButtons } from '../ActionsButtons'
 
 // Types
-import type { Props } from '../../types'
+import type { Props, TableViewMethods } from '../../types'
 
 // Styles
 import { Container } from './styles'
 
-export const TableViewInner = <T,>(props: Props<T>) => {
+export const TableInner = <T,>(props: Props<T>, ref: Ref<TableViewMethods>) => {
   // Constants
   const formulaColumns = useMemo(() => {
     if (!props.data.length) return []
@@ -33,7 +39,9 @@ export const TableViewInner = <T,>(props: Props<T>) => {
 
   // Hooks
   const { permissions } = useTableViewContext()
-  const { formulaModalRef, normalizedColumns } = useTableView(props)
+  const { formulaModalRef, normalizedColumns, handleRefMethods } =
+    useTableView(props)
+  useImperativeHandle(ref, handleRefMethods)
 
   // Functions
   function getFooter() {
@@ -71,3 +79,8 @@ export const TableViewInner = <T,>(props: Props<T>) => {
     </Container>
   )
 }
+
+export const TableViewContainer = forwardRef(TableInner) as <T>(
+  props: Props<T> & { ref?: Ref<TableViewMethods> },
+  ref: Ref<TableViewMethods>
+) => ReactNode

@@ -1,3 +1,6 @@
+// External Libraries
+import { forwardRef, type ReactNode, type Ref } from 'react'
+
 // Components
 import type { BaseCustomData } from '../DataTable'
 
@@ -6,20 +9,28 @@ import { ModalContextProvider } from '@contexts/useModalContext'
 import { TableViewContextProvider } from './contexts/useTableViewContext'
 
 // Types
-import type { Props } from './types'
+import type { Props, TableViewMethods } from './types'
 
 // Styles
-import { TableViewInner } from './components/TableViewInner'
+import { TableViewContainer } from './components/TableViewInner'
 
 export * from './types'
 export * from './utils/functions'
 
-export const TableView = <T extends BaseCustomData>(props: Props<T>) => {
+export const TableInner = <T extends BaseCustomData>(
+  props: Props<T>,
+  ref: Ref<TableViewMethods>
+) => {
   return (
     <TableViewContextProvider>
       <ModalContextProvider>
-        <TableViewInner {...props} />
+        <TableViewContainer {...props} ref={ref} />
       </ModalContextProvider>
     </TableViewContextProvider>
   )
 }
+
+export const TableView = forwardRef(TableInner) as <T extends BaseCustomData>(
+  props: Props<T> & { ref?: Ref<TableViewMethods> },
+  ref: Ref<TableViewMethods>
+) => ReactNode

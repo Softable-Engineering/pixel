@@ -22,7 +22,9 @@ export const Container = styled.div<ContainerProps>`
   --border-color: ${({ $borderColor, theme }) =>
     $borderColor ?? theme.colors.border.primary};
 
-  padding-left: ${({ $enableRowReordering }) => ($enableRowReordering ? '4rem' : 0)};
+  & > div {
+    padding-left: ${({ $enableRowReordering }) => ($enableRowReordering ? '4rem' : 0)};
+  }
 `
 
 export const Content = styled.div<ContainerProps>`

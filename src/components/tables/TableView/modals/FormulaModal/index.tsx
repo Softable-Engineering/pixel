@@ -17,7 +17,11 @@ import { FUNCTIONS } from './utils'
 
 // Types
 import { ColumnActions } from '../../types'
-import type { FormulaModalProps, FormulaModalMethods } from './types'
+import {
+  type FormulaModalProps,
+  type FormulaModalMethods,
+  ColumnType
+} from './types'
 
 // Styles
 import { Container, Content, Row } from './styles'
@@ -69,6 +73,16 @@ export const FormulaModal = React.forwardRef<
         type: ColumnActions.ChangeFormula
       })
     }
+
+    if (!columnId && formula) {
+      props.onManagementHeader({
+        formula,
+        typeColumn: ColumnType.FORMULA,
+        type: ColumnActions.AddFormulaColumn
+      })
+    }
+
+    handleClose()
   }
 
   return (
