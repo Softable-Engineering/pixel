@@ -201,7 +201,7 @@ export function getColumns<T>(
   const { columns, onManagementHeader } = props
 
   return columns.map(column => ({
-    id: column.header,
+    id: column.id,
     result: column.result,
     cell: info => info.getValue(),
     header: () =>
