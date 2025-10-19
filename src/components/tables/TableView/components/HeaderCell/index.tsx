@@ -15,7 +15,7 @@ import { getActions } from './utils'
 
 // Types
 import {
-  ColumnType,
+  type ColumnType,
   ColumnActions,
   type ColumnDef,
   type ManagementHeaderParams
@@ -48,6 +48,11 @@ export const HeaderCell = <T,>({
   const { permissions } = useTableViewContext()
 
   // Constants
+  const namePermission = permissions.columns.name
+  const showNameInput =
+    namePermission.enabled === true && Array.isArray(namePermission.types)
+      ? namePermission.types.includes(column.type)
+      : namePermission.types === true
   const groupOptions = useMemo(() => {
     const params = {
       column,
@@ -64,7 +69,7 @@ export const HeaderCell = <T,>({
 
   // Functions
   function handleOpenPanel() {
-    if (!groupOptions.length) return null
+    if (!groupOptions.length && !showNameInput) return null
 
     setIsOpen(true)
   }
@@ -79,12 +84,8 @@ export const HeaderCell = <T,>({
     if (action === ColumnActions.ChangeFormula) return
     if (action === ColumnActions.UpdateProperty) return
     if (action === ColumnActions.UpdateColumnName) return
-    if (action === ColumnActions.UpdateTypeColumn)
-      return onManagementHeader({
-        type: action,
-        columnId: column.id,
-        typeColumn: ColumnType.EMAIL
-      })
+    if (action === ColumnActions.UpdateTypeColumn) return
+    if (action === ColumnActions.AddFormulaColumn) return
 
     onManagementHeader({ type: action, columnId: column.id })
     handleClosePanel()
@@ -106,6 +107,12 @@ export const HeaderCell = <T,>({
     })
   }
 
+  function renderHeader() {
+    if (!showNameInput) return null
+
+    return <Header value={title} onChange={handleChangeColumnName} />
+  }
+
   return (
     <Container onClick={handleOpenPanel} ref={containerRef}>
       {icon}
@@ -118,7 +125,7 @@ export const HeaderCell = <T,>({
         options={groupOptions}
         placement="bottom-start"
         wrapperId="table-column-actions-panel"
-        header={<Header value={title} onChange={handleChangeColumnName} />}
+        header={renderHeader()}
         onClose={handleClosePanel}
         onClick={handleClickOption}
       />
