@@ -21,11 +21,11 @@ export const ResultsRow = <T,>({ table, enableRowReordering }: Props<T>) => {
 
   // Functions
   function renderCells() {
-    return headers.map(header => {
+    return headers.map((header, index) => {
       const col = header.column.columnDef as CustomColumnDef<CustomData<T>>
       return (
         <ResultsCell
-          key={`result_cell_${header.id}`}
+          key={`result_cell_${header.id}_${index}`}
           style={{ width: header.getSize() }}
         >
           <Typography variant="b1">{col.result}</Typography>
