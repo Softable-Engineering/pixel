@@ -43,6 +43,7 @@ export const HeaderCell = <T,>({
 }: Props<T>) => {
   // Refs
   const containerRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   // States
   const [name, setName] = useState(title)
@@ -78,7 +79,8 @@ export const HeaderCell = <T,>({
   }
 
   function handleClosePanel() {
-    if (title !== name) handleChangeColumnName(name)
+    if (title !== inputRef.current?.value)
+      return handleChangeColumnName(inputRef.current?.value ?? name)
 
     setIsOpen(false)
   }
@@ -115,7 +117,7 @@ export const HeaderCell = <T,>({
   function renderHeader() {
     if (!showNameInput) return null
 
-    return <Header value={name} onChange={setName} />
+    return <Header ref={inputRef} value={name} onChange={setName} />
   }
 
   return (

@@ -1,5 +1,5 @@
 // External Libraries
-import type React from 'react'
+import { forwardRef } from 'react'
 
 // Styles
 import { Container, InputField } from './styles'
@@ -9,14 +9,17 @@ interface Props {
   onChange: (value: string) => void
 }
 
-export const Header: React.FC<Props> = ({ value, onChange }) => {
-  return (
-    <Container>
-      <InputField
-        autoFocus
-        value={value}
-        onChange={e => onChange(e.target.value)}
-      />
-    </Container>
-  )
-}
+export const Header = forwardRef<HTMLInputElement, Props>(
+  ({ value, onChange }, ref) => {
+    return (
+      <Container>
+        <InputField
+          ref={ref}
+          autoFocus
+          value={value}
+          onChange={e => onChange(e.target.value)}
+        />
+      </Container>
+    )
+  }
+)
