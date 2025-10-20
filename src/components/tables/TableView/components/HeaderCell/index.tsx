@@ -79,8 +79,9 @@ export const HeaderCell = <T,>({
   }
 
   function handleClosePanel() {
-    if (title !== inputRef.current?.value)
-      return handleChangeColumnName(inputRef.current?.value ?? name)
+    if (title !== inputRef.current?.value) {
+      handleChangeColumnName(inputRef.current?.value ?? name)
+    }
 
     setIsOpen(false)
   }
