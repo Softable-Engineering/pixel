@@ -44,6 +44,9 @@ export const HeaderCell = <T,>({
   // Refs
   const containerRef = useRef<HTMLDivElement>(null)
 
+  // States
+  const [name, setName] = useState(title)
+
   // Hooks
   const { permissions } = useTableViewContext()
 
@@ -75,6 +78,8 @@ export const HeaderCell = <T,>({
   }
 
   function handleClosePanel() {
+    if (title !== name) handleChangeColumnName(name)
+
     setIsOpen(false)
   }
 
@@ -110,7 +115,7 @@ export const HeaderCell = <T,>({
   function renderHeader() {
     if (!showNameInput) return null
 
-    return <Header value={title} onChange={handleChangeColumnName} />
+    return <Header value={name} onChange={setName} />
   }
 
   return (

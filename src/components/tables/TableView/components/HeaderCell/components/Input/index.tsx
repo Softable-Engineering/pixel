@@ -1,8 +1,6 @@
 // External Libraries
 import type React from 'react'
 
-// Components
-
 // Styles
 import { Container, InputField } from './styles'
 
