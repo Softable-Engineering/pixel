@@ -28,7 +28,7 @@ export const COUNT: FunctionDescriptor = {
   value: 'count',
   displayName: 'COUNT()',
   params: ['...number'],
-  description: 'Média dos argumentos',
+  description: 'Contagem dos argumentos',
   evaluateForPreview: (...args: any[]) => {
     return '-'
   }
@@ -38,7 +38,7 @@ export const MAX: FunctionDescriptor = {
   value: 'max',
   displayName: 'MAX()',
   params: ['...number'],
-  description: 'Média dos argumentos',
+  description: 'Máximo dos argumentos',
   evaluateForPreview: (...args: any[]) => {
     return '-'
   }
@@ -46,9 +46,9 @@ export const MAX: FunctionDescriptor = {
 
 export const MIN: FunctionDescriptor = {
   value: 'min',
-  displayName: 'MAX()',
+  displayName: 'MIN()',
   params: ['...number'],
-  description: 'Média dos argumentos',
+  description: 'Mínimo dos argumentos',
   evaluateForPreview: (...args: any[]) => {
     return '-'
   }
@@ -57,8 +57,8 @@ export const MIN: FunctionDescriptor = {
 export const YEAR_FROM: FunctionDescriptor = {
   value: 'year_from',
   displayName: 'YEAR_FROM()',
-  params: ['...number'],
-  description: 'Média dos argumentos',
+  params: ['date'],
+  description: 'Ano da data',
   evaluateForPreview: (...args: any[]) => {
     return '-'
   }
@@ -67,8 +67,8 @@ export const YEAR_FROM: FunctionDescriptor = {
 export const MONTH_FROM: FunctionDescriptor = {
   value: 'month_from',
   displayName: 'MONTH_FROM()',
-  params: ['...number'],
-  description: 'Média dos argumentos',
+  params: ['date'],
+  description: 'Mês da data',
   evaluateForPreview: (...args: any[]) => {
     return '-'
   }
@@ -77,8 +77,8 @@ export const MONTH_FROM: FunctionDescriptor = {
 export const DAY_FROM: FunctionDescriptor = {
   value: 'day_from',
   displayName: 'DAY_FROM()',
-  params: ['...number'],
-  description: 'Média dos argumentos',
+  params: ['date'],
+  description: 'Dia da data',
   evaluateForPreview: (...args: any[]) => {
     return '-'
   }
@@ -87,8 +87,8 @@ export const DAY_FROM: FunctionDescriptor = {
 export const DAY_OF_WEEK: FunctionDescriptor = {
   value: 'day_of_week',
   displayName: 'DAY_OF_WEEK()',
-  params: ['...number'],
-  description: 'Média dos argumentos',
+  params: ['date'],
+  description: 'Dia da semana da data',
   evaluateForPreview: (...args: any[]) => {
     return '-'
   }
@@ -97,8 +97,8 @@ export const DAY_OF_WEEK: FunctionDescriptor = {
 export const HOUR_FROM: FunctionDescriptor = {
   value: 'hour_from',
   displayName: 'HOUR_FROM()',
-  params: ['...number'],
-  description: 'Média dos argumentos',
+  params: ['date'],
+  description: 'Hora da data',
   evaluateForPreview: (...args: any[]) => {
     return '-'
   }
@@ -107,8 +107,8 @@ export const HOUR_FROM: FunctionDescriptor = {
 export const YEAR_MONTH_FROM: FunctionDescriptor = {
   value: 'year_month_from',
   displayName: 'YEAR_MONTH_FROM()',
-  params: ['...number'],
-  description: 'Média dos argumentos',
+  params: ['date'],
+  description: 'Ano e mês da data',
   evaluateForPreview: (...args: any[]) => {
     return '-'
   }
