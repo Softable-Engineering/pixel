@@ -22,7 +22,12 @@ export const FormulaInput = React.forwardRef<
 
   return (
     <Container>
-      <InputContainer ref={inputRef} contentEditable spellCheck={false} />
+      <InputContainer
+        ref={inputRef}
+        contentEditable
+        spellCheck={false}
+        data-placeholder={'Eg. quantidade_acertos/quantidade_questoes'}
+      />
     </Container>
   )
 })

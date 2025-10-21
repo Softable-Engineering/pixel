@@ -82,6 +82,9 @@ export function useFormula({ columns }: UseFormulaParams) {
 
   function onOptionClick(item: FormulaOption) {
     if (!inputRef.current) return
+
+    inputRef.current.focus()
+
     if (item.type === 'column') inputRef.current.insertColumnToken(item.column)
     else inputRef.current.insertFunctionText(item.value)
   }

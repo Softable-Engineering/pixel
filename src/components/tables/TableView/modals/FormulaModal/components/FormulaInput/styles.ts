@@ -100,4 +100,10 @@ export const InputContainer = styled.div`
   }
 
   ${ScrollStyles}
+
+  &:empty::before {
+    content: attr(data-placeholder);
+    color: #aaa;
+    pointer-events: none;
+  }
 `
