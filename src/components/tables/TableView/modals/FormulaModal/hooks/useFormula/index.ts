@@ -63,9 +63,8 @@ export function useFormula({ columns }: UseFormulaParams) {
       case 'Enter': {
         event.preventDefault()
         const item = availableItems[path[0]].options[path[1]]
-        if (item) {
-          onOptionClick(item)
-        }
+        if (item) onOptionClick(item)
+
         break
       }
     }
@@ -87,6 +86,8 @@ export function useFormula({ columns }: UseFormulaParams) {
 
     if (item.type === 'column') inputRef.current.insertColumnToken(item.column)
     else inputRef.current.insertFunctionText(item.value)
+
+    setSearch('')
   }
 
   function handleRefMethods() {
@@ -105,6 +106,11 @@ export function useFormula({ columns }: UseFormulaParams) {
     closeModal()
   }
 
+  function handleChangeSearch(search: string) {
+    setPath([0, 0])
+    setSearch(search)
+  }
+
   return {
     path,
     search,
@@ -117,6 +123,6 @@ export function useFormula({ columns }: UseFormulaParams) {
     onOptionClick,
     handleKeyDown,
     handleRefMethods,
-    handleChangeSearch: setSearch
+    handleChangeSearch
   }
 }

@@ -13,7 +13,7 @@ export function createColumnNode(
   inputElement: HTMLElement | null
 ) {
   const span = document.createElement('span')
-  span.setAttribute('contenteditable', 'false')
+  span.contentEditable = 'false'
   span.dataset.token = 'column'
   span.dataset.id = column.id
   span.className = 'token column'

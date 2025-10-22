@@ -22,6 +22,7 @@ export class FormulaRenderer {
       if (token.type === 'column' && token.columnId) {
         return this.createOrReuseColumnNode(token.columnId, columnPositions)
       }
+
       return this.createTokenNode(token)
     })
   }

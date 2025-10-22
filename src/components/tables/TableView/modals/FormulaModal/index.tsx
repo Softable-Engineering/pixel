@@ -16,12 +16,12 @@ import { useFormula } from './hooks/useFormula'
 import { FUNCTIONS } from './utils'
 
 // Types
-import { ColumnActions } from '../../types'
 import {
+  ColumnType,
   type FormulaModalProps,
-  type FormulaModalMethods,
-  ColumnType
+  type FormulaModalMethods
 } from './types'
+import { ColumnActions } from '../../types'
 
 // Styles
 import { Container, Content, Row } from './styles'

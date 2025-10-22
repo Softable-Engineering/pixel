@@ -60,34 +60,24 @@ export class FormulaParser {
   }
 
   public getLastWord(element: HTMLElement): string {
-    const text = element.innerText || ''
-
-    let cursorOffset = 0
-
     const selection = window.getSelection()
-    if (selection && selection.rangeCount > 0) {
+
+    if (!selection) return ''
+
+    if (selection.rangeCount > 0 && selection.isCollapsed) {
       const range = selection.getRangeAt(0)
-      const preRange = range.cloneRange()
-      preRange.selectNodeContents(element)
-      preRange.setEnd(range.endContainer, range.endOffset)
-      cursorOffset = preRange.toString().length
-    } else {
-      return ''
+
+      const cloneRange = range.cloneRange()
+      cloneRange.setStart(element, 0)
+      const beforeText = cloneRange.toString()
+
+      const lastWordMatch = beforeText.match(/(\w+)(?!.*\w)$/)
+      const lastWord = lastWordMatch ? lastWordMatch[1] : ''
+
+      return lastWord
     }
 
-    cursorOffset = Math.min(cursorOffset, text.length)
-
-    const textUntilCursor = text.slice(0, cursorOffset)
-
-    if (textUntilCursor.endsWith(' ')) {
-      return ''
-    }
-
-    const cleaned = textUntilCursor.replace(/[^\p{L}\p{N}\s]/gu, ' ')
-
-    const match = cleaned.match(/([\p{L}\p{N}]+)$/u)
-
-    return match ? match[0] : ''
+    return ''
   }
 
   private isColumnElement(node: Node): boolean {

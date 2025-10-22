@@ -13,12 +13,10 @@ export class CursorWalker {
       NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT,
       {
         acceptNode: (node: Node) => {
-          if (this.isColumnElement(node)) {
-            return NodeFilter.FILTER_ACCEPT
-          }
-          if (this.isInsideColumn(node)) {
-            return NodeFilter.FILTER_REJECT
-          }
+          if (this.isColumnElement(node)) return NodeFilter.FILTER_ACCEPT
+
+          if (this.isInsideColumn(node)) return NodeFilter.FILTER_REJECT
+
           return NodeFilter.FILTER_ACCEPT
         }
       }
@@ -70,12 +68,13 @@ export class CursorWalker {
 
   private isInsideColumn(node: Node): boolean {
     let parent = node.parentNode
+
     while (parent && parent !== this.element) {
-      if (this.isColumnElement(parent)) {
-        return true
-      }
+      if (this.isColumnElement(parent)) return true
+
       parent = parent.parentNode
     }
+
     return false
   }
 }

@@ -39,7 +39,7 @@ export function useFormulaInput({
       editorRef.current.deserialize(formula)
     }
 
-    const onInput = (e: Event) => editorRef.current?.handleInput()
+    const onInput = (_e: Event) => editorRef.current?.handleInput()
     el.addEventListener('input', onInput)
 
     return () => {
@@ -71,8 +71,8 @@ export function useFormulaInput({
   }
 
   function insertFunction(name: string) {
-    const offSet = name.length + 1
-    editorRef.current?.insertText(name.toLowerCase() + '()', offSet)
+    const offset = name.length + 1
+    editorRef.current?.insertText(`${name.toLowerCase()}()`, offset)
   }
 
   function handleRefMethods(): FormulaInputMethods {

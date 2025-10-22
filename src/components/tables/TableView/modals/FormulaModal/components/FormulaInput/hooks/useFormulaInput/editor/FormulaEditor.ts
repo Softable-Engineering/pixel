@@ -64,20 +64,63 @@ export class FormulaEditor {
     const selection = window.getSelection()
     if (!selection || selection.rangeCount === 0) return this
 
+    const range = selection.getRangeAt(0)
+    const cursorNode = range.startContainer
     const startOffset = this.cursorManager.getOffset()
 
-    const range = selection.getRangeAt(0)
-    range.deleteContents()
-    range.insertNode(document.createTextNode(textToInsert))
+    if (cursorNode.nodeType === Node.TEXT_NODE) {
+      const textNode = cursorNode as Text
+      const cursorOffset = range.startOffset
+      const textContent = textNode.textContent ?? ''
 
-    const { text, columnPositions } = this.parser.extractText(this.element)
+      const beforeCursor = textContent.slice(0, cursorOffset)
+      const afterCursor = textContent.slice(cursorOffset)
 
-    const tokens = this.tokenizer.tokenize(text)
-    this.renderer.render(tokens, columnPositions)
+      // Use regex to find the start of the current word
+      const beforeMatch = beforeCursor.match(/([\wÀ-ÿ.]+)$/) // Last contiguous sequence of non-space characters before cursor
+      const wordStart = beforeMatch
+        ? beforeCursor.lastIndexOf(beforeMatch[1])
+        : cursorOffset
 
-    const textOffset = offsetText ? offsetText : textToInsert.length
-    const targetOffset = startOffset + textOffset
-    this.cursorManager.restoreOffset(targetOffset)
+      // Use regex to find the end of the current word
+      const afterMatch = afterCursor.match(/^([\wÀ-ÿ.]+)/) // First contiguous sequence of non-space characters after cursor
+      const wordEnd = afterMatch
+        ? cursorOffset + afterMatch[0].length
+        : cursorOffset
+
+      // Set the range to replace only the current word
+      range.setStart(textNode, wordStart)
+      range.setEnd(textNode, wordEnd)
+
+      const newElement = document.createTextNode(textToInsert)
+      range.deleteContents()
+      range.insertNode(newElement)
+
+      const { text, columnPositions } = this.parser.extractText(this.element)
+
+      const tokens = this.tokenizer.tokenize(text)
+      this.renderer.render(tokens, columnPositions)
+
+      const textOffset = offsetText ? offsetText : textToInsert.length
+      const targetOffset = startOffset + textOffset
+
+      this.cursorManager.restoreOffset(targetOffset)
+    } else if (cursorNode.nodeType === Node.ELEMENT_NODE) {
+      const newElement = document.createTextNode(textToInsert)
+      // Insert the element at the caret position
+      range.deleteContents()
+      range.insertNode(newElement)
+
+      const { text, columnPositions } = this.parser.extractText(this.element)
+
+      const tokens = this.tokenizer.tokenize(text)
+      this.renderer.render(tokens, columnPositions)
+
+      const textOffset = offsetText ? offsetText : textToInsert.length
+      const targetOffset = startOffset + textOffset
+
+      this.cursorManager.restoreOffset(targetOffset)
+    }
 
     return this
   }
