@@ -52,6 +52,10 @@ export const InputContainer = styled.div`
     align-items: center;
     gap: 0.25rem;
 
+    padding: 0.25rem;
+    border-radius: 0.125rem;
+    background-color: ${({ theme }) => theme.colors.background.hover};
+
     color: ${({ theme }) => theme.colors.text.primary};
 
     .column-icon {

@@ -16,11 +16,11 @@ export const Container = styled.button<ContainerProps>`
 
   transition: background-color 0.2s ease;
 
-  background-color: ${({ $isFocused }) =>
-    $isFocused ? 'var(--hover)' : 'transparent'};
+  background-color: ${({ $isFocused, theme }) =>
+    $isFocused ? theme.colors.background.hover : 'transparent'};
 
   &:hover {
-    background-color: var(--hover);
+    background-color: ${({ theme }) => theme.colors.background.hover};
   }
 `
 
