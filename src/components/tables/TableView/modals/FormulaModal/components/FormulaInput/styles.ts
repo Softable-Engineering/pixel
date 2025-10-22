@@ -71,7 +71,7 @@ export const InputContainer = styled.div`
   }
 
   .function {
-    color: #ecec93;
+    color: ${({ theme }) => theme.colors.primary};
   }
 
   .number {

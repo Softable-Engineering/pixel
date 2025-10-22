@@ -48,11 +48,15 @@ export interface DataTableProps<T> {
   onReorder?: (ids: string[]) => Promise<void>
 }
 
+export type CustomColumnType<T> = ColumnDef<T> & {
+  tableName?: string
+}
+
 export interface Props<T> extends DataTableProps<T> {
   locale: Locale
   viewOnly?: boolean
   actions?: Actions[]
-  columns: ColumnDef<T>[]
+  columns: CustomColumnType<T>[]
   permissions?: DeepPartial<TablePermissions>
   onManagementHeader: (data: ManagementHeaderParams) => void
   onChangeCell?: (data: UpdateCellParams) => void

@@ -8,7 +8,7 @@ import { type Locale, MaskModule, MaskType } from 'src/services/MaskModule'
 
 // Types
 import type { CustomData } from '@components/tables/DataTable'
-import { type ColumnDef, ColumnType } from '../types'
+import { ColumnType, type ColumnDef, type CustomColumnType } from '../types'
 import type { Column } from '../modals/FormulaModal/types'
 
 interface Params<T> {
@@ -20,7 +20,7 @@ interface Params<T> {
 interface ParamsResolveColumn<T> {
   locale: Locale
   row: CustomData<T>
-  column: ColumnDef<T>
+  column: CustomColumnType<T>
 }
 
 export function resolveRow<T>({ row, locale, columns }: Params<T>): Column[] {
@@ -46,6 +46,7 @@ function resolveColumn<T>({
     return {
       id: column.id,
       label: column.header,
+      tableName: column.tableName,
       type: ColumnType.NUMBER,
       value: normalizeNumber(newValue)
     }
@@ -59,6 +60,7 @@ function resolveColumn<T>({
       id: column.id,
       label: column.header,
       type: ColumnType.PHONE,
+      tableName: column.tableName,
       text: normalizeString(newValue)
     }
   }
@@ -74,7 +76,8 @@ function resolveColumn<T>({
       id: column.id,
       select: newValue,
       type: column.type,
-      label: column.header
+      label: column.header,
+      tableName: column.tableName
     }
   }
 
@@ -82,6 +85,7 @@ function resolveColumn<T>({
     return {
       id: column.id,
       label: column.header,
+      tableName: column.tableName,
       type: ColumnType.CHECKBOX,
       checked: value as boolean
     }
@@ -91,6 +95,7 @@ function resolveColumn<T>({
     id: column.id,
     type: column.type,
     label: column.header,
+    tableName: column.tableName,
     text: normalizeString(value as string)
   }
 }

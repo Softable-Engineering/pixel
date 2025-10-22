@@ -28,7 +28,9 @@ export function buildAvailableItems({
     results.push({
       name: 'Properties',
       title: 'Properties',
-      options: properties.map(column => ({ type: 'column', column }))
+      options: properties.map(column => {
+        return { type: 'column', column: getLabel(column) }
+      })
     })
   }
 
@@ -46,4 +48,12 @@ export function buildAvailableItems({
   }
 
   return results
+}
+
+function getLabel(column: Column) {
+  if (column.tableName) {
+    return { ...column, label: `${column.tableName}.${column.label}` }
+  }
+
+  return column
 }

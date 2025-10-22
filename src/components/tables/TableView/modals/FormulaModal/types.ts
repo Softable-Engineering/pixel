@@ -48,6 +48,7 @@ export type ColumnProperties =
 export type BaseColumn = {
   id: string
   label: string
+  tableName?: string
 }
 
 export type Column = BaseColumn & ColumnProperties
