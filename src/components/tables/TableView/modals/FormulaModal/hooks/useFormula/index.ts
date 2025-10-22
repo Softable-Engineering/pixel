@@ -103,6 +103,7 @@ export function useFormula({ columns }: UseFormulaParams) {
     setFormula(formula || '')
 
     setVisible(true)
+    setTimeout(() => inputRef.current?.focus(), 100)
   }
 
   const handleClose = useCallback(() => {
