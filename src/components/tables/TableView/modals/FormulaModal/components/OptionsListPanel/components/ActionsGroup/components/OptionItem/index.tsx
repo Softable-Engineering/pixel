@@ -36,9 +36,9 @@ export const OptionItem: React.FC<Props> = ({
       return <SigmaIcon color="var(--text-color)" />
     }
 
-    if (option.type === 'column') {
-      return getIcon(option.column.type)
-    }
+    if (option.type === 'column') return getIcon(option.column.type)
+
+    return null
   }
 
   function handleClick() {
@@ -47,10 +47,7 @@ export const OptionItem: React.FC<Props> = ({
 
   function getOptionLabel() {
     if (option.type === 'function') return option.displayValue
-
-    const columnName = option.column.label.trim()
-
-    return columnName
+    return option.column.label.trim()
   }
 
   return (
@@ -63,7 +60,7 @@ export const OptionItem: React.FC<Props> = ({
         </Typography>
       </TextContainer>
 
-      {isFocused && <ConfirmIcon />}
+      {isFocused ? <ConfirmIcon /> : null}
     </Container>
   )
 }

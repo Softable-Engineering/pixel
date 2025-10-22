@@ -9,6 +9,7 @@ import {
 
 // Components
 import { Footer } from '../Footer'
+import { ActionsButtons } from '../ActionsButtons'
 import { DataTable } from '@components/tables/DataTable'
 import { FormulaModal } from '../../modals/FormulaModal'
 
@@ -18,7 +19,6 @@ import { useTableViewContext } from '../../contexts/useTableViewContext'
 
 // Utils
 import { resolveRow } from '../../utils'
-import { ActionsButtons } from '../ActionsButtons'
 
 // Types
 import type { Props, TableViewMethods } from '../../types'
@@ -30,6 +30,7 @@ export const TableInner = <T,>(props: Props<T>, ref: Ref<TableViewMethods>) => {
   // Constants
   const formulaColumns = useMemo(() => {
     if (!props.data.length) return []
+
     return resolveRow({
       row: props.data[0],
       locale: props.locale,
@@ -53,7 +54,6 @@ export const TableInner = <T,>(props: Props<T>, ref: Ref<TableViewMethods>) => {
 
   function renderActionsButtons() {
     const columnPermissions = permissions.columns.create
-
     if (columnPermissions.enabled === false) return null
 
     return <ActionsButtons {...props} />
