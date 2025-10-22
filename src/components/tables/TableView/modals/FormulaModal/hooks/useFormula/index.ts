@@ -102,6 +102,7 @@ export function useFormula({ columns }: UseFormulaParams) {
   }
 
   function handleClose() {
+    setSearch('')
     setVisible(false)
     closeModal()
   }
