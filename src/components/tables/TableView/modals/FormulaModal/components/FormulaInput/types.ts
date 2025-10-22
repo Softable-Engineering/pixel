@@ -1,5 +1,5 @@
 // Types
-import type { Column } from '../../types'
+import type { FormulaOptionColumn } from '../OptionsListPanel/types'
 
 export type FunctionDescriptor = {
   value: string
@@ -15,12 +15,12 @@ export type FormulaInputMethods = {
   serialize: () => string
   deserialize: (formula: string) => void
   insertFunctionText: (text: string) => void
-  insertColumnToken: (column: Column) => void
+  insertColumnToken: (column: FormulaOptionColumn) => void
 }
 
 export interface FormulaInputProps {
   formula?: string
-  columns: Column[]
+  columns: FormulaOptionColumn[]
   functions?: FunctionDescriptor[]
   onChangeSearch: (search: string) => void
 }

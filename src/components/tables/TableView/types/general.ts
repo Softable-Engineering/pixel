@@ -17,6 +17,7 @@ import type { UpdateCellParams } from './cell'
 import type { Locale } from 'src/services/MaskModule'
 import type { TablePermissions } from './permission'
 import type { DeepPartial } from './deepPartial'
+import type { FormulaOptionColumn } from '../modals/FormulaModal/components/OptionsListPanel/types'
 
 export type BaseColumn =
   | TextColumn
@@ -57,6 +58,7 @@ export interface Props<T> extends DataTableProps<T> {
   viewOnly?: boolean
   actions?: Actions[]
   columns: CustomColumnType<T>[]
+  formulaColumns?: FormulaOptionColumn[]
   permissions?: DeepPartial<TablePermissions>
   onManagementHeader: (data: ManagementHeaderParams) => void
   onChangeCell?: (data: UpdateCellParams) => void

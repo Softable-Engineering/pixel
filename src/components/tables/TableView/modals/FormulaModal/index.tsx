@@ -100,7 +100,7 @@ export const FormulaModal = React.forwardRef<
             ref={inputRef}
             formula={formula}
             functions={FUNCTIONS}
-            columns={props.columns}
+            columns={props.formulaColumns ?? props.columns}
             onChangeSearch={handleChangeSearch}
           />
 

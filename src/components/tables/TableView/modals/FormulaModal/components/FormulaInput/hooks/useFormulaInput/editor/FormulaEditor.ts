@@ -6,7 +6,7 @@ import { FormulaTokenizer } from '../tokenizer'
 
 // Types
 import type { FunctionDescriptor } from '../../../types'
-import type { Column } from '@components/tables/TableView/modals/FormulaModal/types'
+import type { FormulaOptionColumn } from '../../../../OptionsListPanel/types'
 
 export class FormulaEditor {
   private tokenizer: FormulaTokenizer
@@ -18,7 +18,7 @@ export class FormulaEditor {
   constructor(
     private element: HTMLElement,
     functions: FunctionDescriptor[],
-    columns: Column[],
+    columns: FormulaOptionColumn[],
     onSearchChange: (lastWord: string) => void
   ) {
     this.tokenizer = new FormulaTokenizer(functions)

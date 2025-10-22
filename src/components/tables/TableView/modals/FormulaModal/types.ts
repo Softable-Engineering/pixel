@@ -1,4 +1,5 @@
 import type { ManagementHeaderParams } from '../../types'
+import type { FormulaOptionColumn } from './components/OptionsListPanel/types'
 
 export enum ColumnType {
   DATE = 'date',
@@ -60,5 +61,6 @@ export interface FormulaModalMethods {
 
 export interface FormulaModalProps {
   columns: Column[]
+  formulaColumns?: FormulaOptionColumn[]
   onManagementHeader: (data: ManagementHeaderParams) => void
 }

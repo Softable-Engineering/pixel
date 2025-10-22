@@ -6,9 +6,9 @@ import { FormulaEditor } from './editor'
 import { FUNCTIONS } from '../../../../utils'
 
 // Types
-import type { Column } from '../../../../types'
 import type { UseFormulaInputParams } from './types'
 import type { FormulaInputMethods } from '../../types'
+import type { FormulaOptionColumn } from '../../../OptionsListPanel/types'
 
 export function useFormulaInput({
   formula,
@@ -17,7 +17,7 @@ export function useFormulaInput({
   onChangeSearch
 }: UseFormulaInputParams) {
   // Refs
-  const columnsRef = useRef(columns)
+  const columnsRef = useRef<FormulaOptionColumn[]>(columns)
   const inputRef = useRef<HTMLDivElement | null>(null)
   const editorRef = useRef<FormulaEditor | null>(null)
 
@@ -66,7 +66,7 @@ export function useFormulaInput({
     inputRef.current?.focus()
   }
 
-  function insertColumn(column: Column) {
+  function insertColumn(column: FormulaOptionColumn) {
     editorRef.current?.insertText(`[col:${column.id}]`, 1)
   }
 

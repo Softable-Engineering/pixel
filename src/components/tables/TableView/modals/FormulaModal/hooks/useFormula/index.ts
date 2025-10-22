@@ -17,7 +17,7 @@ import type {
 import type { ItemPathParams, UseFormulaParams } from './types'
 import type { FormulaInputMethods } from '../../components/FormulaInput/types'
 
-export function useFormula({ columns }: UseFormulaParams) {
+export function useFormula({ columns, formulaColumns }: UseFormulaParams) {
   // Refs
   const inputRef = useRef<FormulaInputMethods>(null)
 
@@ -33,9 +33,13 @@ export function useFormula({ columns }: UseFormulaParams) {
   const [availableItems, setAvailableItems] = useState<OptionsGroup[]>([])
 
   useEffect(() => {
-    const items = buildAvailableItems({ columns, search, functions: FUNCTIONS })
+    const items = buildAvailableItems({
+      columns: formulaColumns ?? columns,
+      search,
+      functions: FUNCTIONS
+    })
     setAvailableItems(items)
-  }, [search, columns])
+  }, [search, columns, formulaColumns])
 
   // Functions
   const handleKeyDown = useCallback(

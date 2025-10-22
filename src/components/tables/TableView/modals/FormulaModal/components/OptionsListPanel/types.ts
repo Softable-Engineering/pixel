@@ -1,11 +1,18 @@
+// External Libraries
+import type { ColumnType } from '@components/tables/TableView/types'
 import type { PropsWithChildren } from 'react'
-import type { Column } from '../../types'
 
-interface Teste {
-  name: string
+// Types
+
+export interface FormulaOptionColumn {
+  id: string
+  label: string
+  type: ColumnType
+  tableName?: string
 }
 
-export interface OptionsGroup extends PropsWithChildren<Teste> {
+export interface OptionsGroup extends PropsWithChildren {
+  name: string
   title: string
   options: FormulaOption[]
 }
@@ -21,5 +28,5 @@ export interface FunctionOption {
 
 export interface ColumnOption {
   type: 'column'
-  column: Column
+  column: FormulaOptionColumn
 }

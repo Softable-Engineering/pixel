@@ -2,14 +2,14 @@
 import type React from 'react'
 
 // Components
+import { ActionsGroup } from './components/ActionsGroup'
+import { EmptyMessage } from './components/EmptyMessage'
 
 // Types
 import type { FormulaOption, OptionsGroup } from './types'
 
 // Styles
 import { Container } from './styles'
-import { ActionsGroup } from './components/ActionsGroup'
-import { EmptyMessage } from './components/EmptyMessage'
 
 interface Props {
   options: OptionsGroup[]

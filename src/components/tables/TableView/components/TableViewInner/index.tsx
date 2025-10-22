@@ -28,7 +28,7 @@ import { Container } from './styles'
 
 export const TableInner = <T,>(props: Props<T>, ref: Ref<TableViewMethods>) => {
   // Constants
-  const formulaColumns = useMemo(() => {
+  const columns = useMemo(() => {
     if (!props.data.length) return []
 
     return resolveRow({
@@ -74,7 +74,8 @@ export const TableInner = <T,>(props: Props<T>, ref: Ref<TableViewMethods>) => {
 
       <FormulaModal
         ref={formulaModalRef}
-        columns={formulaColumns}
+        columns={columns}
+        formulaColumns={props.formulaColumns}
         onManagementHeader={props.onManagementHeader}
       />
     </Container>

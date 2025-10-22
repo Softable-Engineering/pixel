@@ -1,12 +1,12 @@
 // Types
-import type { ColumnPosition, Token } from '../types'
-import type { Column } from '@components/tables/TableView/modals/FormulaModal/types'
 import { createColumnNode } from '../utils'
+import type { ColumnPosition, Token } from '../types'
+import type { FormulaOptionColumn } from '../../../../OptionsListPanel/types'
 
 export class FormulaRenderer {
   constructor(
     private element: HTMLElement,
-    private columns: Column[]
+    private columns: FormulaOptionColumn[]
   ) {}
 
   public render(tokens: Token[], columnPositions: ColumnPosition[]): void {

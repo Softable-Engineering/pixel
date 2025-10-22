@@ -1,11 +1,13 @@
 // Types
-import type { Column } from '../../../types'
-import type { OptionsGroup } from '../../../components/OptionsListPanel/types'
+import type {
+  OptionsGroup,
+  FormulaOptionColumn
+} from '../../../components/OptionsListPanel/types'
 import type { FunctionDescriptor } from '../../../components/FormulaInput/types'
 
 interface AvailableItemsParams {
   search: string
-  columns: Column[]
+  columns: FormulaOptionColumn[]
   functions: FunctionDescriptor[]
 }
 
@@ -29,7 +31,7 @@ export function buildAvailableItems({
       name: 'Properties',
       title: 'Properties',
       options: properties.map(column => {
-        return { type: 'column', column: getLabel(column) }
+        return { type: 'column', column: parseColumn(column) }
       })
     })
   }
@@ -50,7 +52,7 @@ export function buildAvailableItems({
   return results
 }
 
-function getLabel(column: Column) {
+function parseColumn(column: FormulaOptionColumn) {
   if (column.tableName) {
     return { ...column, label: `${column.tableName}.${column.label}` }
   }

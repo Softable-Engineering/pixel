@@ -6,10 +6,10 @@ import { placeCaretAfter, placeCaretBefore } from './caret'
 import { getIcon } from '@components/tables/TableView/utils'
 
 // Types
-import type { Column } from '@components/tables/TableView/modals/FormulaModal/types'
+import type { FormulaOptionColumn } from '../../../../OptionsListPanel/types'
 
 export function createColumnNode(
-  column: Column,
+  column: FormulaOptionColumn,
   inputElement: HTMLElement | null
 ) {
   const span = document.createElement('span')
@@ -27,8 +27,11 @@ export function createColumnNode(
   }
 
   const lbl = document.createElement('span')
+  const label = column.tableName
+    ? `${column.tableName}.${column.label}`
+    : column.label
   lbl.className = 'column-label'
-  lbl.textContent = column.label
+  lbl.textContent = label
 
   span.appendChild(ic)
   span.appendChild(lbl)
