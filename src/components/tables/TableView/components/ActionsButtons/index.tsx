@@ -3,17 +3,18 @@ import { AddColumnButton } from './components/AddColumnButton'
 
 // Types
 import {
-  ColumnActions,
+  type Props,
   type Actions,
+  ColumnActions,
   type ColumnType,
-  type ManagementHeaderParams,
-  type Props
+  type ManagementHeaderParams
 } from '../../types'
 
 // Styles
 import { Container } from './styles'
 
 type ActionsProps<T> = Props<T>
+
 export const ActionsButtons = <T,>({
   actions,
   onManagementHeader
@@ -21,17 +22,21 @@ export const ActionsButtons = <T,>({
   // Functions
   function addColumnClick(typeColumn: ColumnType) {
     const data: ManagementHeaderParams = {
-      type: ColumnActions.AddColumn,
-      typeColumn
+      typeColumn,
+      type: ColumnActions.AddColumn
     }
+
     onManagementHeader(data)
   }
 
   function getAction(action: Actions) {
-    if (action === 'new-column')
+    if (action === 'new-column') {
       return (
         <AddColumnButton key={`action_${action}`} onClick={addColumnClick} />
       )
+    }
+
+    return null
   }
 
   function renderActions() {

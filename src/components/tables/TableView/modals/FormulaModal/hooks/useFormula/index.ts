@@ -32,7 +32,7 @@ export function useFormula({ columns }: UseFormulaParams) {
   const [availableItems, setAvailableItems] = useState<OptionsGroup[]>([])
 
   useEffect(() => {
-    const items = buildAvailableItems(columns, search, FUNCTIONS)
+    const items = buildAvailableItems({ columns, search, functions: FUNCTIONS })
     setAvailableItems(items)
   }, [search, columns])
 

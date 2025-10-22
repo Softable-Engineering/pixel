@@ -1,6 +1,9 @@
-// External Libraries
 /** biome-ignore-all lint/correctness/useExhaustiveDependencies: <Not needed> */
+// External Libraries
 import { useEffect, useRef } from 'react'
+
+// Hooks
+import { useTableViewContext } from '@components/tables/TableView/contexts/useTableViewContext'
 
 // Utils
 import { getColumns } from './utils'
@@ -8,7 +11,6 @@ import { getColumns } from './utils'
 // Types
 import type { Props } from '../../../../types'
 import type { FormulaModalMethods } from '../../../../modals/FormulaModal/types'
-import { useTableViewContext } from '@components/tables/TableView/contexts/useTableViewContext'
 
 export function useTableView<T>(props: Props<T>) {
   // Refs
@@ -19,8 +21,8 @@ export function useTableView<T>(props: Props<T>) {
 
   // UseEffects
   useEffect(() => {
-    if (props?.permissions) handleChangePermissions(props.permissions)
-  }, [props?.permissions])
+    if (props.permissions) handleChangePermissions(props.permissions)
+  }, [props.permissions])
 
   // Functions
   function handleOpenFormulaModal(columnId?: string, formula?: string) {
