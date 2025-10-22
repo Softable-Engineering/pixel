@@ -86,8 +86,5 @@ export function useFormulaInput({
     }
   }
 
-  return {
-    inputRef,
-    handleRefMethods
-  }
+  return { inputRef, handleRefMethods }
 }

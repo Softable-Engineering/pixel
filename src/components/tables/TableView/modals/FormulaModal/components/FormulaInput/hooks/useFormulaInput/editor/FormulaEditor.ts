@@ -98,7 +98,7 @@ export class FormulaEditor {
 
       const { text, columnPositions } = this.parser.extractText(this.element)
 
-      const tokens = this.tokenizer.tokenize(text)
+      const tokens = this.tokenizer.tokenize(text + ' ')
       this.renderer.render(tokens, columnPositions)
 
       const textOffset = offsetText ? offsetText : textToInsert.length
@@ -113,7 +113,7 @@ export class FormulaEditor {
 
       const { text, columnPositions } = this.parser.extractText(this.element)
 
-      const tokens = this.tokenizer.tokenize(text)
+      const tokens = this.tokenizer.tokenize(text + ' ')
       this.renderer.render(tokens, columnPositions)
 
       const textOffset = offsetText ? offsetText : textToInsert.length
