@@ -1,5 +1,6 @@
 // External Libraries
-import { useEffect, useRef, useState } from 'react'
+/** biome-ignore-all lint/correctness/useExhaustiveDependencies: <explanation> */
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 // Hooks
 import { useModalContext } from '@contexts/useModalContext'
@@ -37,47 +38,50 @@ export function useFormula({ columns }: UseFormulaParams) {
   }, [search, columns])
 
   // Functions
-  function handleKeyDown(event: KeyboardEvent) {
-    inputRef.current?.focus()
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      inputRef.current?.focus()
 
-    const pathParams: ItemPathParams = {
-      current: path,
-      direction: 'down',
-      items: availableItems
-    }
-
-    let newPath: number[] | null = null
-
-    switch (event.key) {
-      case 'ArrowDown':
-        event.preventDefault()
-        newPath = getNextItemPath(pathParams)
-        setPath(newPath)
-        break
-      case 'ArrowUp':
-        event.preventDefault()
-        newPath = getNextItemPath({ ...pathParams, direction: 'up' })
-        setPath(newPath)
-        break
-      case 'Tab':
-      case 'Enter': {
-        event.preventDefault()
-        const item = availableItems[path[0]].options[path[1]]
-        if (item) onOptionClick(item)
-
-        break
+      const pathParams: ItemPathParams = {
+        current: path,
+        direction: 'down',
+        items: availableItems
       }
-    }
 
-    if (newPath) {
-      const element = document.querySelector(
-        `[data-path="${newPath.join('-')}"]`
-      )
+      let newPath: number[] | null = null
 
-      if (element)
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }
-  }
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault()
+          newPath = getNextItemPath(pathParams)
+          setPath(newPath)
+          break
+        case 'ArrowUp':
+          event.preventDefault()
+          newPath = getNextItemPath({ ...pathParams, direction: 'up' })
+          setPath(newPath)
+          break
+        case 'Tab':
+        case 'Enter': {
+          event.preventDefault()
+          const item = availableItems[path[0]].options[path[1]]
+          if (item) onOptionClick(item)
+
+          break
+        }
+      }
+
+      if (newPath) {
+        const element = document.querySelector(
+          `[data-path="${newPath.join('-')}"]`
+        )
+
+        if (element)
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    },
+    [availableItems, path]
+  )
 
   function onOptionClick(item: FormulaOption) {
     if (!inputRef.current) return
@@ -101,16 +105,16 @@ export function useFormula({ columns }: UseFormulaParams) {
     setVisible(true)
   }
 
-  function handleClose() {
+  const handleClose = useCallback(() => {
     setSearch('')
     setVisible(false)
     closeModal()
-  }
+  }, [])
 
-  function handleChangeSearch(search: string) {
+  const handleChangeSearch = useCallback((search: string) => {
     setPath([0, 0])
     setSearch(search)
-  }
+  }, [])
 
   return {
     path,
