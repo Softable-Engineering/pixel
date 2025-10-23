@@ -51,9 +51,14 @@ export class FormulaParser {
   }
 
   public deserialize(formula: string): string {
+    // const deserializedText = formula.replace(
+    //   /([^:\s]+)::[^\s]*/g,
+    //   (_, id) => `[col:${id}]`
+    // )
+
     const deserializedText = formula.replace(
-      /([^:\s]+)::[^\s]*/g,
-      (_, id) => `[col:${id}]`
+      /([0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12})::([A-Za-z0-9_]+)/g,
+      (_match, uuid, columnName) => `[col:${columnName}@@@${uuid}]`
     )
 
     return deserializedText
