@@ -56,9 +56,14 @@ export class FormulaParser {
     //   (_, id) => `[col:${id}]`
     // )
 
+    // const deserializedText = formula.replace(
+    //   /([0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12})::([A-Za-z0-9_]+)/g,
+    //   (_match, uuid, columnName) => `[col:${columnName}@@@${uuid}]`
+    // )
+
     const deserializedText = formula.replace(
-      /([0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12})::([A-Za-z0-9_]+)/g,
-      (_match, uuid, columnName) => `[col:${columnName}@@@${uuid}]`
+      /([A-Za-z0-9_]+)@@@([0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12})::[A-Za-z0-9_]+/g,
+      (_match, columnName, uuid) => `[col:${columnName}@@@${uuid}]`
     )
 
     return deserializedText
