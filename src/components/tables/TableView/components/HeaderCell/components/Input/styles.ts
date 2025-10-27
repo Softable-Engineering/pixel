@@ -12,7 +12,9 @@ export const InputField = styled.input`
   color: var(--text-color-secondary);
 
   padding: 0.5rem;
-  background-color: var(--secondary-hover);
+
+  color: ${({ theme }) => theme.colors.text.primary};
+  background-color: ${({ theme }) => theme.colors.background.hover};
 
   border: none;
   border-radius: 0.25rem;

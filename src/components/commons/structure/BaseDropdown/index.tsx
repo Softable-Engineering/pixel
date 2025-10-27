@@ -7,6 +7,7 @@ import { Portal } from '@components/commons/modals/Portal'
 
 // Hooks
 import { useFollowElementPosition } from '@hooks/useFollowElementPosition'
+import { useClickOutsidePortalWatcher } from '@hooks/useClickOutsidePortalWatcher'
 
 // Utils
 import { DROPDOWN_ANIMATION_PRESETS } from '@utils/animations'
@@ -16,7 +17,6 @@ import type { UseFollowElementPositionOptions } from '@hooks/useFollowElementPos
 
 // Styles
 import { Container, Content } from './styles'
-import { useClickOutsidePortalWatcher } from '@hooks/useClickOutsidePortalWatcher'
 
 interface Props extends PropsWithChildren, UseFollowElementPositionOptions {
   isOpen: boolean

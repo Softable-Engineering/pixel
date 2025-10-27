@@ -64,10 +64,10 @@ export const TableInner = <T,>(props: Props<T>, ref: Ref<TableViewMethods>) => {
     <Container id="table-column-actions-panel">
       <DataTable<T>
         {...props}
-        showResultsRow
         cellPadding="1px"
         footer={getFooter()}
         columns={normalizedColumns}
+        showResultsRow={props.showResultsRow}
         actionsColumn={renderActionsButtons()}
         stickyPortalId="table-column-actions-panel"
       />

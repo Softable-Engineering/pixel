@@ -17,7 +17,7 @@ export const SigmaIcon: React.FC<Props> = ({ color }) => {
       <title>Sigma</title>
       <path
         d="M12 4H5.88667L9.88667 8L5.88667 12H12V13.3333H4V12L8 8L4 4V2.66667H12V4Z"
-        fill={color ?? '#C7CFD8'}
+        fill={color ?? 'currentColor'}
       />
     </svg>
   )

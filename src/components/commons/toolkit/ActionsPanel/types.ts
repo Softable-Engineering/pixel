@@ -4,6 +4,8 @@ import type { ReactNode, RefObject } from 'react'
 // Types
 import type { UseFollowElementPositionOptions } from '@hooks/useFollowElementPosition/types'
 
+export type Mode = 'fixed' | 'absolute'
+
 export interface ActionsPanelProps<T extends string>
   extends UseFollowElementPositionOptions {
   isOpen: boolean

@@ -10,6 +10,8 @@ export const Container = styled.div`
   padding: 0.5rem;
   border-radius: 4px;
 
+  color: ${({ theme }) => theme.colors.text.primary};
+
   cursor: pointer;
 
   transition: background-color 0.2s ease;

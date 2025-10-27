@@ -17,7 +17,7 @@ export const ListIcon: React.FC<Props> = ({ color }) => {
       <title>List</title>
       <path
         d="M2 3H3V4H2V3ZM2 5.5H3V6.5H2V5.5ZM2 8H3V9H2V8ZM10 4V3H4.0115V4H9.4H10ZM4 5.5H10V6.5H4V5.5ZM4 8H10V9H4V8Z"
-        fill={color ?? '#C7CFD8'}
+        fill={color ?? 'currentColor'}
       />
     </svg>
   )

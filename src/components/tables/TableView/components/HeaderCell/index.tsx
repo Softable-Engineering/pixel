@@ -132,10 +132,10 @@ export const HeaderCell = <T,>({
         isOpen={isOpen}
         options={groupOptions}
         placement="bottom-start"
-        wrapperId="table-column-actions-panel"
         header={renderHeader()}
         onClose={handleClosePanel}
         onClick={handleClickOption}
+        // wrapperId="table-column-actions-panel"
       />
     </Container>
   )

@@ -13,6 +13,8 @@ export const Container = styled.button`
   border-radius: 4px;
   column-gap: 0.25rem;
 
+  color: ${({ theme }) => theme.colors.text.primary};
+
   transition: background-color 0.25s ease;
 
   &:hover {

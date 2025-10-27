@@ -42,14 +42,14 @@ export function getOptions<T>({
         {
           id: ColumnActions.UpdateProperty,
           label: 'Editar propriedade',
-          icon: <Settings color="var(--text-color)" />,
+          icon: <Settings />,
           type: 'group',
           children: getGroupModal(column, permissions, onOpenFormulaModal)
         },
         {
           id: ColumnActions.UpdateTypeColumn,
           label: 'Alterar tipo',
-          icon: <Type color="var(--text-color)" />,
+          icon: <Type />,
           type: 'group',
           children: (
             <ColumnTypePicker
@@ -65,31 +65,31 @@ export function getOptions<T>({
         {
           id: ColumnActions.AddFilter,
           label: 'Filtrar',
-          icon: <Filter color="var(--text-color)" />,
+          icon: <Filter />,
           type: 'button'
         },
         {
           id: ColumnActions.Calculate,
           label: 'Calcular',
-          icon: <Calc color="var(--text-color)" />,
+          icon: <Calc />,
           type: 'button'
         },
         {
           id: ColumnActions.Freeze,
           label: 'Congelar',
-          icon: <Freeze color="var(--text-color)" />,
+          icon: <Freeze />,
           type: 'button'
         },
         {
           id: ColumnActions.HideColumn,
           label: 'Esconder',
-          icon: <Hide color="var(--text-color)" />,
+          icon: <Hide />,
           type: 'button'
         },
         {
           id: ColumnActions.ExpandedColumn,
           label: 'Expandir',
-          icon: <Expanded color="var(--text-color)" />,
+          icon: <Expanded />,
           type: 'button'
         }
       ]
@@ -99,13 +99,13 @@ export function getOptions<T>({
         {
           id: ColumnActions.DuplicateColumn,
           label: 'Duplicar propriedade',
-          icon: <Duplicate color="var(--text-color)" />,
+          icon: <Duplicate />,
           type: 'button'
         },
         {
           id: ColumnActions.DeleteColumn,
           label: 'Excluir',
-          icon: <Trash color="var(--text-color)" />,
+          icon: <Trash />,
           type: 'button',
           destructive: true
         }
@@ -129,7 +129,7 @@ function getGroupModal<T>(
           {
             id: 'formula',
             label: 'Editar fórmula',
-            startIcon: <PencilIcon color="var(--text-color)" />
+            startIcon: <PencilIcon />
           }
         ]}
         onClick={() => onOpenFormulaModal(column.id, column.formula)}

@@ -57,6 +57,7 @@ export interface Props<T> extends DataTableProps<T> {
   locale: Locale
   viewOnly?: boolean
   actions?: Actions[]
+  showResultsRow?: boolean
   columns: CustomColumnType<T>[]
   formulaColumns?: FormulaOptionColumn[]
   permissions?: DeepPartial<TablePermissions>
