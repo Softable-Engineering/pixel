@@ -16,12 +16,14 @@ export const Container = styled.button<ContainerProps>`
 
   transition: background-color 0.2s ease;
 
+  color: ${({ theme }) => theme.colors.text.primary};
+
   &:hover {
     background-color: ${({ theme }) => theme.colors.background.hover_secondary};
 
     svg path {
       transition: 0.5s;
-      fill: ${({ $destructive }) => ($destructive ? 'red' : 'var(--text-color-secondary)')};
+      fill: ${({ $destructive }) => ($destructive ? 'red' : 'currentColor')};
     }
   }
 
