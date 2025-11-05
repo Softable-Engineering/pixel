@@ -2,8 +2,6 @@ import { styled } from 'styled-components'
 
 interface Props {
   $fitWidth?: boolean
-  $hasVerticalDivider?: boolean
-  $hasHorizontalDivider?: boolean
 }
 
 interface ContentProps {
@@ -11,6 +9,8 @@ interface ContentProps {
   $fitWidth?: boolean
   $padding?: string
   $maxWidth?: number
+  $hasVerticalDivider?: boolean
+  $hasHorizontalDivider?: boolean
 }
 
 export const Container = styled.div<Props>`
@@ -20,12 +20,7 @@ export const Container = styled.div<Props>`
 
   text-align: left;
 
-  box-shadow: ${({ $hasVerticalDivider }) =>
-    $hasVerticalDivider ? '1px 0 var(--border-color)' : 'none'};
-
-  border-bottom: 1px solid
-    ${({ $hasHorizontalDivider }) =>
-      $hasHorizontalDivider ? 'var(--border-color)' : 'none'};
+  background-color: ${({ theme }) => theme.colors.background.primary};
 `
 
 export const ColumnHeader = styled.div`
@@ -46,6 +41,15 @@ export const Content = styled.div<ContentProps>`
   justify-content: left;
 
   overflow: hidden;
+
+  box-shadow: ${({ $hasVerticalDivider }) =>
+    $hasVerticalDivider ? '1px 0 var(--border-color)' : 'none'};
+
+  border-radius: 0.5rem;
+
+  border: 1px solid
+    ${({ $hasHorizontalDivider }) =>
+      $hasHorizontalDivider ? 'var(--border-color)' : 'none'};
 
   span {
     width: ${({ $width }) => `${$width}px`};

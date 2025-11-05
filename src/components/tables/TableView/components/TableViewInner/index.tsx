@@ -24,10 +24,12 @@ import { ActionsButtons } from '../ActionsButtons'
 import type { Props, TableViewMethods } from '../../types'
 
 // Styles
-import { Container } from './styles'
+import { Container, ContainerPortal } from './styles'
 
 export const TableInner = <T,>(props: Props<T>, ref: Ref<TableViewMethods>) => {
   // Constants
+  const containerId = crypto.randomUUID()
+  const portalId = crypto.randomUUID()
   const columns = useMemo(() => {
     if (!props.data.length) return []
 
@@ -61,20 +63,23 @@ export const TableInner = <T,>(props: Props<T>, ref: Ref<TableViewMethods>) => {
   }
 
   return (
-    <Container id="table-column-actions-panel">
+    <Container id={containerId}>
+      <ContainerPortal id={portalId} />
+
       <DataTable<T>
         {...props}
         cellPadding="1px"
         footer={getFooter()}
+        stickyPortalId={portalId}
         columns={normalizedColumns}
         showResultsRow={props.showResultsRow}
         actionsColumn={renderActionsButtons()}
-        stickyPortalId="table-column-actions-panel"
       />
 
       <FormulaModal
         ref={formulaModalRef}
         columns={columns}
+        wrapperId={containerId}
         formulaColumns={props.formulaColumns}
         onManagementHeader={props.onManagementHeader}
       />

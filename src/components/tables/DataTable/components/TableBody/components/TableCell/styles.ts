@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 
 interface Props {
   $cellPadding?: string
+  $isFirstRow?: boolean
   $hasVerticalDivider: boolean
   $hasHorizontalDivider: boolean
 }
@@ -12,8 +13,13 @@ export const Container = styled.div<Props>`
 
   padding: ${({ $cellPadding }) => $cellPadding ?? '0.75rem'};
 
-  box-shadow: ${({ $hasVerticalDivider }) =>
-    $hasVerticalDivider ? '1px 0 var(--border-color)' : 'none'};
+
+  border-top: ${({ $isFirstRow }) =>
+    $isFirstRow ? '1px solid var(--border-color)' : 'none'};
+  border-left: ${({ $hasVerticalDivider }) =>
+    $hasVerticalDivider ? '1px solid var(--border-color)' : 'none'};
+  border-right: ${({ $hasVerticalDivider }) =>
+    $hasVerticalDivider ? '1px solid var(--border-color)' : 'none'};
 
   border-bottom: 1px solid
     ${({ $hasHorizontalDivider }) =>

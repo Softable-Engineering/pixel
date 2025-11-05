@@ -4,8 +4,13 @@ export interface ColumnProps {
   columnId: string
 }
 
+export interface Result {
+  label: string
+  value: string
+}
+
 export type CustomColumnDef<T> = AccessorFnColumnDef<T, unknown> & {
-  result?: string
+  result?: Result
   onClick?: (row: T) => void
 }
 

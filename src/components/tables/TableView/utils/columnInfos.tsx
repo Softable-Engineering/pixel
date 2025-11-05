@@ -21,42 +21,42 @@ type ColumntTypeInfos = {
 export const COLUMN_TYPE_MAP: Record<ColumnType, ColumntTypeInfos> = {
   date: {
     label: 'Data',
-    icon: <CalendarIcon color="var(--text-color)" />
+    icon: <CalendarIcon />
   },
   number: {
     label: 'Número',
-    icon: <NumberIcon color="var(--text-color)" />
+    icon: <NumberIcon />
   },
   email: {
     label: 'Email',
-    icon: <EmailIcon color="var(--text-color)" />
+    icon: <EmailIcon />
   },
   phone: {
     label: 'Telefone',
-    icon: <PhoneIcon color="var(--text-color)" />
+    icon: <PhoneIcon />
   },
   multi_select: {
     label: 'Multi Categórico',
-    icon: <ListIcon color="var(--text-color)" />
+    icon: <ListIcon />
   },
   select: {
     label: 'Categórico',
-    icon: <SelectIcon color="var(--text-color)" />
+    icon: <SelectIcon />
   },
   rich_text: {
     label: 'Texto',
-    icon: <TextIcon color="var(--text-color)" />
+    icon: <TextIcon />
   },
   page: {
     label: 'Página',
-    icon: <TextIcon color="var(--text-color)" />
+    icon: <TextIcon />
   },
   checkbox: {
     label: 'Checkbox',
-    icon: <CheckboxIcon color="var(--text-color)" />
+    icon: <CheckboxIcon />
   },
   formula: {
     label: 'Fórmula',
-    icon: <SigmaIcon color="var(--text-color)" />
+    icon: <SigmaIcon />
   }
 }

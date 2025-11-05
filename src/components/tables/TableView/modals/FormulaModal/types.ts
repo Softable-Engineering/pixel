@@ -61,6 +61,7 @@ export interface FormulaModalMethods {
 
 export interface FormulaModalProps {
   columns: Column[]
+  wrapperId?: string
   formulaColumns?: FormulaOptionColumn[]
   onManagementHeader: (data: ManagementHeaderParams) => void
 }

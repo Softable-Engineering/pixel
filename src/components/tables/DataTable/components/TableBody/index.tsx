@@ -40,7 +40,7 @@ export const TableBody = <T,>({
 
   // Functions
   function renderRows() {
-    return rows.map(row => {
+    return rows.map((row, index) => {
       const cells = row.getVisibleCells()
       const isSelected = selectedRows.includes(row.original.data.id)
       const cursor = row.original.onClick ? 'pointer' : 'default'
@@ -51,6 +51,7 @@ export const TableBody = <T,>({
           row={row}
           key={row.id}
           cells={cells}
+          rowIndex={index}
           cursor={cursor}
           isSelected={isSelected}
           cellPadding={cellPadding}

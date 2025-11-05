@@ -95,13 +95,21 @@ export const DataTable = <T,>({
     if (stickyPortalId) {
       return (
         <Portal wrapperId={stickyPortalId}>
-          <ResultsRow table={table} enableRowReordering={enableRowReordering} />
+          <ResultsRow
+            table={table}
+            haActionsColumn={!!actionsColumn}
+            enableRowReordering={enableRowReordering}
+          />
         </Portal>
       )
     }
 
     return (
-      <ResultsRow table={table} enableRowReordering={enableRowReordering} />
+      <ResultsRow
+        table={table}
+        enableRowReordering={enableRowReordering}
+        haActionsColumn={!!actionsColumn}
+      />
     )
   }
 
@@ -122,27 +130,27 @@ export const DataTable = <T,>({
         $borderColor={borderColor}
         $hasBorder={!actionsColumn}
       >
-        {/* <Portal wrapperId="table-column-actions-panel"> */}
-        <DndContext
-          sensors={sensors}
-          onDragEnd={handleDragEnd}
-          collisionDetection={closestCenter}
-        >
-          <TableHeader<CustomData<T>>
-            table={table}
-            headerColor={headerColor}
-            columnOrder={columnOrder}
-            actionsColumn={actionsColumn}
-            canResetResize={canResetResize}
-            textColorHeader={textColorHeader}
-            hasVerticalDivider={hasVerticalDivider}
-            enableRowReordering={enableRowReordering}
-            enableResizeColumns={enableResizeColumns}
-            hasHorizontalDivider={hasHorizontalDivider}
-            enableColumnOrdering={enableColumnOrdering}
-          />
-        </DndContext>
-        {/* </Portal> */}
+        <Portal wrapperId={stickyPortalId}>
+          <DndContext
+            sensors={sensors}
+            onDragEnd={handleDragEnd}
+            collisionDetection={closestCenter}
+          >
+            <TableHeader<CustomData<T>>
+              table={table}
+              headerColor={headerColor}
+              columnOrder={columnOrder}
+              actionsColumn={actionsColumn}
+              canResetResize={canResetResize}
+              textColorHeader={textColorHeader}
+              hasVerticalDivider={hasVerticalDivider}
+              enableRowReordering={enableRowReordering}
+              enableResizeColumns={enableResizeColumns}
+              hasHorizontalDivider={hasHorizontalDivider}
+              enableColumnOrdering={enableColumnOrdering}
+            />
+          </DndContext>
+        </Portal>
 
         <DndContext
           sensors={sensors}

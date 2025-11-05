@@ -89,7 +89,7 @@ export const FormulaModal = React.forwardRef<
     <Modal
       hideHeader
       open={visible}
-      wrapperId="table-column-actions-panel"
+      wrapperId={props.wrapperId}
       onClose={handleClose}
     >
       <Container>

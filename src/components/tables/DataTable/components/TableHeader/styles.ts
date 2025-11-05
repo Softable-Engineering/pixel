@@ -15,12 +15,7 @@ interface ActionsCellProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  position: sticky;
-  top: 0;
-
-  z-index: 10;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.colors.background.primary};
 
   svg path {
     fill: ${({ $textColorHeader }) =>
@@ -37,6 +32,8 @@ export const HeaderRow = styled.div`
   width: 100%;
 
   display: flex;
+
+  column-gap: 0.5rem;
 `
 
 export const ActionsCell = styled.div<ActionsCellProps>`
@@ -44,11 +41,14 @@ export const ActionsCell = styled.div<ActionsCellProps>`
 
   display: flex;
 
-  padding: 0 2rem 0 0;
+  /* padding: 0 2rem 0 0; */
 
-    border-bottom: 1px solid
-    ${({ $hasHorizontalDivider }) =>
-      $hasHorizontalDivider ? 'var(--border-color)' : 'none'};
+  border-bottom: 1px solid
+  ${({ $hasHorizontalDivider }) =>
+    $hasHorizontalDivider ? 'var(--border-color)' : 'none'};
+
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
 `
 
 export const ReorderCell = styled.div<ReorderCellProps>`

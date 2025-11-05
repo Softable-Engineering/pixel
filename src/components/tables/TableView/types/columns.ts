@@ -1,4 +1,5 @@
 // Types
+import type { Result } from '@components/tables/DataTable'
 import type { BaseColumn } from './general'
 
 export type Actions = 'new-column'
@@ -21,7 +22,7 @@ export type ResponseAccessor = string | string[] | boolean
 export type Column<T> = {
   id: string
   header: string
-  result?: string
+  result?: Result
   accessorFn: (row: T) => ResponseAccessor
 }
 

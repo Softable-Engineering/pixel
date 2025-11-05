@@ -61,12 +61,7 @@ export const DraggableColumnHeader = <T,>({
   }
 
   return (
-    <Container
-      ref={setNodeRef}
-      style={style}
-      $hasVerticalDivider={hasVerticalDivider}
-      $hasHorizontalDivider={hasHorizontalDivider}
-    >
+    <Container ref={setNodeRef} style={style}>
       <ColumnHeader
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
@@ -74,6 +69,8 @@ export const DraggableColumnHeader = <T,>({
         <Content
           $padding={padding}
           $width={header.column.getSize()}
+          $hasVerticalDivider={hasVerticalDivider}
+          $hasHorizontalDivider={hasHorizontalDivider}
           onDoubleClick={() => resetSize()}
         >
           <Typography

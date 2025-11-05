@@ -10,6 +10,7 @@ export const Container = styled.div<RowProps>`
   position: relative;
 
   display: flex;
+  column-gap: 0.5rem;
 
   cursor: ${({ cursor }) => (cursor ? cursor : 'default')};
 `
@@ -19,6 +20,9 @@ export const EmptyCell = styled.div`
 
   padding: 0.75rem;
 
+  border-left: 1px solid var(--border-color);
+
+  border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 `
 

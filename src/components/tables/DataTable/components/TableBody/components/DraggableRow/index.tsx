@@ -16,6 +16,7 @@ import { EmptyCell, Container } from './styles'
 
 interface Props<T> {
   cursor: string
+  rowIndex: number
   isSelected: boolean
   cellPadding?: string
   row: Row<CustomData<T>>
@@ -32,6 +33,7 @@ export const DraggableRow = <T,>({
   row,
   cells,
   cursor,
+  rowIndex,
   isSelected,
   cellPadding,
   actionsColumn,
@@ -87,6 +89,7 @@ export const DraggableRow = <T,>({
             key={`row_${cell.id}_${index}`}
             row={row}
             cell={cell}
+            rowIndex={rowIndex}
             cellPadding={cellPadding}
             hasHorizontalDivider={hasHorizontalDivider}
             hasVerticalDivider={

@@ -21,6 +21,19 @@ export const Container = styled.div`
   }
 `
 
+export const ContainerPortal = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  z-index: 1;
+  position: sticky;
+  top: 0;
+
+  row-gap: 0.5rem;
+
+  width: 100%;
+`
+
 export const ScrollStyles = css`
   ::-webkit-scrollbar {
     width: 8px;

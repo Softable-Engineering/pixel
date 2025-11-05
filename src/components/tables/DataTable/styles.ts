@@ -14,7 +14,7 @@ export const Container = styled.div<ContainerProps>`
 
   overflow: hidden;
 
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
 
 
   --text-color-secondary: ${({ theme }) => theme.colors.text.secondary};
@@ -28,6 +28,9 @@ export const Container = styled.div<ContainerProps>`
 `
 
 export const Content = styled.div<ContainerProps>`
+  display: flex;
+  flex-direction: column;
+
   border: ${({ $hasBorder }) => ($hasBorder ? '1px solid var(--border-color)' : null)};
   border-bottom: 0;
   border-radius: 0.5rem;

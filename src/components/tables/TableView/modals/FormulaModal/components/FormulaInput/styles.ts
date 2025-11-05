@@ -35,6 +35,7 @@ export const InputContainer = styled.div`
   text-align: start;
   white-space: pre-wrap;
   word-break: break-all;
+  font-weight: bold;
 
   vertical-align: middle;
 
@@ -53,7 +54,7 @@ export const InputContainer = styled.div`
     gap: 0.25rem;
 
     padding: 0.25rem;
-    border-radius: 0.125rem;
+    border-radius: 0.5rem;
     background-color: ${({ theme }) => theme.colors.background.hover};
 
     color: ${({ theme }) => theme.colors.text.primary};
@@ -79,7 +80,7 @@ export const InputContainer = styled.div`
   }
 
   .number {
-    color: #d1949e;
+    color: #c92b45ff;
   }
 
   .formula-error-underline {
@@ -87,7 +88,7 @@ export const InputContainer = styled.div`
   }
 
   .string {
-    color: #bde052;
+    color: #92b722ff;
   }
 
   .text {
@@ -100,7 +101,7 @@ export const InputContainer = styled.div`
   }
 
   .operator {
-    color: #f5b83d;
+    color: #d59a25ff;
   }
 
   ${ScrollStyles}
