@@ -82,7 +82,7 @@ export const DraggableRow = <T,>({
       ) : null}
 
       {cells.map((cell, index) => {
-        const isLastCell = index === cells.length - 1
+        // const isLastCell = index === cells.length - 1
 
         return (
           <TableCell<T>
@@ -92,9 +92,7 @@ export const DraggableRow = <T,>({
             rowIndex={rowIndex}
             cellPadding={cellPadding}
             hasHorizontalDivider={hasHorizontalDivider}
-            hasVerticalDivider={
-              (!isLastCell || !!actionsColumn) && hasVerticalDivider
-            }
+            hasVerticalDivider={hasVerticalDivider}
           />
         )
       })}

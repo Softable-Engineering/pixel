@@ -128,7 +128,7 @@ export const DataTable = <T,>({
       <Content
         style={tableStyles}
         $borderColor={borderColor}
-        $hasBorder={!actionsColumn}
+        $hasBorder={false}
       >
         <Portal wrapperId={stickyPortalId}>
           <DndContext

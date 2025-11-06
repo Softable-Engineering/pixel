@@ -1,5 +1,9 @@
 import { css, styled } from 'styled-components'
 
+interface ContainerPortalProps {
+  showResultsRow?: boolean
+}
+
 export const Container = styled.div`
 
   width: fit-content;
@@ -21,7 +25,7 @@ export const Container = styled.div`
   }
 `
 
-export const ContainerPortal = styled.div`
+export const ContainerPortal = styled.div<ContainerPortalProps>`
   display: flex;
   flex-direction: column;
 
@@ -32,6 +36,8 @@ export const ContainerPortal = styled.div`
   row-gap: 0.5rem;
 
   width: 100%;
+
+  margin-bottom: ${({ showResultsRow }) => (!showResultsRow ? '0.5rem' : 0)};
 `
 
 export const ScrollStyles = css`

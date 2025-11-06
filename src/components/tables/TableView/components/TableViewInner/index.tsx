@@ -64,7 +64,7 @@ export const TableInner = <T,>(props: Props<T>, ref: Ref<TableViewMethods>) => {
 
   return (
     <Container id={containerId}>
-      <ContainerPortal id={portalId} />
+      <ContainerPortal id={portalId} showResultsRow={props.showResultsRow} />
 
       <DataTable<T>
         {...props}
