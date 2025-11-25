@@ -15,7 +15,7 @@ npm install softable-pixel
 ### DataTable
 
 `DataTable` is a table component built on top of [`@tanstack/react-table`](https://tanstack.com/table).
-It supports column resizing, drag-and-drop ordering and selection.
+It supports column resizing, drag-and-drop ordering and selection
 
 ```tsx
 import {
