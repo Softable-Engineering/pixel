@@ -1,6 +1,6 @@
 {
   "name": "softable-pixel",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -64,6 +64,12 @@
       ],
       "data-table": [
         "dist/data-table/index.d.ts"
+      ],
+      "table-view": [
+        "dist/table-view/index.d.ts"
+      ],
+      "mask-modules": [
+        "dist/mask-modules/index.d.ts"
       ]
     }
   },
