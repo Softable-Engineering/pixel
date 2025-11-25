@@ -1,6 +1,6 @@
 {
   "name": "softable-pixel",
-  "version": "1.6.13",
+  "version": "1.7.0",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -54,7 +54,7 @@
     "facepaint": "^1.2.1",
     "framer-motion": "^11.0.3",
     "styled-components": "^6.0.8",
-    "tsdown": "^0.14.1",
+    "tsdown": "0.15.12",
     "typescript": "^5.2.2"
   },
   "typesVersions": {
