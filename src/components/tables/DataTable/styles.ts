@@ -12,8 +12,6 @@ export const Container = styled.div<ContainerProps>`
 
   border-spacing: 0;
 
-  overflow: hidden;
-
   /* border-radius: 0.5rem; */
 
 
