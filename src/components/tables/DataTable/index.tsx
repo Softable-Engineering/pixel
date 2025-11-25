@@ -1,7 +1,6 @@
 // External Libraries
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: Ignored due to no validation needed */
-import type { ReactNode } from 'react'
-import type { CSSProperties } from 'styled-components'
+import type { ReactNode, CSSProperties } from 'react'
 import { DndContext, closestCenter } from '@dnd-kit/core'
 
 // Components
