@@ -14,6 +14,7 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   shims: true,
+  fixedExtension: false,
 
   external: [
     'react',
