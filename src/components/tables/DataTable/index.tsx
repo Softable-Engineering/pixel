@@ -89,6 +89,36 @@ export const DataTable = <T,>({
   })
 
   // Functions
+  function renderTableHeader() {
+    const tableHeader = (
+      <DndContext
+        sensors={sensors}
+        onDragEnd={handleDragEnd}
+        collisionDetection={closestCenter}
+      >
+        <TableHeader<CustomData<T>>
+          table={table}
+          headerColor={headerColor}
+          columnOrder={columnOrder}
+          actionsColumn={actionsColumn}
+          canResetResize={canResetResize}
+          textColorHeader={textColorHeader}
+          hasVerticalDivider={hasVerticalDivider}
+          enableRowReordering={enableRowReordering}
+          enableResizeColumns={enableResizeColumns}
+          hasHorizontalDivider={hasHorizontalDivider}
+          enableColumnOrdering={enableColumnOrdering}
+        />
+      </DndContext>
+    )
+
+    if (stickyPortalId) {
+      return <Portal wrapperId={stickyPortalId}>{tableHeader}</Portal>
+    }
+
+    return tableHeader
+  }
+
   function renderResultsRow() {
     if (!showResultsRow) return null
 
@@ -130,27 +160,7 @@ export const DataTable = <T,>({
         $borderColor={borderColor}
         $hasBorder={false}
       >
-        <Portal wrapperId={stickyPortalId}>
-          <DndContext
-            sensors={sensors}
-            onDragEnd={handleDragEnd}
-            collisionDetection={closestCenter}
-          >
-            <TableHeader<CustomData<T>>
-              table={table}
-              headerColor={headerColor}
-              columnOrder={columnOrder}
-              actionsColumn={actionsColumn}
-              canResetResize={canResetResize}
-              textColorHeader={textColorHeader}
-              hasVerticalDivider={hasVerticalDivider}
-              enableRowReordering={enableRowReordering}
-              enableResizeColumns={enableResizeColumns}
-              hasHorizontalDivider={hasHorizontalDivider}
-              enableColumnOrdering={enableColumnOrdering}
-            />
-          </DndContext>
-        </Portal>
+        {renderTableHeader()}
 
         <DndContext
           sensors={sensors}

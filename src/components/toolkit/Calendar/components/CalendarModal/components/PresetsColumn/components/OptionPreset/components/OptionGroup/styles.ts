@@ -87,7 +87,7 @@ export const ContainerChildren = styled(motion.div)`
 
   border-radius: 0.5rem;
 
-  background-color: var(--option-background-color);
+  background-color: ${({ theme }) => theme.colors.background.secondary};
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
   overflow-y: auto;
   border: 1px solid var(--border-color);

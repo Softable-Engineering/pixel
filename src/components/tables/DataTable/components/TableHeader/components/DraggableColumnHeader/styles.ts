@@ -21,6 +21,8 @@ export const Container = styled.div<Props>`
   text-align: left;
 
   background-color: ${({ theme }) => theme.colors.background.primary};
+
+  border-radius: 0.5rem;
 `
 
 export const ColumnHeader = styled.div`
