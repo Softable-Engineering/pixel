@@ -31,7 +31,6 @@ export const TableCell = <T,>({
 }: Props<T>) => {
   // Constants
   const value = cell.getValue()
-  const typeValue = typeof value
   const columnDef = cell.column.columnDef as CustomColumnDef<T>
   const handleClick = columnDef.onClick
     ? () => columnDef.onClick?.(row.original.data)
@@ -39,8 +38,10 @@ export const TableCell = <T,>({
 
   // Functions
   function getValue() {
-    if (typeValue === 'string')
-      return <Typography variant="b1">{value as string}</Typography>
+    if (typeof value === 'string' || typeof value === 'number') {
+      return <Typography variant="b1">{value}</Typography>
+    }
+
     return value as React.ReactNode
   }
 

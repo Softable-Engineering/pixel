@@ -2,7 +2,6 @@
 import { useState, type ReactNode } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import type { Cell, Row } from '@tanstack/react-table'
-import type { CSSProperties } from 'styled-components'
 
 // Components
 import { TableCell } from '../TableCell'
@@ -52,11 +51,11 @@ export const DraggableRow = <T,>({
 
   // Constants
   const showActionsCell = enableRowReordering && (hover || isSelected)
-  const style: CSSProperties = {
+  const style = {
     transform: transform ? `translateY(${transform.y}px)` : undefined,
     opacity: hover ? 0.8 : isDragging ? 0.5 : 1,
     transition: '0.5s'
-  }
+  } as const
 
   return (
     // biome-ignore lint/a11y/useSemanticElements: <Not needed>
@@ -82,8 +81,6 @@ export const DraggableRow = <T,>({
       ) : null}
 
       {cells.map((cell, index) => {
-        // const isLastCell = index === cells.length - 1
-
         return (
           <TableCell<T>
             key={`row_${cell.id}_${index}`}
