@@ -4,6 +4,9 @@ import type React from 'react'
 // Components
 import { Typography } from '@components/toolkit/Typography'
 
+// Hooks
+import { useOptionItem } from './hooks/useOptionItem'
+
 // Assets
 import { SigmaIcon } from '@assets/icons/tables/Sigma'
 import { ConfirmIcon } from '@assets/icons/tables/Confirm'
@@ -12,24 +15,18 @@ import { ConfirmIcon } from '@assets/icons/tables/Confirm'
 import { getIcon } from '@components/tables/TableView/utils'
 
 // Types
-import type { FormulaOption } from '../../../../types'
+import type { OptionItemProps } from './types'
 
 // Styles
 import { Container, IconContainer, TextContainer } from './styles'
 
-interface Props {
-  pathKey: string
-  isFocused: boolean
-  option: FormulaOption
-  onClick: (item: FormulaOption) => void
-}
+export const OptionItem: React.FC<OptionItemProps> = params => {
+  // Constants
+  const { option, pathKey, isFocused } = params
 
-export const OptionItem: React.FC<Props> = ({
-  option,
-  pathKey,
-  isFocused,
-  onClick
-}) => {
+  // Hooks
+  const { label, handleClick } = useOptionItem(params)
+
   // Functions
   function renderOptionIcon() {
     if (option.type === 'function') {
@@ -41,22 +38,13 @@ export const OptionItem: React.FC<Props> = ({
     return null
   }
 
-  function handleClick() {
-    onClick(option)
-  }
-
-  function getOptionLabel() {
-    if (option.type === 'function') return option.displayValue
-    return option.column.label.trim()
-  }
-
   return (
     <Container data-path={pathKey} $isFocused={isFocused} onClick={handleClick}>
       <TextContainer>
         <IconContainer>{renderOptionIcon()}</IconContainer>
 
         <Typography variant="b1" fontSize="0.85rem">
-          {getOptionLabel()}
+          {label}
         </Typography>
       </TextContainer>
 
