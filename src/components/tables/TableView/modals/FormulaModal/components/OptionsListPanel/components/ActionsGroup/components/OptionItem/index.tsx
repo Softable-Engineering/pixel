@@ -1,8 +1,10 @@
 // External Libraries
 import type React from 'react'
+import { useTheme } from 'styled-components'
 
 // Components
 import { Typography } from '@components/toolkit/Typography'
+import { Tooltip } from '@components/commons/toolkit/Tooltip'
 
 // Hooks
 import { useOptionItem } from './hooks/useOptionItem'
@@ -16,6 +18,7 @@ import { getIcon } from '@components/tables/TableView/utils'
 
 // Types
 import type { OptionItemProps } from './types'
+import { TooltipPlacement } from '@components/commons/toolkit/Tooltip/types'
 
 // Styles
 import { Container, IconContainer, TextContainer } from './styles'
@@ -25,7 +28,8 @@ export const OptionItem: React.FC<OptionItemProps> = params => {
   const { option, pathKey, isFocused } = params
 
   // Hooks
-  const { label, handleClick } = useOptionItem(params)
+  const { colors } = useTheme()
+  const { label, hasTippy, handleClick } = useOptionItem(params)
 
   // Functions
   function renderOptionIcon() {
@@ -39,16 +43,27 @@ export const OptionItem: React.FC<OptionItemProps> = params => {
   }
 
   return (
-    <Container data-path={pathKey} $isFocused={isFocused} onClick={handleClick}>
-      <TextContainer>
-        <IconContainer>{renderOptionIcon()}</IconContainer>
+    <Tooltip
+      content={label}
+      disabled={!hasTippy}
+      color={colors.border.secondary}
+      placement={TooltipPlacement.Right}
+    >
+      <Container
+        data-path={pathKey}
+        $isFocused={isFocused}
+        onClick={handleClick}
+      >
+        <TextContainer>
+          <IconContainer>{renderOptionIcon()}</IconContainer>
 
-        <Typography variant="b1" fontSize="0.85rem">
-          {label}
-        </Typography>
-      </TextContainer>
+          <Typography variant="b1" fontSize="0.85rem">
+            {label}
+          </Typography>
+        </TextContainer>
 
-      {isFocused ? <ConfirmIcon /> : null}
-    </Container>
+        {isFocused ? <ConfirmIcon /> : null}
+      </Container>
+    </Tooltip>
   )
 }
