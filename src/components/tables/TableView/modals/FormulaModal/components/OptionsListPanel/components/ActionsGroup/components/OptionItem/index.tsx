@@ -1,8 +1,13 @@
 // External Libraries
 import type React from 'react'
+import { useTheme } from 'styled-components'
 
 // Components
 import { Typography } from '@components/toolkit/Typography'
+import { Tooltip } from '@components/commons/toolkit/Tooltip'
+
+// Hooks
+import { useOptionItem } from './hooks/useOptionItem'
 
 // Assets
 import { SigmaIcon } from '@assets/icons/tables/Sigma'
@@ -12,24 +17,20 @@ import { ConfirmIcon } from '@assets/icons/tables/Confirm'
 import { getIcon } from '@components/tables/TableView/utils'
 
 // Types
-import type { FormulaOption } from '../../../../types'
+import type { OptionItemProps } from './types'
+import { TooltipPlacement } from '@components/commons/toolkit/Tooltip/types'
 
 // Styles
 import { Container, IconContainer, TextContainer } from './styles'
 
-interface Props {
-  pathKey: string
-  isFocused: boolean
-  option: FormulaOption
-  onClick: (item: FormulaOption) => void
-}
+export const OptionItem: React.FC<OptionItemProps> = params => {
+  // Constants
+  const { option, pathKey, isFocused } = params
 
-export const OptionItem: React.FC<Props> = ({
-  option,
-  pathKey,
-  isFocused,
-  onClick
-}) => {
+  // Hooks
+  const { colors } = useTheme()
+  const { label, hasTippy, handleClick } = useOptionItem(params)
+
   // Functions
   function renderOptionIcon() {
     if (option.type === 'function') {
@@ -41,26 +42,28 @@ export const OptionItem: React.FC<Props> = ({
     return null
   }
 
-  function handleClick() {
-    onClick(option)
-  }
-
-  function getOptionLabel() {
-    if (option.type === 'function') return option.displayValue
-    return option.column.label.trim()
-  }
-
   return (
-    <Container data-path={pathKey} $isFocused={isFocused} onClick={handleClick}>
-      <TextContainer>
-        <IconContainer>{renderOptionIcon()}</IconContainer>
+    <Tooltip
+      content={label}
+      disabled={!hasTippy}
+      color={colors.border.secondary}
+      placement={TooltipPlacement.Right}
+    >
+      <Container
+        data-path={pathKey}
+        $isFocused={isFocused}
+        onClick={handleClick}
+      >
+        <TextContainer>
+          <IconContainer>{renderOptionIcon()}</IconContainer>
 
-        <Typography variant="b1" fontSize="0.85rem">
-          {getOptionLabel()}
-        </Typography>
-      </TextContainer>
+          <Typography variant="b1" fontSize="0.85rem">
+            {label}
+          </Typography>
+        </TextContainer>
 
-      {isFocused ? <ConfirmIcon /> : null}
-    </Container>
+        {isFocused ? <ConfirmIcon /> : null}
+      </Container>
+    </Tooltip>
   )
 }
