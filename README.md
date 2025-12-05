@@ -112,5 +112,5 @@ After cloning the repository, run:
 yarn build
 ```
 
-This compiles the components to the `dist` directory.
+This compiles the components to the `dist` directory
 
