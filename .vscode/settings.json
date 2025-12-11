@@ -1,6 +1,6 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit"
+    "source.fixAll.biome": "always"
   },
 
   "[javascript]": {
@@ -23,5 +23,6 @@
   },
   "[jsonc]": {
     "editor.defaultFormatter": "biomejs.biome"
-  }
+  },
+  "i18n-ally.localesPaths": ["src/locales", "src/services/MaskModule/locales"]
 }

@@ -24,4 +24,8 @@ export const Container = styled.div<Props>`
   border-bottom: 1px solid
     ${({ $hasHorizontalDivider }) =>
       $hasHorizontalDivider ? 'var(--border-color)' : 'none'};
+
+  p {
+    word-break: break-word;
+  }
 `
