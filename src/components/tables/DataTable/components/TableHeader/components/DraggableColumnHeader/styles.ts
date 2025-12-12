@@ -44,9 +44,6 @@ export const Content = styled.div<ContentProps>`
 
   overflow: hidden;
 
-  box-shadow: ${({ $hasVerticalDivider }) =>
-    $hasVerticalDivider ? '1px 0 var(--border-color)' : 'none'};
-
   border-radius: 0.5rem;
 
   border: 1px solid
