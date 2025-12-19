@@ -22,8 +22,20 @@ export class ColumnTokenParser extends BaseTokenParser {
       i++
     }
 
-    if (i < text.length) value += ']'
+    if (i >= text.length) {
+      return { token: { type: 'text', value, isError: true }, nextIndex: i }
+    }
+
+    value += ']'
     i++
+
+    const hasHashes = text[i] === '|' && text[i + 1] === '|'
+    if (!hasHashes) {
+      return { token: { type: 'text', value, isError: true }, nextIndex: i }
+    }
+
+    value += '||'
+    i += 2
 
     const match = value.match(COLUMN_PLACEHOLDER_REGEX)
     const token: Token = match

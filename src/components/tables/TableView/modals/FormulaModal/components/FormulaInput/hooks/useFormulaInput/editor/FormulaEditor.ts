@@ -31,6 +31,7 @@ export class FormulaEditor {
   public applyTokenization(): void {
     const cursorOffset = this.cursorManager.getOffset()
     const { text, columnPositions } = this.parser.extractText(this.element)
+    console.log(text)
     const tokens = this.tokenizer.tokenize(text)
     this.renderer.render(tokens, columnPositions)
     this.cursorManager.restoreOffset(cursorOffset)

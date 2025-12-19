@@ -67,7 +67,7 @@ export function useFormulaInput({
   }
 
   function insertColumn(column: FormulaOptionColumn) {
-    editorRef.current?.insertText(`[col:${column.id}]`, 1)
+    editorRef.current?.insertText(`[col:${column.id}]||`, 1)
   }
 
   function insertFunction(name: string) {

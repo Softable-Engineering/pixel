@@ -41,7 +41,7 @@ export class FormulaParser {
           ? (labelEl.textContent ?? '').trim()
           : (el.dataset.label ?? '').trim()
 
-        result += `${el.dataset.id}::${label}`
+        result += `${el.dataset.id}::${label}||`
       } else {
         result += node.textContent || ''
       }
@@ -62,8 +62,8 @@ export class FormulaParser {
     // )
 
     const deserializedText = formula.replace(
-      /([A-Za-z0-9_]+)@@@([0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12})::[A-Za-z0-9_]+/g,
-      (_match, columnName, uuid) => `[col:${columnName}@@@${uuid}]`
+      /([A-Za-z0-9_]+)@@@([0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12})::[A-Za-z0-9_]+\|\|/g,
+      (_match, columnName, uuid) => `[col:${columnName}@@@${uuid}]##`
     )
 
     return deserializedText
