@@ -1,8 +1,5 @@
 import { styled } from 'styled-components'
 
-// Utils
-import { lightenAndDesaturate } from '@utils/functions'
-
 interface ContainerProps {
   $enableRowReordering: boolean
 }
@@ -46,5 +43,5 @@ export const ResultsCell = styled.div`
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 
-  background-color: ${({ theme }) => `${lightenAndDesaturate(theme.colors.primary, 0.8)}`};
+  background-color: ${({ theme }) => `color-mix(in srgb, ${theme.colors.primary} 15%, ${theme.colors.background.primary})`};
 `
