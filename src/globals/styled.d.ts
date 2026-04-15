@@ -13,6 +13,7 @@ declare module 'styled-components' {
     text: TextColors
     border: BorderColors
     background: BackgroundColors
+    tooltip: TooltipColors
   }
 
   interface TextColors {
@@ -37,5 +38,9 @@ declare module 'styled-components' {
 
     hover: string
     hover_secondary: string
+  }
+
+  interface TooltipColors {
+    primary: string
   }
 }

@@ -130,7 +130,7 @@ export const HeaderCell = <T,>({
 
       <Tooltip
         content={title}
-        color={theme.colors.background.on_primary}
+        color={theme.colors.tooltip.primary}
         style={{
           boxShadow: 'none',
           color: theme.colors.text.primary_light,
