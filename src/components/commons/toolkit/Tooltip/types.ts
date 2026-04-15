@@ -12,6 +12,7 @@ export interface Position {
 
 export interface TooltipProps {
   color?: string
+  style?: React.CSSProperties
   content: React.ReactNode
   children: React.ReactNode
 

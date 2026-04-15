@@ -18,6 +18,7 @@ import {
 
 export const Tooltip: React.FC<TooltipProps> = ({
   color,
+  style,
   content,
   children,
   offset = 8,
@@ -50,6 +51,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
           <TooltipContainer
             ref={tooltipRef}
             $color={color}
+            style={style}
             position={position}
             $maxWidth={maxWidth}
             $isVisible={isVisible}

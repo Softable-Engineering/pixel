@@ -18,6 +18,7 @@ declare module 'styled-components' {
   interface TextColors {
     primary: string
     secondary: string
+    primary_light: string
   }
 
   interface BorderColors {
@@ -32,6 +33,7 @@ declare module 'styled-components' {
     primary: string
     secondary: string
     tertiary: string
+    on_primary: string
 
     hover: string
     hover_secondary: string
