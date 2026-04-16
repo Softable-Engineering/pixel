@@ -1,6 +1,7 @@
 // External Libraries
 /** biome-ignore-all lint/correctness/useExhaustiveDependencies: <Not needed> */
 import { useMemo, useRef, useState, type ReactNode } from 'react'
+import { useTheme } from 'styled-components'
 
 // Components
 import { Header } from './components/Input'
@@ -23,6 +24,7 @@ import {
 
 // Styles
 import { Container } from './styles'
+import { Tooltip } from '@components/commons/toolkit/Tooltip'
 
 interface Props<T> {
   title: string
@@ -49,6 +51,7 @@ export const HeaderCell = <T,>({
   const [name, setName] = useState(title)
 
   // Hooks
+  const theme = useTheme()
   const { permissions } = useTableViewContext()
 
   // Constants
@@ -125,7 +128,17 @@ export const HeaderCell = <T,>({
     <Container onClick={handleOpenPanel} ref={containerRef}>
       {icon}
 
-      <Typography variant="b2">{title}</Typography>
+      <Tooltip
+        content={title}
+        color={theme.colors.tooltip.primary}
+        style={{
+          boxShadow: 'none',
+          color: theme.colors.text.primary_light,
+          fontSize: 14
+        }}
+      >
+        <Typography variant="b2">{title}</Typography>
+      </Tooltip>
 
       <ActionsPanel
         referenceRef={containerRef}
