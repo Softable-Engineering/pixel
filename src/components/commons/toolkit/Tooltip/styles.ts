@@ -9,7 +9,7 @@ export const Container = styled.div`
   display: inline-block;
 `
 
-export const TriggerWrapper = styled.span`
+export const TriggerWrapper = styled.div`
   width: 100%;
   display: inline-flex;
   align-items: center;
