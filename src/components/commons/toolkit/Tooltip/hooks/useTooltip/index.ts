@@ -10,7 +10,7 @@ import type { UseTooltipParams } from './types'
 
 export function useTooltip({ offset, disabled, placement }: UseTooltipParams) {
   // Refs
-  const triggerRef = useRef<HTMLSpanElement>(null)
+  const triggerRef = useRef<HTMLDivElement>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
 
   // States

@@ -1,6 +1,6 @@
 {
   "name": "softable-pixel",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "type": "module",
   "repository": {
     "url": "https://github.com/Softable-Engineering/pixel"
@@ -76,5 +76,5 @@
       ]
     }
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@1.22.22"
 }
