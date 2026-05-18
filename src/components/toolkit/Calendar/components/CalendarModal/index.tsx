@@ -143,6 +143,7 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
             <Button
               label="Aplicar"
               variant="filled"
+              color="var(--primary)"
               borderRadius="0.5rem"
               onClick={applyValue}
             />
