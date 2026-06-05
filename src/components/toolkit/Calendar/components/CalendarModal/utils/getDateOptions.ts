@@ -4,7 +4,13 @@ import { startOfDay } from '../hooks/useCalendar/utils'
 // Types
 import type { Option } from '../components/Select/types'
 
-export function getDateOptions(): Option<string>[] {
+interface GetDateOptionsParams {
+  disableFutureDates?: boolean
+  disablePastDates?: boolean
+}
+
+export function getDateOptions(params?: GetDateOptionsParams): Option<string>[] {
+  const { disableFutureDates, disablePastDates } = params ?? {}
   const today = new Date()
   const yesterday = new Date(
     today.getFullYear(),
@@ -17,18 +23,26 @@ export function getDateOptions(): Option<string>[] {
     today.getDate() + 1
   )
 
-  return [
+  const options: Option<string>[] = [
     {
       label: 'Hoje',
       value: startOfDay(today).toISOString()
-    },
-    {
-      label: 'Ontem',
-      value: startOfDay(yesterday).toISOString()
-    },
-    {
-      label: 'Amanhã',
-      value: startOfDay(tomorrow).toISOString()
     }
   ]
+
+  if (!disablePastDates) {
+    options.push({
+      label: 'Ontem',
+      value: startOfDay(yesterday).toISOString()
+    })
+  }
+
+  if (!disableFutureDates) {
+    options.push({
+      label: 'Amanhã',
+      value: startOfDay(tomorrow).toISOString()
+    })
+  }
+
+  return options
 }

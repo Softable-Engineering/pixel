@@ -31,6 +31,8 @@ export const Day: React.FC<Props> = ({
 }) => {
   // Functions
   function handleChangeValue() {
+    if (disabled) return
+    
     const newDate = new Date(year, month, day)
     onChange(newDate)
   }
@@ -38,7 +40,11 @@ export const Day: React.FC<Props> = ({
   if (isOtherMonth) return <Container />
 
   return (
-    <Container $variant={variant} onClick={handleChangeValue}>
+    <Container
+      $variant={variant}
+      $disabled={disabled}
+      onClick={handleChangeValue}
+    >
       <Typography variant="b2" $align="center" color={'var(--text-color)'}>
         {day}
       </Typography>

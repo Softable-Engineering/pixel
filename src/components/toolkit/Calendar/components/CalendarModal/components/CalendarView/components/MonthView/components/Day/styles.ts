@@ -9,6 +9,7 @@ import type { Variant } from './types'
 
 interface ContainerProps {
   $variant?: Variant
+  $disabled?: boolean
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -18,6 +19,14 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${({ $disabled }) =>
+    $disabled &&
+    `
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  `}
 
   ${({ $variant }) => ($variant ? getVariant($variant) : null)}
 `
