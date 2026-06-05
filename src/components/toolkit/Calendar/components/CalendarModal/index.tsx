@@ -36,6 +36,8 @@ interface Props {
   presets?: PresetGroup[]
   onClose: () => void
   onChange: (range: DateRangeValue, operator: DateOperator) => void
+  disableFutureDates?: boolean
+  disablePastDates?: boolean
 }
 
 export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
@@ -58,8 +60,12 @@ export const CalendarModal = React.forwardRef<HTMLDivElement, Props>(
     } = useCalendar(params)
 
     // Constants
-    const startDateOptions = getDateOptions()
-    const endDateOptions = getDateOptions()
+    const dateOptionsParams = {
+      disableFutureDates: params.disableFutureDates,
+      disablePastDates: params.disablePastDates
+    }
+    const startDateOptions = getDateOptions(dateOptionsParams)
+    const endDateOptions = getDateOptions(dateOptionsParams)
     const { filters } = context
     const endDateValue = valueRange.end
       ? startOfDay(valueRange.end).toISOString()

@@ -85,4 +85,16 @@ export interface CalendarProps
    * (e.g., "equals", "after", "before", "range").
    */
   onChange: (range: DateRangeValue, operator: DateOperator) => void
+
+  /**
+   * When `true`, disables all dates after today (tomorrow and beyond).
+   * Today remains selectable.
+   */
+  disableFutureDates?: boolean
+
+  /**
+   * When `true`, disables all dates before today (yesterday and earlier).
+   * Today remains selectable.
+   */
+  disablePastDates?: boolean
 }

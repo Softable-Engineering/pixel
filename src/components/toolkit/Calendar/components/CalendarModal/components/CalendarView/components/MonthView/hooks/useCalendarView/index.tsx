@@ -70,12 +70,16 @@ export function useCalendarView({
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
+      const cellDate = new Date(year, month, day)
+      const isBeforeMin = context.minDate ? cellDate < context.minDate : false
+      const isAfterMax = context.maxDate ? cellDate > context.maxDate : false
+
       result.push({
         key: `day_${day}_${month}_${year}`,
         day,
         year,
         month,
-        disabled: false,
+        disabled: isBeforeMin || isAfterMax,
         isOtherMonth: false
       })
     }

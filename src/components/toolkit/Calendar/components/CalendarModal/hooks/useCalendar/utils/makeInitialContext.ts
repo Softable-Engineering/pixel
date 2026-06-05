@@ -20,14 +20,27 @@ function getFilters(variant: Variant): Filters {
   }
 }
 
+interface MakeInitialContextOptions {
+  disableFutureDates?: boolean
+  disablePastDates?: boolean
+}
+
 export function makeInitialContext(
   onChangeFilters: (change: Partial<Filters>) => void,
-  variant: Variant
+  variant: Variant,
+  options?: MakeInitialContextOptions
 ): BuildContext {
+  const today = new Date()
+  const startOfToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  )
+
   return {
-    minDate: MIN,
-    maxDate: MAX,
-    now: new Date(),
+    minDate: options?.disablePastDates ? startOfToday : MIN,
+    maxDate: options?.disableFutureDates ? startOfToday : MAX,
+    now: today,
     weekStartsOn: 0,
     utils: getAdapters(),
     filters: getFilters(variant),

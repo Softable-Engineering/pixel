@@ -22,15 +22,18 @@ export function useCalendar({
   visibleMonths,
   variant = 'group',
   onClose,
-  onChange
+  onChange,
+  disableFutureDates,
+  disablePastDates
 }: Props) {
   // Constants
   const calendarPresets = presets ?? getPresets(variant)
+  const dateConstraints = { disableFutureDates, disablePastDates }
 
   // States
   const [valueRange, setValueRange] = useState<DateRange>(parseDateValue())
   const [context, setContext] = useState<BuildContext>(
-    makeInitialContext(handleChangeFilters, variant)
+    makeInitialContext(handleChangeFilters, variant, dateConstraints)
   )
 
   // Functions
@@ -69,7 +72,10 @@ export function useCalendar({
       start: undefined,
       end: undefined
     })
-    setContext(makeInitialContext(handleChangeFilters, variant))
+    
+    setContext(
+      makeInitialContext(handleChangeFilters, variant, dateConstraints)
+    )
   }
 
   function applyValue() {
